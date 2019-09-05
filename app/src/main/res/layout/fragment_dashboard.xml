@@ -8,10 +8,6 @@
         <variable
             name="viewModel"
             type="com.example.pantanima.ui.viewmodels.DashboardViewModel" />
-
-        <variable
-            name="navDirection"
-            type="androidx.navigation.NavDirections"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,12 +17,12 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="@{viewModel.title}"
-            android:onClick="@{() -> viewModel.setNewDestination(navDirection.getActionId())}"
+            android:onClick="@{() -> viewModel.goToNotifications()}"
             android:textAlignment="center"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"

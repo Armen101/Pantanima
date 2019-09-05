@@ -31,5 +31,11 @@
         android:id="@+id/navigation_notifications"
         android:name="com.example.pantanima.ui.fragments.NotificationsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_notifications" >
+
+        <action
+            android:id="@+id/navigateToHome"
+            app:destination="@id/navigation_home" />
+
+    </fragment>
 </navigation>
