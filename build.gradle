@@ -41,5 +41,6 @@ ext {
     rxjava2Version = '2.1.9'
     rxandroidVersion = '2.1.1'
     navigationVersion = '2.0.0'
-    coroutines_version = '1.1.1'
+    coroutinesVersion = '1.1.1'
+    roomVersion = '2.1.0'
 }

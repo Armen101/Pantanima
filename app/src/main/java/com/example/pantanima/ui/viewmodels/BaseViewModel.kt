@@ -7,11 +7,13 @@ import com.example.pantanima.ui.Event
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.pantanima.ui.activities.NavActivity
+import com.example.pantanima.ui.asynchronous.CompositeJob
 import java.lang.ref.WeakReference
 
 abstract class BaseViewModel(var activity: WeakReference<NavActivity>) : ViewModel() {
 
-    private var disposable: CompositeDisposable = CompositeDisposable()
+    protected var disposable: CompositeDisposable = CompositeDisposable()
+    protected var compositeJob: CompositeJob = CompositeJob()
 
     private val newDestination = MutableLiveData<Event<Int>>()
 
@@ -28,6 +30,7 @@ abstract class BaseViewModel(var activity: WeakReference<NavActivity>) : ViewMod
     override fun onCleared() {
         super.onCleared()
         disposable.clear()
+        compositeJob.cancel()
     }
 
     open fun onCreate() {}
