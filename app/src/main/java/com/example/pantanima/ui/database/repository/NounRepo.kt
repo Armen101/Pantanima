@@ -14,11 +14,11 @@ object NounRepo {
         NounRepo.dao = dao
     }
 
-    fun getNouns(language: String, count: Int, offset: Int) =
-        dao.getAll(language, count, offset)
+    fun getNouns(language: String, count: Int) =
+        dao.getAll(language, count)
 
-    fun getNouns(level: Level, language: String, count: Int, offset: Int) =
-        dao.getAll(level, language, count, offset)
+    fun getNouns(level: Level, language: String, count: Int) =
+        dao.getAll(level, language, count)
 
     fun insertNouns() {
         val nouns = ArrayList<Noun>()
@@ -29,6 +29,12 @@ object NounRepo {
         Log.i("nouns adding", "result = $result, nouns: $nouns")
     }
 
+    fun updateLastUsedTime(nouns: List<Noun>) {
+        for (noun in nouns) {
+            noun.lastUsedTime = System.currentTimeMillis()
+        }
+        dao.update(nouns)
+    }
 
     private fun insertLightLevelNouns(list: MutableList<Noun>) {
         val armenianLightLevelList = listOf(
