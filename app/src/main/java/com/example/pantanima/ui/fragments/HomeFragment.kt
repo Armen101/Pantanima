@@ -1,37 +1,38 @@
 package com.example.pantanima.ui.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import com.example.pantanima.BR
 import com.example.pantanima.R
-import com.example.pantanima.ui.ViewModelUtils
+import com.example.pantanima.databinding.FragmentHomeBinding
 import com.example.pantanima.ui.activities.NavActivity
 import com.example.pantanima.ui.viewmodels.HomeViewModel
 import java.lang.ref.WeakReference
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var fragmentHomeBinding: FragmentHomeBinding
+    private lateinit var viewModel: HomeViewModel
 
-    @Suppress("UNCHECKED_CAST")
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val viewModel = HomeViewModel(WeakReference(activity as NavActivity))
-        val factory = ViewModelUtils.createFor(viewModel)
-        homeViewModel = ViewModelProviders.of(this, factory).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
-        return root
+    override fun getBindingVariable(): Int {
+        return BR.viewModel
+    }
+
+    override fun getLayoutId(): Int {
+        return R.layout.fragment_home
+    }
+
+    override fun getNavHostId(): Int {
+        return R.id.nav_host_fragment
+    }
+
+    override fun getViewModel(): HomeViewModel {
+        viewModel = HomeViewModel(WeakReference(activity as NavActivity))
+        return viewModel
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        fragmentHomeBinding = getViewDataBinding()
     }
 }
