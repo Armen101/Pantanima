@@ -11,9 +11,14 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home">
 
-        <action
-            android:id="@+id/navigateToDashboard"
-            app:destination="@id/navigation_dashboard" />
+        <argument
+            android:name="mode"
+            app:argType="com.example.pantanima.ui.enums.Mode" />
+
+        <argument
+            android:name="time"
+            app:argType="integer"
+            android:defaultValue="70" />
     </fragment>
 
     <fragment
