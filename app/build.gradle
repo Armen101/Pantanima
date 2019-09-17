@@ -72,4 +72,8 @@ dependencies {
     //sdp, ssp
     implementation 'com.intuit.sdp:sdp-android:1.0.5'
 
+    //dagger2
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
 }

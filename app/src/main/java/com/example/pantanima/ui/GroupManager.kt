@@ -2,7 +2,7 @@ package com.example.pantanima.ui
 
 import com.example.pantanima.ui.models.Group
 
-object GroupManager {
+class GroupManager {
 
     var groups: List<Group> = ArrayList()
 

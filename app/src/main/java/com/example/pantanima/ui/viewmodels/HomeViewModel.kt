@@ -19,9 +19,13 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 class HomeViewModel(activity: WeakReference<NavActivity>) : BaseViewModel(activity),
     WordsAdapterListener {
+
+    @Inject
+    lateinit var groupManager: GroupManager
 
     private var currentWords: List<Noun>? = null
     var maxProgress = ObservableInt(40)
@@ -33,6 +37,7 @@ class HomeViewModel(activity: WeakReference<NavActivity>) : BaseViewModel(activi
     val adapterObservable = ObservableField<RecyclerView.Adapter<*>>(adapter)
 
     init {
+        getApp().getComponent().injectHomeViewModel(this)
         updateAdapterData()
     }
 
@@ -81,16 +86,16 @@ class HomeViewModel(activity: WeakReference<NavActivity>) : BaseViewModel(activi
     private fun switchGroup(){
         currentProgress.set(0)
         startButtonVisibility.set(true)
-        GroupManager.switchGroup()
+        groupManager.switchGroup()
     }
 
     override fun onItemClick(item: Noun) {
         val oldIsActiveValue = item.isActive.get()
         item.isActive.set(!oldIsActiveValue)
         if (oldIsActiveValue) {
-            GroupManager.decAnsweredCount()
+            groupManager.decAnsweredCount()
         } else {
-            GroupManager.incAnsweredCount()
+            groupManager.incAnsweredCount()
         }
         if (allItemsIsInactive()) {
             updateAdapterData()
