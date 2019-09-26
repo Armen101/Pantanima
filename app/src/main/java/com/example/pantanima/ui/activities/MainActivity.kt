@@ -29,6 +29,7 @@ class MainActivity : NavActivity() {
 
         setupUI()
         setupData()
+        supportActionBar?.hide();
     }
 
     private fun setupUI(){
