@@ -3,7 +3,7 @@
     <color name="colorPrimary">#B4FF8D22</color>
     <color name="colorPrimaryDark">#7E808181</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="wordsItemActiveBorderColor">#80E4E4E4</color>
+    <color name="wordsItemActiveBorderColor">#BFDDDBDB</color>
     <color name="homeScreenBackground">#2FDCE8EC</color>
     <color name="wordsItemPassiveBorderColor">#E7E3E2</color>
 </resources>

@@ -59,7 +59,7 @@ class HomeViewModel(activity: WeakReference<NavActivity>) : BaseViewModel(activi
     private fun updateAdapterData() {
         disposable.add(NounRepo.getNouns(Constants.LANGUAGE_AM, 30)
             .map { it.shuffled() }
-            .map { it.dropLast(23) }
+            .map { it.dropLast(25) }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { list ->
