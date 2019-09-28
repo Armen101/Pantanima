@@ -16,21 +16,27 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="@dimen/_7sdp"
         android:onClick="@{(view)-> listener.onItemClick(item)}">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="@dimen/_222sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/_2sdp"
             android:gravity="center"
-            android:background="@drawable/words_item_border"
+            android:elevation="@dimen/_5sdp"
+            android:padding="@dimen/_7sdp"
+            android:shadowColor="#000000"
+            android:background="@drawable/word_item_bg"
             android:clipToPadding="false"
             android:textStyle="bold"
             android:enabled="@{item.isActive}"
             android:focusable="@{item.isActive}"
             android:text="@{item.value}"
+            android:textColor="@{item.isActive() ? @color/wordActiveTextColor: @color/wordInactiveTextColor}"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
