@@ -23,6 +23,7 @@ import javax.inject.Inject
 import android.media.MediaPlayer
 import android.media.AudioManager
 import android.content.Context.AUDIO_SERVICE
+import com.example.pantanima.ui.GamePrefs
 
 class HomeViewModel(activity: WeakReference<NavActivity>) : BaseViewModel(activity),
     WordsAdapterListener {
@@ -33,10 +34,10 @@ class HomeViewModel(activity: WeakReference<NavActivity>) : BaseViewModel(activi
     lateinit var groupManager: GroupManager
 
     private var currentWords: List<Noun>? = null
-    var maxProgress = ObservableInt(30)
+    var maxProgress = ObservableInt(GamePrefs.ROUND_TIME)
     var currentProgress = ObservableInt(0)
     var countDownTimerText =
-        ObservableField<String>((maxProgress.get() - currentProgress.get()).toString())
+        ObservableField<String>((GamePrefs.ROUND_TIME - currentProgress.get()).toString())
     var startButtonVisibility = ObservableBoolean(true)
 
     private val adapter = WordsAdapter(this)
@@ -57,9 +58,9 @@ class HomeViewModel(activity: WeakReference<NavActivity>) : BaseViewModel(activi
     }
 
     private fun updateAdapterData() {
-        disposable.add(NounRepo.getNouns(Constants.LANGUAGE_AM, 30)
+        disposable.add(NounRepo.getNouns(GamePrefs.ASSORTMENT_WORDS_COUNT)
             .map { it.shuffled() }
-            .map { it.dropLast(25) }
+            .map { it.drop( GamePrefs.ASSORTMENT_WORDS_COUNT - GamePrefs.WORDS_COUNT) }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { list ->

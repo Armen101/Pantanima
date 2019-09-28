@@ -2,6 +2,7 @@ package com.example.pantanima.ui.database.repository
 
 import android.util.Log
 import com.example.pantanima.ui.Constants
+import com.example.pantanima.ui.GamePrefs
 import com.example.pantanima.ui.database.dao.NounDao
 import com.example.pantanima.ui.database.entity.Noun
 import com.example.pantanima.ui.enums.Level
@@ -14,11 +15,11 @@ object NounRepo {
         NounRepo.dao = dao
     }
 
-    fun getNouns(language: String, count: Int) =
-        dao.getAll(language, count)
+    fun getNouns(count: Int) =
+        dao.getAll(GamePrefs.LANGUAGE, count)
 
-    fun getNouns(level: Level, language: String, count: Int) =
-        dao.getAll(level, language, count)
+    fun getNouns(level: Level, count: Int) =
+        dao.getAll(level, GamePrefs.LANGUAGE, count)
 
     fun insertNouns() {
         val nouns = ArrayList<Noun>()
