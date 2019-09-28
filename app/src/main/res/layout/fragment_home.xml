@@ -28,6 +28,8 @@
             android:layout_height="wrap_content"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
+            android:overScrollMode="never"
+            android:scrollbars="vertical"
             app:adapter="@{viewModel.adapterObservable}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
