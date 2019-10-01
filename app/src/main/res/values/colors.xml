@@ -15,5 +15,9 @@
     <color name="homeScreenBackground">#2FDCE8EC</color>
     <color name="wordsItemPassiveBorderColor">#E7E3E2</color>
 
+
+    <color name="splash_screen_gradient_top_color">#f6e4d6</color>
+    <color name="splash_screen_gradient_bottom_color">#fcf7f0</color>
+
     <color name="white_transparent_40">#66FFFFFF</color>
 </resources>
