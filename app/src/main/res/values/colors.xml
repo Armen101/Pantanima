@@ -2,9 +2,9 @@
 <resources>
     <color name="colorPrimary">#B4F1A45B</color>
     <color name="colorPrimaryDark">#7E808181</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#F44336</color>
 
-    <color name="wordActiveBgColor">#FFFFFF</color>
+    <color name="wordActiveBgColor">#E9FFFFFF</color>
     <color name="wordActiveBgBorderColor">#838D8C8C</color>
     <color name="wordActiveTextColor">#BF353535</color>
 
@@ -14,4 +14,6 @@
 
     <color name="homeScreenBackground">#2FDCE8EC</color>
     <color name="wordsItemPassiveBorderColor">#E7E3E2</color>
+
+    <color name="white_transparent_40">#66FFFFFF</color>
 </resources>

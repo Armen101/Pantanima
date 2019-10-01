@@ -13,8 +13,34 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@drawable/toto"
         android:layout_height="match_parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/hourglass"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_150sdp"
+            android:adjustViewBounds="true"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_colorFilter="@color/colorPrimaryDark"
+            app:lottie_fileName="cool.json"
+            app:lottie_loop="true"
+            app:lottie_speed="0.8" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.countDownTimerText}"
+            android:textStyle="bold"
+            android:textSize="@dimen/_20sdp"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintBottom_toBottomOf="@+id/hourglass"
+            app:layout_constraintEnd_toEndOf="@+id/hourglass"
+            app:layout_constraintStart_toStartOf="@+id/hourglass"
+            app:layout_constraintTop_toTopOf="@+id/hourglass" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -29,21 +55,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline" />
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginBottom="50dp"
-            android:indeterminate="false"
-            android:max="@{viewModel.maxProgress}"
-            android:progress="@{viewModel.currentProgress}"
-            android:progressDrawable="@drawable/countdown_progress"
-            android:secondaryProgress="100"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
         <Button
             android:id="@+id/button2"
             android:layout_width="wrap_content"
@@ -53,18 +64,8 @@
             android:text="Start"
             android:visibility="@{viewModel.startButtonVisibility}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/recyclerView" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{viewModel.countDownTimerText}"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-            app:layout_constraintEnd_toEndOf="@+id/progressBar"
-            app:layout_constraintStart_toStartOf="@+id/progressBar"
-            app:layout_constraintTop_toTopOf="@+id/progressBar" />
+            app:layout_constraintEnd_toEndOf="@+id/recyclerView"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"

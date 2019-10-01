@@ -4,7 +4,6 @@ import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pantanima.ui.Constants
 import com.example.pantanima.ui.GroupManager
 import com.example.pantanima.ui.activities.NavActivity
 import com.example.pantanima.ui.adapters.WordsAdapter
