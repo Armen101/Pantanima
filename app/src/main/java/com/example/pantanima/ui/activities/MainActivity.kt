@@ -14,8 +14,6 @@ import com.example.pantanima.ui.database.preference.PrefConstants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import androidx.core.content.ContextCompat
-import android.view.WindowManager
 
 class MainActivity : NavActivity() {
 
@@ -25,36 +23,17 @@ class MainActivity : NavActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme)
         setContentView(R.layout.activity_main)
 
         navController = findNavController(R.id.nav_host_fragment)
 
         setupUI()
         setupData()
-        supportActionBar?.hide();
-
-
-// clear FLAG_TRANSLUCENT_STATUS flag:
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-
-// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-
-// finally change the color
-        window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorAccent))
     }
 
     private fun setupUI(){
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home,
-                R.id.navigation_dashboard,
-                R.id.navigation_notifications
-            )
-        )
-//        setupActionBarWithNavController(navController, appBarConfiguration)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
-        navView.setupWithNavController(navController)
+        supportActionBar?.hide()
     }
 
 

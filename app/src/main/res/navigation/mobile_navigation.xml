@@ -3,13 +3,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_start_screen">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.pantanima.ui.fragments.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home">
+        android:id="@+id/navigation_start_screen"
+        android:name="com.example.pantanima.ui.fragments.StartScreenFragment"
+        android:label="@string/title_start_screen"
+        tools:layout="@layout/fragment_start_screen">
+
+        <action
+            android:id="@+id/navigateToGroups"
+            app:destination="@id/navigation_groups" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/navigation_groups"
+        android:name="com.example.pantanima.ui.fragments.GroupsFragment"
+        android:label="@string/title_groups"
+        tools:layout="@layout/fragment_groups" >
+
+        <action
+            android:id="@+id/navigateToPlay"
+            app:destination="@id/navigation_play" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/navigation_play"
+        android:name="com.example.pantanima.ui.fragments.PlayFragment"
+        android:label="@string/title_play"
+        tools:layout="@layout/fragment_play">
 
         <argument
             android:name="mode"
@@ -19,28 +44,5 @@
             android:name="time"
             app:argType="integer"
             android:defaultValue="70" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.pantanima.ui.fragments.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard">
-
-        <action
-            android:id="@+id/navigateToNotification"
-            app:destination="@id/navigation_notifications" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.pantanima.ui.fragments.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" >
-
-        <action
-            android:id="@+id/navigateToHome"
-            app:destination="@id/navigation_home" />
-
     </fragment>
 </navigation>

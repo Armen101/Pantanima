@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.pantanima.ui.viewmodels.HomeViewModel" />
+            type="com.example.pantanima.ui.viewmodels.PlayViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

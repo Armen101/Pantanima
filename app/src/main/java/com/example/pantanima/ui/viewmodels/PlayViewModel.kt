@@ -24,7 +24,7 @@ import android.media.AudioManager
 import android.content.Context.AUDIO_SERVICE
 import com.example.pantanima.ui.GamePrefs
 
-class HomeViewModel(activity: WeakReference<NavActivity>) : BaseViewModel(activity),
+class PlayViewModel(activity: WeakReference<NavActivity>) : BaseViewModel(activity),
     WordsAdapterListener {
 
     private var mediaPlayer: MediaPlayer? = null

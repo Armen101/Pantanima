@@ -4,6 +4,11 @@
     <color name="colorPrimaryDark">#7E808181</color>
     <color name="colorAccent">#F44336</color>
 
+    <color name="app_style_blue">#68b5b0</color>
+    <color name="app_style_dark_blue">#4d83bf</color>
+    <color name="app_style_red">#d36961</color>
+    <color name="app_style_orange">#e6bf73</color>
+
     <color name="wordActiveBgColor">#E9FFFFFF</color>
     <color name="wordActiveBgBorderColor">#838D8C8C</color>
     <color name="wordActiveTextColor">#BF353535</color>
@@ -12,7 +17,7 @@
     <color name="wordInactiveBgBorderColor">#71DDDBDB</color>
     <color name="wordInactiveTextColor">#BF7C7B7B</color>
 
-    <color name="homeScreenBackground">#2FDCE8EC</color>
+    <color name="playScreenBackground">#FFFFFF</color>
     <color name="wordsItemPassiveBorderColor">#E7E3E2</color>
 
 

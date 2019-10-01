@@ -3,36 +3,36 @@ package com.example.pantanima.ui.fragments
 import android.os.Bundle
 import android.view.View
 import com.example.pantanima.BR
-import com.example.pantanima.databinding.FragmentDashboardBinding
-import com.example.pantanima.ui.viewmodels.DashboardViewModel
 import com.example.pantanima.R
+import com.example.pantanima.databinding.FragmentGroupsBinding
 import com.example.pantanima.ui.activities.NavActivity
+import com.example.pantanima.ui.viewmodels.GroupsViewModel
 import java.lang.ref.WeakReference
 
-class DashboardFragment : BaseFragment<FragmentDashboardBinding, DashboardViewModel>() {
+class GroupsFragment : BaseFragment<FragmentGroupsBinding, GroupsViewModel>() {
 
-    private lateinit var fragmentDashboardBinding: FragmentDashboardBinding
-    private lateinit var viewModel: DashboardViewModel
+    private lateinit var fragmentGroupsBinding: FragmentGroupsBinding
+    private lateinit var viewModel: GroupsViewModel
 
     override fun getBindingVariable(): Int {
         return BR.viewModel
     }
 
     override fun getLayoutId(): Int {
-        return R.layout.fragment_dashboard
+        return R.layout.fragment_groups
     }
 
     override fun getNavHostId(): Int {
         return R.id.nav_host_fragment
     }
 
-    override fun getViewModel(): DashboardViewModel {
-        viewModel = DashboardViewModel(WeakReference(activity as NavActivity))
+    override fun getViewModel(): GroupsViewModel {
+        viewModel = GroupsViewModel(WeakReference(activity as NavActivity))
         return viewModel
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fragmentDashboardBinding = getViewDataBinding()
+        fragmentGroupsBinding = getViewDataBinding()
     }
 }

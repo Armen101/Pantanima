@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -6,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.pantanima.ui.viewmodels.NotificationsViewModel" />
+            type="com.example.pantanima.ui.viewmodels.StartScreenViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,13 +15,13 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/text_notifications"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="@{viewModel.title}"
+            android:onClick="@{() -> viewModel.goToGroups()}"
             android:textAlignment="center"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
