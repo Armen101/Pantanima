@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#B4F1A45B</color>
     <color name="colorPrimaryDark">#7E808181</color>
-    <color name="colorAccent">#F44336</color>
+    <color name="colorAccent">#d1d1d1</color>
 
     <color name="app_style_blue">#68b5b0</color>
     <color name="app_style_dark_blue">#4d83bf</color>
@@ -25,4 +25,6 @@
     <color name="splash_screen_gradient_bottom_color">#fcf7f0</color>
 
     <color name="white_transparent_40">#66FFFFFF</color>
+    <color name="gray_inactive">#d1d1d1</color>
+    <color name="gray_active">#8B8B8B</color>
 </resources>

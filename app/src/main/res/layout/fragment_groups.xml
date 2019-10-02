@@ -13,19 +13,120 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/text_groups"
+        <LinearLayout
+            android:id="@+id/row_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="@{viewModel.title}"
-            android:textAlignment="center"
-            android:textSize="20sp"
+            android:layout_marginStart="@dimen/group_row_start_end_margin"
+            android:layout_marginTop="@dimen/_100sdp"
+            android:layout_marginEnd="@dimen/group_row_start_end_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="@dimen/groups_screen_left_icon_size"
+                android:layout_height="@dimen/groups_screen_et_height"
+                android:layout_marginEnd="@dimen/groups_screen_left_icon_margin"
+                android:src="@drawable/ic_group" />
+
+            <EditText
+                android:id="@+id/group_name_1"
+                android:layout_width="@dimen/groups_screen_et_width"
+                android:layout_height="@dimen/groups_screen_et_height"
+                android:backgroundTint="@color/gray_inactive"
+                android:fontFamily="@font/caviar_dreams_bold"
+                android:gravity="start"
+                android:inputType="text"
+                android:text="@string/first_def_group_name"
+                android:textAlignment="textStart"
+                android:textColor="@color/app_style_dark_blue"
+                android:textSize="@dimen/groups_screen_et_text_size" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/row_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/group_row_start_end_margin"
+            android:layout_marginTop="@dimen/group_rows_between_margin"
+            android:layout_marginEnd="@dimen/group_row_start_end_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/row_1">
+
+            <ImageView
+                android:layout_width="@dimen/groups_screen_left_icon_size"
+                android:layout_height="@dimen/groups_screen_et_height"
+                android:layout_marginEnd="@dimen/groups_screen_left_icon_margin"
+                android:src="@drawable/ic_group"
+                android:tint="@color/app_style_red" />
+
+            <EditText
+                android:id="@+id/group_name_2"
+                android:layout_width="@dimen/groups_screen_et_width"
+                android:layout_height="@dimen/groups_screen_et_height"
+                android:backgroundTint="@color/gray_inactive"
+                android:fontFamily="@font/caviar_dreams_bold"
+                android:gravity="start"
+                android:inputType="text"
+                android:text="@string/second_def_group_name"
+                android:textAlignment="textStart"
+                android:textColor="@color/app_style_red"
+                android:textSize="@dimen/groups_screen_et_text_size" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/row_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/group_row_start_end_margin"
+            android:layout_marginTop="@dimen/group_rows_between_margin"
+            android:layout_marginEnd="@dimen/group_row_start_end_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/row_2">
+
+            <ImageView
+                android:layout_width="@dimen/groups_screen_left_icon_size"
+                android:layout_height="@dimen/groups_screen_et_height"
+                android:layout_marginEnd="@dimen/groups_screen_left_icon_margin"
+                android:src="@drawable/ic_group"
+                android:tint="@color/gray_inactive" />
+
+            <EditText
+                android:id="@+id/group_name_3"
+                android:layout_width="@dimen/groups_screen_et_width"
+                android:layout_height="@dimen/groups_screen_et_height"
+                android:backgroundTint="@color/gray_inactive"
+                android:drawableEnd="@drawable/ic_add_inactive"
+                android:fontFamily="@font/caviar_dreams_bold"
+                android:gravity="start"
+                android:hint="@string/group_name"
+                android:inputType="text"
+                android:textAlignment="textStart"
+                android:textColor="@color/app_style_dark_blue"
+                android:textColorHint="@color/gray_inactive"
+                android:textSize="@dimen/groups_screen_et_text_size" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/go_to_play_screen"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginBottom="@dimen/_100sdp"
+            android:background="@drawable/word_item_bg"
+            android:backgroundTint="@color/app_style_red"
+            android:onClick="@{(view) -> viewModel.goToPlay()}"
+            android:src="@drawable/ic_next"
+            android:padding="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -3,7 +3,15 @@
     <string name="title_play">Play</string>
     <string name="title_start_screen">Start screen</string>
     <string name="title_groups">Groups</string>
+
+    <!-- START SCREEN -->
     <string name="new_game">new game</string>
     <string name="tutorial">tutorial</string>
     <string name="language">language</string>
+
+    <!-- GROUPS SCREEN -->
+    <string name="first_def_group_name">group 1</string>
+    <string name="second_def_group_name">group 2</string>
+    <string name="group_name">group name</string>
+
 </resources>

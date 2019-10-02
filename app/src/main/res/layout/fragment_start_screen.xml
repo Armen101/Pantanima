@@ -24,6 +24,7 @@
             android:clipToPadding="false"
             android:fontFamily="@font/caviar_dreams_bold"
             android:gravity="center"
+            android:onClick="@{(view) -> viewModel.goToGroups()}"
             android:text="@string/new_game"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
