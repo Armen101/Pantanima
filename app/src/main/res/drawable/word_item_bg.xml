@@ -4,5 +4,5 @@
 <!--    <item android:state_pressed="true"-->
 <!--        android:drawable="@drawable/todo" /> &lt;!&ndash; focused &ndash;&gt;-->
     <item android:state_enabled="false" android:drawable="@drawable/words_item_inactive_bg"/>
-    <item android:state_enabled="true" android:drawable="@drawable/words_item_border"/>
+    <item android:state_enabled="true" android:drawable="@drawable/start_screen_button"/>
 </selector>

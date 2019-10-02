@@ -2,4 +2,9 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="start_screen_button_text_size">@dimen/_16sdp</dimen>
+    <dimen name="start_screen_button_width">@dimen/_200sdp</dimen>
+    <dimen name="start_screen_button_height">@dimen/_47sdp</dimen>
+    <dimen name="start_screen_button_corner_radius">@dimen/_22sdp</dimen>
+    <dimen name="start_screen_buttons_between_margin">@dimen/_18sdp</dimen>
 </resources>

@@ -14,19 +14,66 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="@{viewModel.title}"
-            android:onClick="@{() -> viewModel.goToGroups()}"
-            android:textAlignment="center"
-            android:textSize="20sp"
+        <Button
+            android:id="@+id/new_game"
+            android:layout_width="@dimen/start_screen_button_width"
+            android:layout_height="@dimen/start_screen_button_height"
+            android:layout_marginBottom="@dimen/start_screen_buttons_between_margin"
+            android:background="@drawable/word_item_bg"
+            android:backgroundTint="@color/app_style_red"
+            android:clipToPadding="false"
+            android:fontFamily="@font/caviar_dreams_bold"
+            android:gravity="center"
+            android:text="@string/new_game"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/start_screen_button_text_size"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tutorial"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/tutorial"
+            android:layout_width="@dimen/start_screen_button_width"
+            android:layout_height="@dimen/start_screen_button_height"
+            android:background="@drawable/word_item_bg"
+            android:backgroundTint="@color/app_style_orange"
+            android:clipToPadding="false"
+            android:fontFamily="@font/caviar_dreams_bold"
+            android:gravity="center"
+            android:text="@string/tutorial"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/start_screen_button_text_size"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/language"
+            android:layout_width="@dimen/start_screen_button_width"
+            android:layout_height="@dimen/start_screen_button_height"
+            android:layout_marginTop="@dimen/start_screen_buttons_between_margin"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/word_item_bg"
+            android:backgroundTint="@color/app_style_blue"
+            android:clipToPadding="false"
+            android:fontFamily="@font/caviar_dreams_bold"
+            android:gravity="center"
+            android:text="@string/language"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/start_screen_button_text_size"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.575"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tutorial" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
