@@ -7,12 +7,21 @@
     <!-- START SCREEN -->
     <string name="new_game">new game</string>
     <string name="tutorial">tutorial</string>
-    <string name="language">language</string>
+
+    <string name="english" translatable="false">english</string>
+    <string name="armenian" translatable="false">հայերեն</string>
+    <string name="russian" translatable="false">русский</string>
+
+    <string-array name="languages_list">
+        <item>@string/english</item>
+        <item>@string/russian</item>
+        <item>@string/armenian</item>
+    </string-array>
 
     <!-- GROUPS SCREEN -->
     <string name="first_def_group_name">group 1</string>
     <string name="second_def_group_name">group 2</string>
-    <string name="group_name">group name</string>
+    <string name="new_group">group name</string>
     <string name="start">start</string>
 
 </resources>

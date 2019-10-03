@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Pantanima</string>
+    <string name="title_play">Play</string>
+    <string name="title_start_screen">Start screen</string>
+    <string name="title_groups">Groups</string>
+
+    <!-- START SCREEN -->
+    <string name="new_game">новая игра</string>
+    <string name="tutorial">правила</string>
+
+    <!-- GROUPS SCREEN -->
+    <string name="first_def_group_name">группа 1</string>
+    <string name="second_def_group_name">группа 2</string>
+    <string name="new_group">имя группы</string>
+    <string name="start">начать</string>
+</resources>

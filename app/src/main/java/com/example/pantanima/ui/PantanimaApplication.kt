@@ -14,8 +14,6 @@ class PantanimaApplication : Application() {
     private lateinit var database: AppDatabase
     private lateinit var component: AppComponent
 
-    lateinit var prefs : Preferences
-
     override fun onCreate() {
         super.onCreate()
 
@@ -23,7 +21,7 @@ class PantanimaApplication : Application() {
         database = Room.databaseBuilder(this, AppDatabase::class.java, DbConstants.DB_NAME)
             .build()
 
-        prefs = Preferences(applicationContext)
+        Preferences.init(applicationContext)
         NounRepo.injectDao(database.nounDao())
     }
 

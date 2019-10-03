@@ -3,11 +3,15 @@ package com.example.pantanima.ui.database.preference
 import android.content.Context
 import android.content.SharedPreferences
 
-class Preferences(context: Context) {
-    private val sharedPref =
-        context.getSharedPreferences(PrefConstants.PREFERENCE_NAME, Context.MODE_PRIVATE)
+object Preferences {
 
-    fun save(KEY_NAME: String, value: String, async: Boolean = true) {
+    private lateinit var sharedPref: SharedPreferences
+
+    fun init(context: Context) {
+        sharedPref = context.getSharedPreferences(PrefConstants.PREFERENCE_NAME, Context.MODE_PRIVATE)
+    }
+
+    fun save(KEY_NAME: String, value: String?, async: Boolean = true) {
         val editor = sharedPref.edit()
         editor.putString(KEY_NAME, value)
         completeSaving(editor, async)
@@ -47,7 +51,7 @@ class Preferences(context: Context) {
         return sharedPref.getBoolean(KEY_NAME, default)
     }
 
-    private fun completeSaving(editor: SharedPreferences.Editor, async: Boolean){
+    private fun completeSaving(editor: SharedPreferences.Editor, async: Boolean) {
         if (async) {
             editor.apply()
         } else {
