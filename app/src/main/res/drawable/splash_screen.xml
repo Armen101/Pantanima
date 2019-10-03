@@ -4,8 +4,10 @@
     <item android:drawable="@drawable/splash_screen_bg" />
 
     <item
-        android:bottom="@dimen/_280sdp"
-        android:drawable="@drawable/ic_splash_screen"
+        android:bottom="@dimen/_305sdp"
+        android:drawable="@drawable/ic_new_logo"
+        android:left="@dimen/_85sdp"
+        android:right="@dimen/_85sdp"
         android:gravity="fill|center"
-        android:top="@dimen/_280sdp" />
+        android:top="@dimen/_305sdp" />
 </layer-list>

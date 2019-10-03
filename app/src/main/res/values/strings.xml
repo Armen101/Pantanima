@@ -13,5 +13,6 @@
     <string name="first_def_group_name">group 1</string>
     <string name="second_def_group_name">group 2</string>
     <string name="group_name">group name</string>
+    <string name="start">start</string>
 
 </resources>

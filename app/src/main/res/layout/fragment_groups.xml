@@ -40,7 +40,8 @@
                 android:inputType="text"
                 android:text="@string/first_def_group_name"
                 android:textAlignment="textStart"
-                android:textColor="@color/app_style_dark_blue"
+                android:textChangeListener="@{viewModel.group1}"
+                android:textColor="@color/app_style_blue"
                 android:textSize="@dimen/groups_screen_et_text_size" />
 
         </LinearLayout>
@@ -73,6 +74,7 @@
                 android:inputType="text"
                 android:text="@string/second_def_group_name"
                 android:textAlignment="textStart"
+                android:textChangeObserver="@{viewModel.group2}"
                 android:textColor="@color/app_style_red"
                 android:textSize="@dimen/groups_screen_et_text_size" />
 
@@ -94,38 +96,81 @@
                 android:layout_height="@dimen/groups_screen_et_height"
                 android:layout_marginEnd="@dimen/groups_screen_left_icon_margin"
                 android:src="@drawable/ic_group"
-                android:tint="@color/gray_inactive" />
+                android:tint="@{viewModel.group3.length() == 0 ? @color/gray_inactive : @color/app_style_green}" />
 
             <EditText
                 android:id="@+id/group_name_3"
                 android:layout_width="@dimen/groups_screen_et_width"
                 android:layout_height="@dimen/groups_screen_et_height"
                 android:backgroundTint="@color/gray_inactive"
-                android:drawableEnd="@drawable/ic_add_inactive"
                 android:fontFamily="@font/caviar_dreams_bold"
                 android:gravity="start"
                 android:hint="@string/group_name"
                 android:inputType="text"
                 android:textAlignment="textStart"
-                android:textColor="@color/app_style_dark_blue"
+                android:textChangeListener="@{viewModel.group3}"
+                android:textColor="@color/app_style_green"
                 android:textColorHint="@color/gray_inactive"
                 android:textSize="@dimen/groups_screen_et_text_size" />
 
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/go_to_play_screen"
+        <LinearLayout
+            android:id="@+id/row_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/group_row_start_end_margin"
+            android:layout_marginTop="@dimen/group_rows_between_margin"
+            android:layout_marginEnd="@dimen/group_row_start_end_margin"
+            android:visibility="@{viewModel.group3.length() > 0}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/row_3">
+
+            <ImageView
+                android:layout_width="@dimen/groups_screen_left_icon_size"
+                android:layout_height="@dimen/groups_screen_et_height"
+                android:layout_marginEnd="@dimen/groups_screen_left_icon_margin"
+                android:src="@drawable/ic_group"
+                android:tint="@{viewModel.group4.length() == 0 ? @color/gray_inactive : @color/app_style_orange}" />
+
+            <EditText
+                android:id="@+id/group_name_4"
+                android:layout_width="@dimen/groups_screen_et_width"
+                android:layout_height="@dimen/groups_screen_et_height"
+                android:backgroundTint="@color/gray_inactive"
+                android:fontFamily="@font/caviar_dreams_bold"
+                android:gravity="start"
+                android:hint="@string/group_name"
+                android:inputType="text"
+                android:textAlignment="textStart"
+                android:textChangeListener="@{viewModel.group4}"
+                android:textColor="@color/app_style_orange"
+                android:textColorHint="@color/gray_inactive"
+                android:textSize="@dimen/groups_screen_et_text_size" />
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/new_game"
             android:layout_width="@dimen/_150sdp"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_height="@dimen/start_screen_button_height"
             android:layout_marginBottom="@dimen/_100sdp"
             android:background="@drawable/word_item_bg"
-            android:backgroundTint="@color/app_style_red"
+            android:backgroundTint="@color/app_style_green"
+            android:clipToPadding="false"
+            android:fontFamily="@font/caviar_dreams_bold"
+            android:gravity="center"
             android:onClick="@{(view) -> viewModel.goToPlay()}"
-            android:src="@drawable/ic_next"
-            android:padding="@dimen/_12sdp"
+            android:text="@string/start"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/start_screen_button_text_size"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

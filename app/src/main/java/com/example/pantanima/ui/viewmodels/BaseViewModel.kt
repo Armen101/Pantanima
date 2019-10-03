@@ -1,6 +1,7 @@
 package com.example.pantanima.ui.viewmodels
 
 import android.content.Intent
+import androidx.annotation.StringRes
 import io.reactivex.disposables.CompositeDisposable
 import androidx.lifecycle.LiveData
 import com.example.pantanima.ui.Event
@@ -27,6 +28,8 @@ abstract class BaseViewModel(var activity: WeakReference<NavActivity>) : ViewMod
     }
 
     fun getApp() = activity.get()?.application as PantanimaApplication
+
+    fun getString(@StringRes resource: Int): String? = activity.get()?.getString(resource)
 
     override fun onCleared() {
         super.onCleared()
