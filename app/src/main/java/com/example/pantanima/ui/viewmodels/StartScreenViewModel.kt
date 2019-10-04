@@ -3,8 +3,8 @@ package com.example.pantanima.ui.viewmodels
 import androidx.databinding.ObservableField
 import com.example.pantanima.R
 import com.example.pantanima.ui.activities.NavActivity
+import com.example.pantanima.ui.helpers.LocaleHelper
 import java.lang.ref.WeakReference
-import java.util.*
 
 class StartScreenViewModel(activity: WeakReference<NavActivity>) : BaseViewModel(activity) {
 
@@ -19,32 +19,24 @@ class StartScreenViewModel(activity: WeakReference<NavActivity>) : BaseViewModel
     }
 
     fun onLanguageClick() {
+        val newLanguage = getNextLanguage()
+
+        LocaleHelper.changeLanguage(activity.get()?.resources, newLanguage)
+
+        language.set(newLanguage)
+        newGame.set(getString(R.string.new_game))
+        tutorial.set(getString(R.string.tutorial))
+    }
+
+    private fun getNextLanguage(): String {
         val curIndex = languageList.indexOf(language.get())
         val futureLanguageIndex = if (curIndex < languageList.size - 1) {
             curIndex.inc()
         } else {
             0
         }
-        language.set(languageList[futureLanguageIndex])
-        changeLanguage(getLanguageCode(language.get()))
-        newGame.set(getString(R.string.new_game))
-        tutorial.set(getString(R.string.tutorial))
+        return languageList[futureLanguageIndex]
     }
 
-    private fun getLanguageCode(language: String?): String {
-        return when (language) {
-            getString(R.string.armenian) -> "hy"
-            getString(R.string.russian) -> "ru"
-            else -> "en"
-        }
-    }
 
-    @Suppress("DEPRECATION")
-    private fun changeLanguage(languageCode: String) {
-        val res = activity.get()?.resources
-        val dm = res?.displayMetrics
-        val conf = res?.configuration
-        conf?.setLocale(Locale(languageCode.toLowerCase(Locale.ENGLISH)))
-        res?.updateConfiguration(conf, dm)
-    }
 }

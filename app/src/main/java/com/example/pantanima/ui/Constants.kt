@@ -1,7 +1,7 @@
 package com.example.pantanima.ui
 
 object Constants {
-    const val LANGUAGE_AM = "AM"
-    const val LANGUAGE_RU = "RU"
-    const val LANGUAGE_US = "US"
+    const val LANGUAGE_AM = "hy"
+    const val LANGUAGE_RU = "ru"
+    const val LANGUAGE_EN = "en"
 }

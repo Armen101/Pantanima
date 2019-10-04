@@ -22,7 +22,7 @@ import javax.inject.Inject
 import android.media.MediaPlayer
 import android.media.AudioManager
 import android.content.Context.AUDIO_SERVICE
-import com.example.pantanima.ui.GamePrefs
+import com.example.pantanima.ui.helpers.GamePrefs
 
 class PlayViewModel(activity: WeakReference<NavActivity>) : BaseViewModel(activity),
     WordsAdapterListener {

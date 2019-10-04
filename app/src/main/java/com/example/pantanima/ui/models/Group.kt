@@ -6,7 +6,7 @@ class Group {
 
     var roundAnsweredCount: Int = 0
 
-    fun saveStatistics(){
+    fun saveStatistics() {
         statistics.add(roundAnsweredCount)
         roundAnsweredCount = 0
     }

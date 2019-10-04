@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.pantanima.ui.viewmodels.BaseViewModel
 import androidx.navigation.NavController
 import com.example.pantanima.ui.EventObserver
-import com.example.pantanima.ui.ViewModelUtils
+import com.example.pantanima.ui.helpers.ViewModelUtils
 import com.example.pantanima.ui.activities.NavActivity
 
 

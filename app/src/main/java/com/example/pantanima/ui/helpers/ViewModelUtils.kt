@@ -1,4 +1,4 @@
-package com.example.pantanima.ui
+package com.example.pantanima.ui.helpers
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

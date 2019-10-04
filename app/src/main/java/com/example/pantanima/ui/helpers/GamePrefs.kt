@@ -1,4 +1,6 @@
-package com.example.pantanima.ui
+package com.example.pantanima.ui.helpers
+
+import com.example.pantanima.ui.Constants
 
 object GamePrefs {
 
