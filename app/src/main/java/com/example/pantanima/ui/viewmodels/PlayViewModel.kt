@@ -2,7 +2,6 @@ package com.example.pantanima.ui.viewmodels
 
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
-import androidx.databinding.ObservableInt
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pantanima.ui.GroupManager
 import com.example.pantanima.ui.activities.NavActivity
@@ -23,8 +22,10 @@ import android.media.MediaPlayer
 import android.media.AudioManager
 import android.content.Context.AUDIO_SERVICE
 import com.example.pantanima.ui.helpers.GamePrefs
+import com.example.pantanima.ui.models.Group
+import java.lang.StringBuilder
 
-class PlayViewModel(activity: WeakReference<NavActivity>) : BaseViewModel(activity),
+class PlayViewModel(activity: WeakReference<NavActivity>, groupNames: ArrayList<String>) : BaseViewModel(activity),
     WordsAdapterListener {
 
     private var mediaPlayer: MediaPlayer? = null
@@ -33,18 +34,23 @@ class PlayViewModel(activity: WeakReference<NavActivity>) : BaseViewModel(activi
     lateinit var groupManager: GroupManager
 
     private var currentWords: List<Noun>? = null
-    var maxProgress = ObservableInt(GamePrefs.ROUND_TIME)
-    var currentProgress = ObservableInt(0)
-    var countDownTimerText =
-        ObservableField<String>((GamePrefs.ROUND_TIME - currentProgress.get()).toString())
+    var countDownTimerText = ObservableField<String>((GamePrefs.ROUND_TIME).toString())
     var startButtonVisibility = ObservableBoolean(true)
+    var history  = ObservableField("")
 
     private val adapter = WordsAdapter(this)
     val adapterObservable = ObservableField<RecyclerView.Adapter<*>>(adapter)
 
     init {
         getApp().getComponent().injectHomeViewModel(this)
-        updateAdapterData()
+        initGroups(groupNames)
+    }
+
+    private fun initGroups(names: ArrayList<String>) {
+        for (name in names){
+            groupManager.groups.add(Group(name))
+        }
+        groupManager.setGroup()
     }
 
     private fun allItemsIsInactive(): Boolean {
@@ -56,7 +62,7 @@ class PlayViewModel(activity: WeakReference<NavActivity>) : BaseViewModel(activi
         return true
     }
 
-    private fun updateAdapterData() {
+    private fun updateAdapterData(code: () -> Unit) {
         disposable.add(NounRepo.getNouns(GamePrefs.ASSORTMENT_WORDS_COUNT)
             .map { it.shuffled() }
             .map { it.drop( GamePrefs.ASSORTMENT_WORDS_COUNT - GamePrefs.WORDS_COUNT) }
@@ -69,6 +75,7 @@ class PlayViewModel(activity: WeakReference<NavActivity>) : BaseViewModel(activi
                 compositeJob.add(GlobalScope.launch(Dispatchers.IO) {
                     NounRepo.updateLastUsedTime(list)
                 })
+                code()
             }
         )
     }
@@ -77,58 +84,67 @@ class PlayViewModel(activity: WeakReference<NavActivity>) : BaseViewModel(activi
         if(mediaPlayer != null && mediaPlayer!!.isPlaying){
             return
         }
-        val resID = activity.get()?.resources?.getIdentifier(
-            "tikc_tock", "raw",
-            activity.get()?.packageName
+        val resID = resources?.getIdentifier("tikc_tock", "raw",
+            activity?.packageName
         )
-        mediaPlayer = MediaPlayer.create(activity.get(), resID!!)
+        mediaPlayer = MediaPlayer.create(activity, resID!!)
         mediaPlayer?.setOnCompletionListener {
             playTimerSound()
         }
         mediaPlayer?.start()
 
-        val audioManager = activity.get()?.getSystemService(AUDIO_SERVICE) as AudioManager?
+        val audioManager = activity?.getSystemService(AUDIO_SERVICE) as AudioManager?
         audioManager!!.setStreamVolume(AudioManager.STREAM_MUSIC, 12, 0)
     }
 
     fun startGame() {
         startButtonVisibility.set(false)
-        val disposable = Flowable.interval(1, TimeUnit.SECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .subscribe {
-
-                if (maxProgress.get() - currentProgress.get() == 10 ) {
-                    playTimerSound()
+        updateAdapterData {
+            val disposable = Flowable.interval(1, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .map { s -> GamePrefs.ROUND_TIME - s }
+                .subscribeOn(Schedulers.io())
+                .subscribe {
+                    countDownTimerText.set(it.toString())
+                    when (it) {
+                        10L -> playTimerSound()
+                        0L -> {
+                            mediaPlayer?.stop()
+                            groupManager.switchGroup()
+                            setHistoryText()
+                            startButtonVisibility.set(true)
+                            disposable.dispose()
+                        }
+                    }
                 }
-
-                currentProgress.set(it.toInt())
-                countDownTimerText.set((maxProgress.get() - currentProgress.get()).toString())
-                if (it.toInt() == maxProgress.get()) {
-                    switchGroup()
-                    disposable.dispose()
-                }
-            }
-        this.disposable.add(disposable)
+            this.disposable.add(disposable)
+        }
     }
 
-    private fun switchGroup() {
-        mediaPlayer?.stop()
-        currentProgress.set(0)
-        startButtonVisibility.set(true)
-//        groupManager.switchGroup()
+    private fun setHistoryText() {
+        val strBuilder = StringBuilder()
+        for (group in groupManager.groups){
+            strBuilder.append(group.name)
+            var total = 0
+            for (round in group.statistics){
+                total += round
+            }
+            strBuilder.append(":\t").append(total)
+            strBuilder.append("\n")
+        }
+        history.set(strBuilder.toString())
     }
 
     override fun onItemClick(item: Noun) {
         val oldIsActiveValue = item.isActive.get()
         item.isActive.set(!oldIsActiveValue)
         if (oldIsActiveValue) {
-//            groupManager.decAnsweredCount()
+            groupManager.incAnsweredCount()
         } else {
-//            groupManager.incAnsweredCount()
+            groupManager.decAnsweredCount()
         }
         if (allItemsIsInactive()) {
-            updateAdapterData()
+            updateAdapterData({})
         }
     }
 

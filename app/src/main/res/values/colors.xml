@@ -11,11 +11,11 @@
 
     <color name="wordActiveBgColor">#E9FFFFFF</color>
     <color name="wordActiveBgBorderColor">#838D8C8C</color>
-    <color name="wordActiveTextColor">#BF353535</color>
+    <color name="wordActiveTextColor">#FFFFFF</color>
 
     <color name="wordInactiveBgColor">#21DDDBDB</color>
     <color name="wordInactiveBgBorderColor">#71DDDBDB</color>
-    <color name="wordInactiveTextColor">#BF7C7B7B</color>
+    <color name="wordInactiveTextColor">#7B7C7B7B</color>
 
     <color name="playScreenBackground">#FFFFFF</color>
     <color name="wordsItemPassiveBorderColor">#E7E3E2</color>

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <import type="android.graphics.Color" />
 
         <variable
             name="viewModel"
@@ -20,23 +21,41 @@
             android:layout_width="@dimen/_150sdp"
             android:layout_height="@dimen/_150sdp"
             android:adjustViewBounds="true"
+            android:lottie_play="@{!viewModel.startButtonVisibility}"
             app:layout_constraintBottom_toTopOf="@+id/recyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_colorFilter="@color/colorPrimaryDark"
+            android:visibility="@{!viewModel.startButtonVisibility}"
             app:lottie_fileName="cool.json"
             app:lottie_loop="true"
             app:lottie_speed="0.8" />
 
         <TextView
+            android:id="@+id/history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            android:text="@{viewModel.history}"
+            android:textSize="@dimen/_20sdp"
+            android:textColor="@color/app_style_green"
+            android:visibility="@{viewModel.startButtonVisibility}" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{viewModel.countDownTimerText}"
-            android:textStyle="bold"
-            android:textSize="@dimen/_20sdp"
             android:textColor="@android:color/background_light"
+            android:textSize="@dimen/_20sdp"
+            android:textStyle="bold"
+            android:visibility="@{!viewModel.startButtonVisibility}"
             app:layout_constraintBottom_toBottomOf="@+id/hourglass"
             app:layout_constraintEnd_toEndOf="@+id/hourglass"
             app:layout_constraintStart_toStartOf="@+id/hourglass"
@@ -46,10 +65,11 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:overScrollMode="never"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
-            android:overScrollMode="never"
             android:scrollbars="vertical"
+            android:visibility="@{!viewModel.startButtonVisibility}"
             app:adapter="@{viewModel.adapterObservable}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -57,15 +77,19 @@
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_150sdp"
+            android:background="@drawable/start_round_button_bg"
+            android:fontFamily="@font/caviar_dreams_bold"
             android:onClick="@{(view)-> viewModel.startGame()}"
-            android:text="Start"
+            android:text="@string/start"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_20sdp"
             android:visibility="@{viewModel.startButtonVisibility}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/recyclerView"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hourglass" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"

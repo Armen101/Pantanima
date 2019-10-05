@@ -21,7 +21,7 @@ class StartScreenViewModel(activity: WeakReference<NavActivity>) : BaseViewModel
     fun onLanguageClick() {
         val newLanguage = getNextLanguage()
 
-        LocaleHelper.changeLanguage(activity.get()?.resources, newLanguage)
+        LocaleHelper.changeLanguage(resources, newLanguage)
 
         language.set(newLanguage)
         newGame.set(getString(R.string.new_game))
@@ -37,6 +37,5 @@ class StartScreenViewModel(activity: WeakReference<NavActivity>) : BaseViewModel
         }
         return languageList[futureLanguageIndex]
     }
-
 
 }

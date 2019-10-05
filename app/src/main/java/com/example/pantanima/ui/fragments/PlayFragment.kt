@@ -5,6 +5,7 @@ import android.view.View
 import com.example.pantanima.BR
 import com.example.pantanima.R
 import com.example.pantanima.databinding.FragmentPlayBinding
+import com.example.pantanima.ui.Constants
 import com.example.pantanima.ui.activities.NavActivity
 import com.example.pantanima.ui.viewmodels.PlayViewModel
 import java.lang.ref.WeakReference
@@ -27,7 +28,8 @@ class PlayFragment : BaseFragment<FragmentPlayBinding, PlayViewModel>() {
     }
 
     override fun getViewModel(): PlayViewModel {
-        viewModel = PlayViewModel(WeakReference(activity as NavActivity))
+        val groups = arguments?.getStringArrayList(Constants.BUNDLE_GROUPS)
+        viewModel = PlayViewModel(WeakReference(activity as NavActivity), groups!!)
         return viewModel
     }
 

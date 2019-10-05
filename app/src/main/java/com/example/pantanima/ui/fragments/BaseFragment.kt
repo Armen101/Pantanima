@@ -72,7 +72,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         viewDataBinding.lifecycleOwner = this
         viewDataBinding.executePendingBindings()
         viewModel.getNewDestination().observe(this, EventObserver {
-            getNavController()?.navigate(it)
+            getNavController()?.navigate(it.first, it.second)
         })
     }
 

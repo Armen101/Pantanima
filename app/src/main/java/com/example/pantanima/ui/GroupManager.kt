@@ -4,18 +4,20 @@ import com.example.pantanima.ui.models.Group
 
 class GroupManager {
 
-    var groups: List<Group> = ArrayList()
+    var groups: MutableList<Group> = ArrayList()
 
-    private lateinit var currentGroup: Group
+    private var currentGroup: Group ?= null
 
-    fun incAnsweredCount() = currentGroup.roundAnsweredCount.inc()
+    fun incAnsweredCount() = currentGroup?.incAnsweredCount()
 
-    fun decAnsweredCount() = currentGroup.roundAnsweredCount.dec()
+    fun decAnsweredCount() = currentGroup?.decAnsweredCount()
 
-    fun getAnsweredCount() = currentGroup.roundAnsweredCount
+    fun setGroup() {
+        currentGroup = groups[0]
+    }
 
     fun switchGroup() {
-        currentGroup.saveStatistics()
+        currentGroup?.saveStatistics()
         val currentGroupIndex = groups.indexOf(currentGroup)
         currentGroup = if (currentGroupIndex + 1 == groups.size) {
             groups[0]

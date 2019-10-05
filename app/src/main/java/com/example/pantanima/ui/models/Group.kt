@@ -1,15 +1,23 @@
 package com.example.pantanima.ui.models
 
-class Group {
-
-    var name: String = ""
+class Group(var name: String) {
 
     var roundAnsweredCount: Int = 0
+    var statistics: MutableList<Int> = ArrayList()
+        private set
 
     fun saveStatistics() {
-        statistics.add(roundAnsweredCount)
+        val ss = roundAnsweredCount
+        statistics.add(ss)
         roundAnsweredCount = 0
     }
 
-    private var statistics: MutableList<Int> = ArrayList()
+    fun incAnsweredCount() {
+        roundAnsweredCount = roundAnsweredCount.inc()
+    }
+
+    fun decAnsweredCount() {
+        roundAnsweredCount = roundAnsweredCount.dec()
+    }
+
 }
