@@ -100,7 +100,6 @@ class PlayViewModel(activity: WeakReference<NavActivity>, groupNames: ArrayList<
     fun startRound() {
         startButtonVisibility.set(false)
         updateAdapterData {
-            this.disposable.clear()
             val disposable = Flowable.interval(1, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { s -> GamePrefs.ROUND_TIME - s }
@@ -111,7 +110,7 @@ class PlayViewModel(activity: WeakReference<NavActivity>, groupNames: ArrayList<
                         GamePrefs.SOUND_TIME -> playTimerSound()
                         0L -> {
                             finishRound()
-                            disposable.dispose()
+                            disposable.clear()
                         }
                     }
                 }
