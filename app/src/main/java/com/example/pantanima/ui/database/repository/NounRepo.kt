@@ -15,11 +15,11 @@ object NounRepo {
         NounRepo.dao = dao
     }
 
-    fun getNouns(count: Int) =
-        dao.getAll(GamePrefs.LANGUAGE, count)
+    fun getNouns() =
+        dao.getAll(GamePrefs.LANGUAGE, GamePrefs.ASSORTMENT_WORDS_COUNT)
 
-    fun getNouns(level: Level, count: Int) =
-        dao.getAll(level, GamePrefs.LANGUAGE, count)
+    fun getNouns(level: Level) =
+        dao.getAll(level, GamePrefs.LANGUAGE, GamePrefs.ASSORTMENT_WORDS_COUNT)
 
     fun insertNouns() {
         val nouns = ArrayList<Noun>()

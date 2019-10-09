@@ -81,7 +81,7 @@
             android:layout_height="@dimen/_150sdp"
             android:background="@drawable/start_round_button_bg"
             android:fontFamily="@font/caviar_dreams_bold"
-            android:onClick="@{(view)-> viewModel.startGame()}"
+            android:onClick="@{(view)-> viewModel.startRound()}"
             android:text="@string/start"
             android:textColor="@android:color/white"
             android:textSize="@dimen/_20sdp"

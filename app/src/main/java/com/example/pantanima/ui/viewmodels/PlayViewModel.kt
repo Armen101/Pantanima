@@ -63,7 +63,7 @@ class PlayViewModel(activity: WeakReference<NavActivity>, groupNames: ArrayList<
     }
 
     private fun updateAdapterData(code: () -> Unit) {
-        disposable.add(NounRepo.getNouns(GamePrefs.ASSORTMENT_WORDS_COUNT)
+        disposable.add(NounRepo.getNouns()
             .map { it.shuffled() }
             .map { it.drop( GamePrefs.ASSORTMENT_WORDS_COUNT - GamePrefs.WORDS_COUNT) }
             .subscribeOn(Schedulers.io())
@@ -97,9 +97,10 @@ class PlayViewModel(activity: WeakReference<NavActivity>, groupNames: ArrayList<
         audioManager!!.setStreamVolume(AudioManager.STREAM_MUSIC, 12, 0)
     }
 
-    fun startGame() {
+    fun startRound() {
         startButtonVisibility.set(false)
         updateAdapterData {
+            this.disposable.clear()
             val disposable = Flowable.interval(1, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { s -> GamePrefs.ROUND_TIME - s }
@@ -107,12 +108,9 @@ class PlayViewModel(activity: WeakReference<NavActivity>, groupNames: ArrayList<
                 .subscribe {
                     countDownTimerText.set(it.toString())
                     when (it) {
-                        10L -> playTimerSound()
+                        GamePrefs.SOUND_TIME -> playTimerSound()
                         0L -> {
-                            mediaPlayer?.stop()
-                            groupManager.switchGroup()
-                            setHistoryText()
-                            startButtonVisibility.set(true)
+                            finishRound()
                             disposable.dispose()
                         }
                     }
@@ -121,7 +119,14 @@ class PlayViewModel(activity: WeakReference<NavActivity>, groupNames: ArrayList<
         }
     }
 
-    private fun setHistoryText() {
+    private fun finishRound() {
+        mediaPlayer?.stop()
+        groupManager.switchGroup()
+        showHistory()
+        startButtonVisibility.set(true)
+    }
+
+    private fun showHistory() {
         val strBuilder = StringBuilder()
         for (group in groupManager.groups){
             strBuilder.append(group.name)

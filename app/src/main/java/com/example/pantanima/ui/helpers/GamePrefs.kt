@@ -8,6 +8,7 @@ object GamePrefs {
     const val WORDS_COUNT = 5
     var LANGUAGE = Constants.LANGUAGE_AM
     var ROUND_TIME = 20
+    var SOUND_TIME = 10L
     var GOL_POINTS = 100
 
 }
