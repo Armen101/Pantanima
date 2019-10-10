@@ -19,8 +19,6 @@ import java.lang.ref.WeakReference
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import android.media.MediaPlayer
-import android.media.AudioManager
-import android.content.Context.AUDIO_SERVICE
 import com.example.pantanima.ui.helpers.GamePrefs
 import com.example.pantanima.ui.models.Group
 import java.lang.StringBuilder
@@ -28,7 +26,8 @@ import java.lang.StringBuilder
 class PlayViewModel(activity: WeakReference<NavActivity>, groupNames: ArrayList<String>) : BaseViewModel(activity),
     WordsAdapterListener {
 
-    private var mediaPlayer: MediaPlayer? = null
+    private var clickPlayer: MediaPlayer? = null
+    private var tickTockPlayer: MediaPlayer? = null
 
     @Inject
     lateinit var groupManager: GroupManager
@@ -80,21 +79,32 @@ class PlayViewModel(activity: WeakReference<NavActivity>, groupNames: ArrayList<
         )
     }
 
-    private fun playTimerSound() {
-        if(mediaPlayer != null && mediaPlayer!!.isPlaying){
+    private fun playTickTockSound() {
+        if(tickTockPlayer != null && tickTockPlayer!!.isPlaying){
             return
         }
         val resID = resources?.getIdentifier("tikc_tock", "raw",
             activity?.packageName
         )
-        mediaPlayer = MediaPlayer.create(activity, resID!!)
-        mediaPlayer?.setOnCompletionListener {
-            playTimerSound()
+        tickTockPlayer = MediaPlayer.create(activity, resID!!)
+        tickTockPlayer?.setOnCompletionListener {
+            playTickTockSound()
         }
-        mediaPlayer?.start()
+        tickTockPlayer?.start()
+    }
 
-        val audioManager = activity?.getSystemService(AUDIO_SERVICE) as AudioManager?
-        audioManager!!.setStreamVolume(AudioManager.STREAM_MUSIC, 12, 0)
+    private fun playClickSound(active: Boolean) {
+        clickPlayer?.stop()
+
+        val resName = if(active) {
+            "button_click_on"
+        } else {
+            "button_click_off"
+        }
+
+        val resID = resources?.getIdentifier(resName, "raw", activity?.packageName)
+        clickPlayer = MediaPlayer.create(activity, resID!!)
+        clickPlayer?.start()
     }
 
     fun startRound() {
@@ -107,7 +117,7 @@ class PlayViewModel(activity: WeakReference<NavActivity>, groupNames: ArrayList<
                 .subscribe {
                     countDownTimerText.set(it.toString())
                     when (it) {
-                        GamePrefs.SOUND_TIME -> playTimerSound()
+                        GamePrefs.SOUND_TIME -> playTickTockSound()
                         0L -> {
                             finishRound()
                             disposable.clear()
@@ -119,7 +129,9 @@ class PlayViewModel(activity: WeakReference<NavActivity>, groupNames: ArrayList<
     }
 
     private fun finishRound() {
-        mediaPlayer?.stop()
+        tickTockPlayer?.stop()
+        tickTockPlayer?.reset()
+
         groupManager.switchGroup()
         showHistory()
         startButtonVisibility.set(true)
@@ -147,8 +159,9 @@ class PlayViewModel(activity: WeakReference<NavActivity>, groupNames: ArrayList<
         } else {
             groupManager.decAnsweredCount()
         }
+        playClickSound(oldIsActiveValue)
         if (allItemsIsInactive()) {
-            updateAdapterData({})
+            updateAdapterData {}
         }
     }
 
