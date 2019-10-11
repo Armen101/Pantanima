@@ -34,7 +34,7 @@ class PlayViewModel(activity: WeakReference<NavActivity>, groupNames: ArrayList<
 
     private var currentWords: List<Noun>? = null
     var countDownTimerText = ObservableField<String>((GamePrefs.ROUND_TIME).toString())
-    var startButtonVisibility = ObservableBoolean(true)
+    var roundStarted = ObservableBoolean(false)
     var history  = ObservableField("")
 
     private val adapter = WordsAdapter(this)
@@ -108,7 +108,7 @@ class PlayViewModel(activity: WeakReference<NavActivity>, groupNames: ArrayList<
     }
 
     fun startRound() {
-        startButtonVisibility.set(false)
+        roundStarted.set(true)
         updateAdapterData {
             val disposable = Flowable.interval(1, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -134,7 +134,7 @@ class PlayViewModel(activity: WeakReference<NavActivity>, groupNames: ArrayList<
 
         groupManager.switchGroup()
         showHistory()
-        startButtonVisibility.set(true)
+        roundStarted.set(false)
     }
 
     private fun showHistory() {

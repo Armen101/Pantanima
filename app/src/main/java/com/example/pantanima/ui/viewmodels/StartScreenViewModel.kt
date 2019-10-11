@@ -3,6 +3,7 @@ package com.example.pantanima.ui.viewmodels
 import androidx.databinding.ObservableField
 import com.example.pantanima.R
 import com.example.pantanima.ui.activities.NavActivity
+import com.example.pantanima.ui.helpers.GamePrefs
 import com.example.pantanima.ui.helpers.LocaleHelper
 import java.lang.ref.WeakReference
 
@@ -21,7 +22,7 @@ class StartScreenViewModel(activity: WeakReference<NavActivity>) : BaseViewModel
     fun onLanguageClick() {
         val newLanguage = getNextLanguage()
 
-        LocaleHelper.changeLanguage(resources, newLanguage)
+        LocaleHelper.changeLanguage(resources, GamePrefs.LANGUAGE)
 
         language.set(newLanguage)
         newGame.set(getString(R.string.new_game))

@@ -21,14 +21,14 @@
             android:layout_width="@dimen/_150sdp"
             android:layout_height="@dimen/_150sdp"
             android:adjustViewBounds="true"
-            android:lottie_play="@{!viewModel.startButtonVisibility}"
+            android:lottie_play="@{viewModel.roundStarted}"
             app:layout_constraintBottom_toTopOf="@+id/recyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_colorFilter="@color/colorPrimaryDark"
-            android:visibility="@{!viewModel.startButtonVisibility}"
+            android:visibility="@{viewModel.roundStarted}"
             app:lottie_fileName="cool.json"
             app:lottie_loop="true"
             app:lottie_speed="0.8" />
@@ -46,7 +46,7 @@
             android:text="@{viewModel.history}"
             android:textSize="@dimen/_20sdp"
             android:textColor="@color/app_style_green"
-            android:visibility="@{viewModel.startButtonVisibility}" />
+            android:visibility="@{!viewModel.roundStarted}" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
             android:textColor="@android:color/background_light"
             android:textSize="@dimen/_20sdp"
             android:textStyle="bold"
-            android:visibility="@{!viewModel.startButtonVisibility}"
+            android:visibility="@{viewModel.roundStarted}"
             app:layout_constraintBottom_toBottomOf="@+id/hourglass"
             app:layout_constraintEnd_toEndOf="@+id/hourglass"
             app:layout_constraintStart_toStartOf="@+id/hourglass"
@@ -69,7 +69,7 @@
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:scrollbars="vertical"
-            android:visibility="@{!viewModel.startButtonVisibility}"
+            android:visibility="@{viewModel.roundStarted}"
             app:adapter="@{viewModel.adapterObservable}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -85,7 +85,7 @@
             android:text="@string/start"
             android:textColor="@android:color/white"
             android:textSize="@dimen/_20sdp"
-            android:visibility="@{viewModel.startButtonVisibility}"
+            android:visibility="@{!viewModel.roundStarted}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/recyclerView"
             app:layout_constraintStart_toStartOf="parent"
