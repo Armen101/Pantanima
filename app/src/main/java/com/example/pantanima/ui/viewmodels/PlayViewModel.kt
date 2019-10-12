@@ -45,6 +45,41 @@ class PlayViewModel(activity: WeakReference<NavActivity>, groupNames: ArrayList<
         initGroups(groupNames)
     }
 
+    override fun onItemClick(item: Noun) {
+        val oldIsActiveValue = item.isActive.get()
+        item.isActive.set(!oldIsActiveValue)
+        if (oldIsActiveValue) {
+            groupManager.incAnsweredCount()
+        } else {
+            groupManager.decAnsweredCount()
+        }
+        playClickSound(oldIsActiveValue)
+        if (allItemsIsInactive()) {
+            updateAdapterData {}
+        }
+    }
+
+    fun startRound() {
+        roundStarted.set(true)
+        updateAdapterData {
+            val disposable = Flowable.interval(1, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .map { s -> GamePrefs.ROUND_TIME - s }
+                .subscribeOn(Schedulers.io())
+                .subscribe {
+                    countDownTimerText.set(it.toString())
+                    when (it) {
+                        GamePrefs.SOUND_TIME -> playTickTockSound()
+                        0L -> {
+                            finishRound()
+                            disposable.clear()
+                        }
+                    }
+                }
+            this.disposable.add(disposable)
+        }
+    }
+
     private fun initGroups(names: ArrayList<String>) {
         for (name in names){
             groupManager.groups.add(Group(name))
@@ -107,27 +142,6 @@ class PlayViewModel(activity: WeakReference<NavActivity>, groupNames: ArrayList<
         clickPlayer?.start()
     }
 
-    fun startRound() {
-        roundStarted.set(true)
-        updateAdapterData {
-            val disposable = Flowable.interval(1, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .map { s -> GamePrefs.ROUND_TIME - s }
-                .subscribeOn(Schedulers.io())
-                .subscribe {
-                    countDownTimerText.set(it.toString())
-                    when (it) {
-                        GamePrefs.SOUND_TIME -> playTickTockSound()
-                        0L -> {
-                            finishRound()
-                            disposable.clear()
-                        }
-                    }
-                }
-            this.disposable.add(disposable)
-        }
-    }
-
     private fun finishRound() {
         tickTockPlayer?.stop()
         tickTockPlayer?.reset()
@@ -149,20 +163,6 @@ class PlayViewModel(activity: WeakReference<NavActivity>, groupNames: ArrayList<
             strBuilder.append("\n")
         }
         history.set(strBuilder.toString())
-    }
-
-    override fun onItemClick(item: Noun) {
-        val oldIsActiveValue = item.isActive.get()
-        item.isActive.set(!oldIsActiveValue)
-        if (oldIsActiveValue) {
-            groupManager.incAnsweredCount()
-        } else {
-            groupManager.decAnsweredCount()
-        }
-        playClickSound(oldIsActiveValue)
-        if (allItemsIsInactive()) {
-            updateAdapterData {}
-        }
     }
 
 }

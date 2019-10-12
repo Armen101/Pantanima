@@ -17,7 +17,7 @@ class PantanimaApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        component = DaggerAppComponent.create();
+        component = DaggerAppComponent.create()
         database = Room.databaseBuilder(this, AppDatabase::class.java, DbConstants.DB_NAME)
             .build()
 
