@@ -20,10 +20,6 @@
     <color name="playScreenBackground">#FFFFFF</color>
     <color name="wordsItemPassiveBorderColor">#E7E3E2</color>
 
-
-    <color name="splash_screen_gradient_top_color">#f6e4d6</color>
-    <color name="splash_screen_gradient_bottom_color">#fcf7f0</color>
-
     <color name="white_transparent_40">#66FFFFFF</color>
     <color name="gray_inactive">#d1d1d1</color>
     <color name="gray_active">#8B8B8B</color>
