@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -151,26 +152,46 @@
 
         </LinearLayout>
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.7" />
 
-        <Button
-            android:id="@+id/new_game"
-            android:layout_width="@dimen/_150sdp"
-            android:layout_height="@dimen/start_screen_button_height"
-            android:layout_marginBottom="@dimen/_100sdp"
-            android:background="@drawable/word_item_bg"
-            android:backgroundTint="@color/app_style_green"
-            android:clipToPadding="false"
-            android:fontFamily="@font/caviar_dreams_bold"
-            android:gravity="center"
-            android:onClick="@{(view) -> viewModel.goToPlay()}"
-            android:text="@string/start"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/start_screen_button_text_size"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline_horizontal">
+
+            <Button
+                android:id="@+id/new_game"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/start_screen_button_height"
+                android:background="@drawable/start_screen_button"
+                android:backgroundTint="@color/app_style_green"
+                android:fontFamily="@font/caviar_dreams_bold"
+                android:onClick="@{(view) -> viewModel.goToPlay()}"
+                android:text="@string/start"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/start_screen_button_text_size"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:background="@drawable/start_round_button_bg"
+                android:backgroundTint="@color/app_style_green"
+                app:srcCompat="@drawable/ic_settings"
+                android:padding="@dimen/_12sdp"
+                android:layout_toEndOf="@+id/new_game"
+                android:layout_width="@dimen/start_screen_button_height"
+                android:layout_height="@dimen/start_screen_button_height"
+                android:layout_marginStart="@dimen/_20sdp"
+                tools:layout_editor_absoluteX="332dp"
+                tools:layout_editor_absoluteY="520dp" />
+        </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
