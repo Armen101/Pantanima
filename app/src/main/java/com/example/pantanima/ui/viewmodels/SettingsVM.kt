@@ -10,44 +10,83 @@ import java.lang.ref.WeakReference
 
 class SettingsVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
 
-    private val timeLm = SliderLayoutManager(activity.get())
-    var timeLayoutManager = ObservableField(timeLm)
-    private val sliderAdapter = SliderAdapter()
-    var timeSliderAdapter = ObservableField(sliderAdapter)
-    val timeSliderAdapterPadding: Int = DisplayHelper.displayWidth() / 2 - DisplayHelper.dpToPx(40)
-    var chooseTimeText = ObservableField<String>()
+    val adapterStartEndPadding = DisplayHelper.displayWidth() / 2 - DisplayHelper.dpToPx(40)
 
-    private val data = getTimePickerData()
+    var timeLayoutManager = ObservableField(SliderLayoutManager(activity.get()))
+    var timeSliderAdapter = ObservableField(SliderAdapter())
+    var timeInitialPosition = 7
+    private val timePikerData = getTimePickerData()
+    var timeChooseText = ObservableField<String>(timePikerData[timeInitialPosition])
+
+    var scoreLayoutManager = ObservableField(SliderLayoutManager(activity.get()))
+    var scoreSliderAdapter = ObservableField(SliderAdapter())
+    private val scorePikerData = getScorePickerData()
+    var scoreInitialPosition = 80
+    var scoreChooseText = ObservableField<String>(scorePikerData[scoreInitialPosition])
 
     init {
-        setHorizontalPicker()
+        initTimePicker()
+        initScorePicker()
+    }
+
+    private fun initScorePicker() {
+
+        scoreLayoutManager.get()?.apply {
+            callback = object : SliderLayoutManager.OnItemSelectedListener {
+                override fun onItemSelected(layoutPosition: Int) {
+                    scoreChooseText.set(scorePikerData[layoutPosition])
+                }
+            }
+        }
+
+        scoreSliderAdapter.get()?.apply {
+            setData(scorePikerData)
+            callback = object : SliderAdapter.Callback {
+                override fun onItemClicked(view: View) {
+                    //todo
+                }
+            }
+        }
     }
 
     private fun getTimePickerData(): ArrayList<String> {
         val data = ArrayList<String>()
-        for (x in 1..20) {
+        for (x in 2..16) {
             data.add((x * 10).toString())
         }
         return data
     }
 
-    private fun setHorizontalPicker() {
+    private fun getScorePickerData(): ArrayList<String> {
+        val data = ArrayList<String>()
+        for (x in 20..160) {
+            data.add(x.toString())
+        }
+        return data
+    }
 
-        timeLm.apply {
+    private fun initTimePicker() {
+
+        timeLayoutManager.get()?.apply {
             callback = object : SliderLayoutManager.OnItemSelectedListener {
                 override fun onItemSelected(layoutPosition: Int) {
-                    chooseTimeText.set(data[layoutPosition])
+                    timeChooseText.set(timePikerData[layoutPosition])
                 }
             }
         }
 
-        sliderAdapter.apply {
-            setData(data)
+        timeSliderAdapter.get()?.apply {
+            setData(timePikerData)
             callback = object : SliderAdapter.Callback {
                 override fun onItemClicked(view: View) {
-                   //todo
+                    //todo
                 }
             }
         }
+    }
+
+    fun onConfirmClick() {
+        //todo save settings
+        activity?.onBackPressed()
     }
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -15,31 +16,97 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/round_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="250dp"
-            android:text="@{viewModel.chooseTimeText}"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:text="@string/round_time"
+            app:layout_constraintBottom_toBottomOf="@+id/timeChooseTv"
+            app:layout_constraintEnd_toStartOf="@+id/timeChooseTv"
+            app:layout_constraintTop_toTopOf="@+id/timeChooseTv" />
+
+        <TextView
+            android:id="@+id/timeChooseTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/caviar_dreams_bold"
+            android:text="@{viewModel.timeChooseText}"
             android:textColor="@color/app_style_red"
             android:textSize="@dimen/_15sdp"
+            app:layout_constraintBottom_toTopOf="@+id/timeHorizontalPicker"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            tools:text="40" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvHorizontalPicker"
+            android:id="@+id/timeHorizontalPicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
-            android:padding="@{viewModel.timeSliderAdapterPadding}"
-            android:paddingStart="@dimen/_20sdp"
-            android:paddingEnd="@dimen/_20sdp"
+            android:paddingLeft="@{viewModel.adapterStartEndPadding}"
+            android:paddingRight="@{viewModel.adapterStartEndPadding}"
             app:adapter="@{viewModel.timeSliderAdapter}"
+            app:initialPosition="@{viewModel.timeInitialPosition}"
             app:layoutManager="@{viewModel.timeLayoutManager}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/gol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:text="@string/for_victory"
+            app:layout_constraintBottom_toBottomOf="@+id/scoreChooseTv"
+            app:layout_constraintEnd_toStartOf="@+id/scoreChooseTv"
+            app:layout_constraintTop_toTopOf="@+id/scoreChooseTv" />
+
+        <TextView
+            android:id="@+id/scoreChooseTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:fontFamily="@font/caviar_dreams_bold"
+            android:text="@{viewModel.scoreChooseText}"
+            android:textColor="@color/app_style_blue"
+            android:textSize="@dimen/_15sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timeHorizontalPicker"
+            tools:text="50" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/scoreHorizontalPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingLeft="@{viewModel.adapterStartEndPadding}"
+            android:paddingRight="@{viewModel.adapterStartEndPadding}"
+            app:adapter="@{viewModel.scoreSliderAdapter}"
+            app:initialPosition="@{viewModel.scoreInitialPosition}"
+            app:layoutManager="@{viewModel.scoreLayoutManager}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scoreChooseTv" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/start_screen_button_height"
+            android:background="@drawable/start_screen_button"
+            android:backgroundTint="@color/app_style_orange"
+            android:fontFamily="@font/caviar_dreams_bold"
+            android:onClick="@{(view) -> viewModel.onConfirmClick()}"
+            android:text="@string/confirm"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/start_screen_button_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scoreChooseTv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

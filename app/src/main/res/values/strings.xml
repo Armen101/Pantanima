@@ -24,5 +24,8 @@
     <string name="second_def_group_name">group 2</string>
     <string name="new_group">group name</string>
     <string name="start">start</string>
+    <string name="round_time">round time</string>
+    <string name="for_victory">for victory</string>
+    <string name="confirm">confirm</string>
 
 </resources>

@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableField
+import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 
 
@@ -39,4 +40,9 @@ fun LottieAnimationView.play(boolean: Boolean) {
     } else {
         cancelAnimation()
     }
+}
+
+@BindingAdapter("initialPosition")
+fun RecyclerView.scrollTo(pos: Int) {
+    scrollToPosition(pos)
 }

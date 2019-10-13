@@ -3,6 +3,7 @@
     <string name="title_play">Play</string>
     <string name="title_start_screen">Start screen</string>
     <string name="title_groups">Groups</string>
+    <string name="title_settings">Settings</string>
 
     <!-- START SCREEN -->
     <string name="new_game">новая игра</string>
@@ -13,4 +14,7 @@
     <string name="second_def_group_name">группа 2</string>
     <string name="new_group">имя группы</string>
     <string name="start">начать</string>
+    <string name="round_time">round time</string>
+    <string name="for_victory">for victory</string>
+    <string name="confirm">confirm</string>
 </resources>
