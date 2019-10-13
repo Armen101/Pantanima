@@ -7,7 +7,7 @@ import com.example.pantanima.ui.Constants
 import com.example.pantanima.ui.activities.NavActivity
 import java.lang.ref.WeakReference
 
-class GroupsViewModel(activity: WeakReference<NavActivity>) : BaseViewModel(activity) {
+class GroupsVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
 
     var group1: ObservableField<String?> = ObservableField(getString(R.string.first_def_group_name))
     var group2: ObservableField<String?> = ObservableField(getString(R.string.second_def_group_name))
@@ -18,6 +18,10 @@ class GroupsViewModel(activity: WeakReference<NavActivity>) : BaseViewModel(acti
         val bundle = Bundle()
         bundle.putStringArrayList(Constants.BUNDLE_GROUPS, getGroups())
         setNewDestination(R.id.navigateToPlay, bundle)
+    }
+
+    fun goToSettings() {
+        setNewDestination(R.id.navigateToSettings)
     }
 
     private fun getGroups(): ArrayList<String> {

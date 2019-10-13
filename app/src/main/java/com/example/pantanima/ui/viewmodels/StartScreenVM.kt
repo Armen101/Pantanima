@@ -6,7 +6,7 @@ import com.example.pantanima.ui.activities.NavActivity
 import com.example.pantanima.ui.helpers.LocaleHelper
 import java.lang.ref.WeakReference
 
-class StartScreenViewModel(activity: WeakReference<NavActivity>) : BaseViewModel(activity) {
+class StartScreenVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
 
     private var languageList = activity.get()?.resources?.getStringArray(R.array.languages_list)!!
 

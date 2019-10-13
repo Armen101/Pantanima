@@ -13,7 +13,7 @@ import com.example.pantanima.ui.activities.NavActivity
 import com.example.pantanima.ui.asynchronous.CompositeJob
 import java.lang.ref.WeakReference
 
-abstract class BaseViewModel(activityRef: WeakReference<NavActivity>) : ViewModel() {
+abstract class BaseVM(activityRef: WeakReference<NavActivity>) : ViewModel() {
 
     protected var disposable: CompositeDisposable = CompositeDisposable()
     protected var compositeJob: CompositeJob = CompositeJob()

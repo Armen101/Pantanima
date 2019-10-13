@@ -3,6 +3,7 @@
     <string name="title_play">Play</string>
     <string name="title_start_screen">Start screen</string>
     <string name="title_groups">Groups</string>
+    <string name="title_settings">Settings</string>
 
     <!-- START SCREEN -->
     <string name="new_game">new game</string>

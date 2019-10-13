@@ -10,14 +10,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.example.pantanima.ui.viewmodels.BaseViewModel
+import com.example.pantanima.ui.viewmodels.BaseVM
 import androidx.navigation.NavController
 import com.example.pantanima.ui.EventObserver
 import com.example.pantanima.ui.helpers.ViewModelUtils
 import com.example.pantanima.ui.activities.NavActivity
 
 
-abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment() {
+abstract class BaseFragment<T : ViewDataBinding, V : BaseVM> : Fragment() {
 
     private lateinit var binding: Unit
     private lateinit var viewDataBinding: T

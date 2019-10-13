@@ -6,13 +6,13 @@ import com.example.pantanima.BR
 import com.example.pantanima.R
 import com.example.pantanima.databinding.FragmentGroupsBinding
 import com.example.pantanima.ui.activities.NavActivity
-import com.example.pantanima.ui.viewmodels.GroupsViewModel
+import com.example.pantanima.ui.viewmodels.GroupsVM
 import java.lang.ref.WeakReference
 
-class GroupsFragment : BaseFragment<FragmentGroupsBinding, GroupsViewModel>() {
+class GroupsFragment : BaseFragment<FragmentGroupsBinding, GroupsVM>() {
 
     private lateinit var fragmentGroupsBinding: FragmentGroupsBinding
-    private lateinit var viewModel: GroupsViewModel
+    private lateinit var viewModel: GroupsVM
 
     override fun getBindingVariable(): Int {
         return BR.viewModel
@@ -26,8 +26,8 @@ class GroupsFragment : BaseFragment<FragmentGroupsBinding, GroupsViewModel>() {
         return R.id.nav_host_fragment
     }
 
-    override fun getViewModel(): GroupsViewModel {
-        viewModel = GroupsViewModel(WeakReference(activity as NavActivity))
+    override fun getViewModel(): GroupsVM {
+        viewModel = GroupsVM(WeakReference(activity as NavActivity))
         return viewModel
     }
 

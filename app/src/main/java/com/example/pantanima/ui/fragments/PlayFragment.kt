@@ -7,13 +7,13 @@ import com.example.pantanima.R
 import com.example.pantanima.databinding.FragmentPlayBinding
 import com.example.pantanima.ui.Constants
 import com.example.pantanima.ui.activities.NavActivity
-import com.example.pantanima.ui.viewmodels.PlayViewModel
+import com.example.pantanima.ui.viewmodels.PlayVM
 import java.lang.ref.WeakReference
 
-class PlayFragment : BaseFragment<FragmentPlayBinding, PlayViewModel>() {
+class PlayFragment : BaseFragment<FragmentPlayBinding, PlayVM>() {
 
     private lateinit var fragmentHomeBinding: FragmentPlayBinding
-    private lateinit var viewModel: PlayViewModel
+    private lateinit var viewModel: PlayVM
 
     override fun getBindingVariable(): Int {
         return BR.viewModel
@@ -27,9 +27,9 @@ class PlayFragment : BaseFragment<FragmentPlayBinding, PlayViewModel>() {
         return R.id.nav_host_fragment
     }
 
-    override fun getViewModel(): PlayViewModel {
+    override fun getViewModel(): PlayVM {
         val groups = arguments?.getStringArrayList(Constants.BUNDLE_GROUPS)
-        viewModel = PlayViewModel(WeakReference(activity as NavActivity), groups!!)
+        viewModel = PlayVM(WeakReference(activity as NavActivity), groups!!)
         return viewModel
     }
 

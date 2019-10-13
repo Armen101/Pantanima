@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.pantanima.ui.viewmodels.GroupsViewModel" />
+            type="com.example.pantanima.ui.viewmodels.GroupsVM" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -181,14 +181,15 @@
                 android:textStyle="bold" />
 
             <ImageView
-                android:background="@drawable/start_round_button_bg"
-                android:backgroundTint="@color/app_style_green"
-                app:srcCompat="@drawable/ic_settings"
-                android:padding="@dimen/_12sdp"
-                android:layout_toEndOf="@+id/new_game"
                 android:layout_width="@dimen/start_screen_button_height"
                 android:layout_height="@dimen/start_screen_button_height"
                 android:layout_marginStart="@dimen/_20sdp"
+                android:layout_toEndOf="@+id/new_game"
+                android:background="@drawable/start_round_button_bg"
+                android:backgroundTint="@color/app_style_green"
+                android:onClick="@{(view) -> viewModel.goToSettings()}"
+                android:padding="@dimen/_12sdp"
+                app:srcCompat="@drawable/ic_settings"
                 tools:layout_editor_absoluteX="332dp"
                 tools:layout_editor_absoluteY="520dp" />
         </RelativeLayout>

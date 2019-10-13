@@ -1,11 +1,11 @@
 package com.example.pantanima.ui.di.components
 
 import com.example.pantanima.ui.di.moduls.GroupModule
-import com.example.pantanima.ui.viewmodels.PlayViewModel
+import com.example.pantanima.ui.viewmodels.PlayVM
 import dagger.Component
 
 @Component(modules = [GroupModule::class])
 interface AppComponent {
 
-    fun injectHomeViewModel(homeViewModel: PlayViewModel)
+    fun injectHomeViewModel(homeViewModel: PlayVM)
 }

@@ -23,7 +23,7 @@ import com.example.pantanima.ui.helpers.GamePrefs
 import com.example.pantanima.ui.models.Group
 import java.lang.StringBuilder
 
-class PlayViewModel(activity: WeakReference<NavActivity>, groupNames: ArrayList<String>) : BaseViewModel(activity),
+class PlayVM(activity: WeakReference<NavActivity>, groupNames: ArrayList<String>) : BaseVM(activity),
     WordsAdapterListener {
 
     private var clickPlayer: MediaPlayer? = null

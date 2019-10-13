@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.pantanima.ui.viewmodels.StartScreenViewModel" />
+            type="com.example.pantanima.ui.viewmodels.StartScreenVM" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
