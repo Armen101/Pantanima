@@ -24,7 +24,7 @@ class SliderLayoutManager(context: Context?) : LinearLayoutManager(context) {
 
     override fun onLayoutChildren(recycler: RecyclerView.Recycler?, state: RecyclerView.State) {
         super.onLayoutChildren(recycler, state)
-        scaleDownView()
+        scaleView()
     }
 
     override fun scrollHorizontallyBy(
@@ -34,14 +34,14 @@ class SliderLayoutManager(context: Context?) : LinearLayoutManager(context) {
     ): Int {
         return if (orientation == HORIZONTAL) {
             val scrolled = super.scrollHorizontallyBy(dx, recycler, state)
-            scaleDownView()
+            scaleView()
             scrolled
         } else {
             0
         }
     }
 
-    private fun scaleDownView() {
+    private fun scaleView() {
         val mid = width / 2.0f
         for (i in 0 until childCount) {
 
@@ -56,17 +56,12 @@ class SliderLayoutManager(context: Context?) : LinearLayoutManager(context) {
             // Set scale to view
             child.scaleX = scale
             child.scaleY = scale
+            child.alpha = scale
         }
     }
 
     override fun onScrollStateChanged(state: Int) {
         super.onScrollStateChanged(state)
-//
-//        when(state) {
-//            RecyclerView.SCROLL_STATE_IDLE -> Log.d("scroll", "SCROLL_STATE_IDLE")
-//            RecyclerView.SCROLL_STATE_DRAGGING -> Log.d("scroll", "SCROLL_STATE_DRAGGING")
-//            RecyclerView.SCROLL_STATE_SETTLING -> Log.d("scroll", "SCROLL_STATE_SETTLING")
-//        }
 
         // When scroll stops we notify on the selected item
         if (state == RecyclerView.SCROLL_STATE_IDLE) {
