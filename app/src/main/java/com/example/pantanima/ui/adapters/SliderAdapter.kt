@@ -12,7 +12,8 @@ import android.media.ToneGenerator
 import android.media.AudioManager
 
 
-class SliderAdapter(val data: ArrayList<String>) : RecyclerView.Adapter<SliderAdapter.SliderItemViewHolder>() {
+class SliderAdapter(val data: ArrayList<String>) :
+    RecyclerView.Adapter<SliderAdapter.SliderItemViewHolder>() {
 
     var callback: Callback? = null
     private var recyclerView: RecyclerView? = null
@@ -57,11 +58,7 @@ class SliderAdapter(val data: ArrayList<String>) : RecyclerView.Adapter<SliderAd
         }
 
         fun onItemClick(v: View) {
-            recyclerView?.let {
-                it.smoothScrollToPosition(
-                    it.getChildLayoutPosition(v)
-                )
-            }
+            recyclerView?.smoothScrollToPosition(adapterPosition)
             callback?.onItemClicked(v)
         }
     }
