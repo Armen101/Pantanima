@@ -37,7 +37,7 @@ class SliderAdapter(val data: ArrayList<String>) :
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 val tg = ToneGenerator(AudioManager.ADJUST_LOWER, 50)
-                tg.startTone(ToneGenerator.TONE_CDMA_DIAL_TONE_LITE, 50)
+                tg.startTone(ToneGenerator.TONE_CDMA_KEYPAD_VOLUME_KEY_LITE, 50)
                 tg.release()
             }
         })

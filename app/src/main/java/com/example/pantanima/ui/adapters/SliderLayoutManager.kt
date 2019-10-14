@@ -56,7 +56,7 @@ class SliderLayoutManager(context: Context?) : LinearLayoutManager(context) {
             // Set scale to view
             child.scaleX = scale
             child.scaleY = scale
-            child.alpha = scale
+            child.alpha =  Math.abs(width - distanceFromCenter) / 1000
         }
     }
 
