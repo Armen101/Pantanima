@@ -12,10 +12,9 @@ import android.media.ToneGenerator
 import android.media.AudioManager
 
 
-class SliderAdapter : RecyclerView.Adapter<SliderAdapter.SliderItemViewHolder>() {
+class SliderAdapter(val data: ArrayList<String>) : RecyclerView.Adapter<SliderAdapter.SliderItemViewHolder>() {
 
     var callback: Callback? = null
-    private val data: ArrayList<String> = ArrayList()
     private var recyclerView: RecyclerView? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderItemViewHolder {
@@ -28,12 +27,6 @@ class SliderAdapter : RecyclerView.Adapter<SliderAdapter.SliderItemViewHolder>()
 
     override fun onBindViewHolder(holder: SliderItemViewHolder, position: Int) {
         holder.bind(data[position])
-    }
-
-    fun setData(data: ArrayList<String>) {
-        this.data.clear()
-        this.data.addAll(data)
-        notifyDataSetChanged()
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {

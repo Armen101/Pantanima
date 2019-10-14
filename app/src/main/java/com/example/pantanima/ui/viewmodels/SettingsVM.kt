@@ -13,14 +13,14 @@ class SettingsVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
     val adapterStartEndPadding = DisplayHelper.displayWidth() / 2 - DisplayHelper.dpToPx(40)
 
     var timeLayoutManager = ObservableField(SliderLayoutManager(activity.get()))
-    var timeSliderAdapter = ObservableField(SliderAdapter())
-    var timeInitialPosition = 7
     private val timePikerData = getTimePickerData()
+    var timeSliderAdapter = ObservableField(SliderAdapter(timePikerData))
+    var timeInitialPosition = 7
     var timeChooseText = ObservableField<String>(timePikerData[timeInitialPosition])
 
     var scoreLayoutManager = ObservableField(SliderLayoutManager(activity.get()))
-    var scoreSliderAdapter = ObservableField(SliderAdapter())
     private val scorePikerData = getScorePickerData()
+    var scoreSliderAdapter = ObservableField(SliderAdapter(scorePikerData))
     var scoreInitialPosition = 80
     var scoreChooseText = ObservableField<String>(scorePikerData[scoreInitialPosition])
 
@@ -40,7 +40,6 @@ class SettingsVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
         }
 
         scoreSliderAdapter.get()?.apply {
-            setData(scorePikerData)
             callback = object : SliderAdapter.Callback {
                 override fun onItemClicked(view: View) {
                     //todo
@@ -76,7 +75,6 @@ class SettingsVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
         }
 
         timeSliderAdapter.get()?.apply {
-            setData(timePikerData)
             callback = object : SliderAdapter.Callback {
                 override fun onItemClicked(view: View) {
                     //todo
