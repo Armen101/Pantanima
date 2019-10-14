@@ -8,6 +8,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pantanima.BR
 import com.example.pantanima.R
+import android.media.ToneGenerator
+import android.media.AudioManager
 
 
 class SliderAdapter : RecyclerView.Adapter<SliderAdapter.SliderItemViewHolder>() {
@@ -37,6 +39,14 @@ class SliderAdapter : RecyclerView.Adapter<SliderAdapter.SliderItemViewHolder>()
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         this.recyclerView = recyclerView
+        this.recyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val tg = ToneGenerator(AudioManager.ADJUST_LOWER, 50)
+                tg.startTone(ToneGenerator.TONE_CDMA_DIAL_TONE_LITE, 50)
+                tg.release()
+            }
+        })
     }
 
     interface Callback {
