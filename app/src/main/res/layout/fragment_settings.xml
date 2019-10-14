@@ -40,8 +40,10 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/timeHorizontalPicker"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
             android:clipToPadding="false"
             android:paddingLeft="@{viewModel.adapterStartEndPadding}"
             android:paddingRight="@{viewModel.adapterStartEndPadding}"
@@ -79,8 +81,10 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/scoreHorizontalPicker"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
             android:clipToPadding="false"
             android:paddingLeft="@{viewModel.adapterStartEndPadding}"
             android:paddingRight="@{viewModel.adapterStartEndPadding}"

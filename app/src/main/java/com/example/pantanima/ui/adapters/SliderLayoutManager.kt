@@ -61,6 +61,12 @@ class SliderLayoutManager(context: Context?) : LinearLayoutManager(context) {
 
     override fun onScrollStateChanged(state: Int) {
         super.onScrollStateChanged(state)
+//
+//        when(state) {
+//            RecyclerView.SCROLL_STATE_IDLE -> Log.d("scroll", "SCROLL_STATE_IDLE")
+//            RecyclerView.SCROLL_STATE_DRAGGING -> Log.d("scroll", "SCROLL_STATE_DRAGGING")
+//            RecyclerView.SCROLL_STATE_SETTLING -> Log.d("scroll", "SCROLL_STATE_SETTLING")
+//        }
 
         // When scroll stops we notify on the selected item
         if (state == RecyclerView.SCROLL_STATE_IDLE) {
@@ -83,6 +89,7 @@ class SliderLayoutManager(context: Context?) : LinearLayoutManager(context) {
             callback?.onItemSelected(position)
         }
     }
+
 
     private fun getRecyclerViewCenterX(): Int {
         return (recyclerView.right - recyclerView.left) / 2 + recyclerView.left
