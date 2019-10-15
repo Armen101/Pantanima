@@ -25,6 +25,8 @@ class SettingsVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
     var scoreChooseText = ObservableField<String>(scorePikerData[scoreInitialPosition])
 
     init {
+        timeLayoutManager.get()?.scrollToPosition(timeInitialPosition)
+        scoreLayoutManager.get()?.scrollToPosition(scoreInitialPosition)
         initTimePicker()
         initScorePicker()
     }
