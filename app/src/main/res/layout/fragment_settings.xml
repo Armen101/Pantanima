@@ -15,6 +15,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.example.pantanima.ui.customviews.VerticalSliderView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:list="@{viewModel.getModePickerData()}"
+            app:sliderVariantTvColor="@color/app_style_green"
+            app:sliderVariantTvSize="@dimen/vertical_slider_tv_size"
+            app:sliderVariantTvPadding="@dimen/vertical_slider_tv_padding"
+            app:sliderChooserBtnColor="@color/app_style_red"
+            app:sliderChooserBtnSize="@dimen/vertical_slider_chooser_btn_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/round_time"
             android:layout_width="wrap_content"

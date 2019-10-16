@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="VerticalSliderView">
+        <attr name="sliderVariantTvSize" format="dimension" />
+        <attr name="sliderVariantTvColor" format="color" />
+        <attr name="sliderVariantTvFont" format="reference" />
+        <attr name="sliderVariantTvPadding" format="dimension" />
+        <attr name="sliderChooserBtnSize" format="dimension" />
+        <attr name="sliderChooserBtnColor" format="color" />
+    </declare-styleable>
+</resources>

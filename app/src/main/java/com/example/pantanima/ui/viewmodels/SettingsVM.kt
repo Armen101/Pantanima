@@ -50,6 +50,15 @@ class SettingsVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
         }
     }
 
+    fun getModePickerData(): ArrayList<String> {
+        val data = ArrayList<String>()
+        data.add("aaaaaaaaa")
+        data.add("bbbgfgbbbbb")
+        data.add("ccccccccc")
+        data.add("dddddd")
+        return data
+    }
+
     private fun getTimePickerData(): ArrayList<String> {
         val data = ArrayList<String>()
         for (x in 2..16) {

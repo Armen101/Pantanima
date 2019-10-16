@@ -8,6 +8,7 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableField
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
+import com.example.pantanima.ui.customviews.VerticalSliderView
 
 
 @BindingAdapter("android:visibility")
@@ -45,4 +46,9 @@ fun LottieAnimationView.play(boolean: Boolean) {
 @BindingAdapter("initialPosition")
 fun RecyclerView.scrollTo(pos: Int) {
     scrollToPosition(pos)
+}
+
+@BindingAdapter("list")
+fun VerticalSliderView.setList(list: List<String>) {
+    listStr = list
 }
