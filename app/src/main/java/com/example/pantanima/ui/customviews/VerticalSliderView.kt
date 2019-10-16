@@ -9,10 +9,13 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.example.pantanima.R
+import android.view.MotionEvent
 
 
 class VerticalSliderView : RelativeLayout {
 
+    private var xDelta: Int = 450
+    private var yDelta: Int = 200
     private var variantsTvSize = 30f
     private var chooserBtnSize = 60f
     private var variantsTvPadding = 20
@@ -58,11 +61,20 @@ class VerticalSliderView : RelativeLayout {
             attrs, R.styleable.VerticalSliderView, 0, 0
         ).apply {
             try {
-                variantsTvSize = getDimension(R.styleable.VerticalSliderView_sliderVariantTvSize, variantsTvSize)
-                variantsTvPadding = getDimension(R.styleable.VerticalSliderView_sliderVariantTvPadding, variantsTvPadding.toFloat()).toInt()
-                variantsTvColor = getColor(R.styleable.VerticalSliderView_sliderVariantTvColor, variantsTvColor)
-                chooserBtnColor = getColor(R.styleable.VerticalSliderView_sliderChooserBtnColor, chooserBtnColor)
-                chooserBtnSize = getDimension(R.styleable.VerticalSliderView_sliderChooserBtnSize, chooserBtnSize)
+                variantsTvSize =
+                    getDimension(R.styleable.VerticalSliderView_sliderVariantTvSize, variantsTvSize)
+                variantsTvPadding = getDimension(
+                    R.styleable.VerticalSliderView_sliderVariantTvPadding,
+                    variantsTvPadding.toFloat()
+                ).toInt()
+                variantsTvColor =
+                    getColor(R.styleable.VerticalSliderView_sliderVariantTvColor, variantsTvColor)
+                chooserBtnColor =
+                    getColor(R.styleable.VerticalSliderView_sliderChooserBtnColor, chooserBtnColor)
+                chooserBtnSize = getDimension(
+                    R.styleable.VerticalSliderView_sliderChooserBtnSize,
+                    chooserBtnSize
+                )
             } finally {
                 recycle()
             }
@@ -81,6 +93,7 @@ class VerticalSliderView : RelativeLayout {
     private fun drawChooserButton() {
         chooserButton = Button(context)
         chooserButton.setBackgroundColor(chooserBtnColor)
+        chooserButton.setOnTouchListener(onTouchListener())
         val lp = LayoutParams(chooserBtnSize.toInt(), chooserBtnSize.toInt())
         lp.addRule(END_OF, variantsContainer.id)
         lp.addRule(CENTER_VERTICAL, TRUE)
@@ -97,4 +110,34 @@ class VerticalSliderView : RelativeLayout {
         variantsContainer.addView(tv)
     }
 
+
+    private fun onTouchListener(): OnTouchListener {
+        return OnTouchListener { view, event ->
+            val x = event.rawX.toInt()
+            val y = event.rawY.toInt()
+            when (event.action and MotionEvent.ACTION_MASK) {
+                MotionEvent.ACTION_DOWN -> {
+                    val lParams = view.layoutParams as LayoutParams
+                    xDelta = x - lParams.leftMargin
+                    yDelta = y - lParams.topMargin
+                }
+                MotionEvent.ACTION_UP -> {
+                }
+                MotionEvent.ACTION_POINTER_DOWN -> {
+                }
+                MotionEvent.ACTION_POINTER_UP -> {
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    val layoutParams = view.layoutParams as LayoutParams
+                    layoutParams.leftMargin = x - xDelta
+                    layoutParams.topMargin = y - yDelta
+                    layoutParams.rightMargin = -250
+                    layoutParams.bottomMargin = -250
+                    view.layoutParams = layoutParams
+                }
+            }
+            invalidate()
+            true
+        }
+    }
 }
