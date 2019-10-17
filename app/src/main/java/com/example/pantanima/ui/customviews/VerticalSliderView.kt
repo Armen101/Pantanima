@@ -11,21 +11,25 @@ import android.widget.TextView
 import com.example.pantanima.R
 import android.view.MotionEvent
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 
 
 class VerticalSliderView : RelativeLayout {
 
-    private var chooserBtnStartMargin = 30.0f
+    private var sliderInitialIndex: Int = 1
+    private var chooserBtnStartMargin = 0.0f
     private var yDelta: Int = 0
     private var variantsTvSize = 30f
     private var chooserBtnSize = 60f
     private var variantsTvPadding = 10
     private var variantsTvColor = Color.BLACK
     private var chooserBtnColor = Color.RED
+    private var variantsTvInitialAlpha = 0.75f
+    private var focusedVariant: TextView? = null
 
     lateinit var variantsContainer: LinearLayout
-    lateinit var chooserButton: Button
+    lateinit var cursorButton: Button
 
     var listTv: MutableList<TextView> = ArrayList()
 
@@ -79,9 +83,8 @@ class VerticalSliderView : RelativeLayout {
                     R.styleable.VerticalSliderView_sliderChooserBtnSize,
                     chooserBtnSize
                 )
-                chooserBtnStartMargin = getDimension(
-                    R.styleable.VerticalSliderView_sliderChooserBtnStartMargin,
-                    chooserBtnStartMargin
+                sliderInitialIndex = getInt(
+                    R.styleable.VerticalSliderView_sliderInitialIndex, sliderInitialIndex
                 )
             } finally {
                 recycle()
@@ -99,22 +102,22 @@ class VerticalSliderView : RelativeLayout {
     }
 
     private fun drawChooserButton() {
-        chooserButton = Button(context)
+        cursorButton = Button(context)
 
         val drawable = ContextCompat.getDrawable(context, R.drawable.start_round_button_bg)
         drawable?.let {
             val drawableCompat = DrawableCompat.wrap(drawable)
             DrawableCompat.setTint(drawableCompat, chooserBtnColor)
-            chooserButton.background = drawable
+            cursorButton.background = drawable
         }
 
-        chooserButton.setOnTouchListener(onTouchListener())
+        cursorButton.setOnTouchListener(onTouchListener())
         val lp = LayoutParams(chooserBtnSize.toInt(), chooserBtnSize.toInt())
         lp.addRule(END_OF, variantsContainer.id)
         lp.marginStart = chooserBtnStartMargin.toInt()
         lp.addRule(CENTER_VERTICAL, TRUE)
-        chooserButton.layoutParams = lp
-        addView(chooserButton)
+        cursorButton.layoutParams = lp
+        addView(cursorButton)
     }
 
     private fun drawNewTv(str: String): TextView {
@@ -122,6 +125,12 @@ class VerticalSliderView : RelativeLayout {
             text = str
             textSize = variantsTvSize
             setTextColor(variantsTvColor)
+            alpha = variantsTvInitialAlpha
+            width = 500
+
+            val typeface = ResourcesCompat.getFont(context, R.font.caviar_dreams_bold)
+            setTypeface(typeface)
+
             setPadding(variantsTvPadding, variantsTvPadding, variantsTvPadding, variantsTvPadding)
             variantsContainer.addView(this)
         }
@@ -149,15 +158,12 @@ class VerticalSliderView : RelativeLayout {
                             view.y = newY
 
                             val btnHalfHeight = (view.bottom - view.top) / 2
-                            val binMidCoordinates = newY + btnHalfHeight
-                            val posAndScale = getCurrentFocusedPosition(binMidCoordinates.toInt())
+                            val cursorMid = newY + btnHalfHeight
+                            val posAndScale = getCurrentFocusedPosition(cursorMid.toInt())
                             val index = posAndScale.first
                             val scaleXY = posAndScale.second
                             if (index != -1) {
-                                val tv = listTv[index]
-                                tv.scaleX = 1 + (scaleXY / 4)
-                                tv.scaleY = 1 + (scaleXY / 4)
-                                tv.translationX = scaleXY * 30
+                                toFocus(index, scaleXY)
                             }
                         }
                     }
@@ -168,9 +174,21 @@ class VerticalSliderView : RelativeLayout {
         }
     }
 
-    private fun getCurrentFocusedPosition(chooserMid: Int): Pair<Int, Float> {
+    private fun toFocus(index: Int, scale: Float = 1f) {
+        focusedVariant = listTv[index]
+        focusedVariant!!.scaleX = 1 + (scale / 4)
+        focusedVariant!!.scaleY = 1 + (scale / 4)
+        focusedVariant!!.translationX = scale * 35
+        focusedVariant!!.alpha = variantsTvInitialAlpha + scale
+    }
+
+    private fun getOneItemHeight(): Int {
         val totalHeight = variantsContainer.height
-        val oneItemHeight = totalHeight / listStr.size
+        return totalHeight / listStr.size
+    }
+
+    private fun getCurrentFocusedPosition(chooserMid: Int): Pair<Int, Float> {
+        val oneItemHeight = getOneItemHeight()
         for (position in listStr.indices) {
             val top = height - (height - position * oneItemHeight)
             val bottom = top + oneItemHeight

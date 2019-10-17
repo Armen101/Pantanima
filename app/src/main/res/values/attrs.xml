@@ -7,6 +7,6 @@
         <attr name="sliderVariantTvPadding" format="dimension" />
         <attr name="sliderChooserBtnSize" format="dimension" />
         <attr name="sliderChooserBtnColor" format="color" />
-        <attr name="sliderChooserBtnStartMargin" format="dimension" />
+        <attr name="sliderInitialIndex" format="integer" />
     </declare-styleable>
 </resources>
