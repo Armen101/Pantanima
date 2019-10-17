@@ -18,14 +18,16 @@
         <com.example.pantanima.ui.customviews.VerticalSliderView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:list="@{viewModel.getModePickerData()}"
-            app:sliderVariantTvColor="@color/app_style_green"
-            app:sliderVariantTvSize="@dimen/vertical_slider_tv_size"
-            app:sliderVariantTvPadding="@dimen/vertical_slider_tv_padding"
-            app:sliderChooserBtnColor="@color/app_style_blue"
-            app:sliderChooserBtnSize="@dimen/vertical_slider_chooser_btn_size"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:list="@{viewModel.getModePickerData()}"
+            app:sliderChooserBtnColor="@color/app_style_green"
+            app:sliderChooserBtnStartMargin="@dimen/_10sdp"
+            app:sliderChooserBtnSize="@dimen/vertical_slider_chooser_btn_size"
+            app:sliderVariantTvColor="@color/slider_tv_color"
+            app:sliderVariantTvPadding="@dimen/vertical_slider_tv_padding"
+            app:sliderVariantTvSize="@dimen/vertical_slider_tv_size" />
 
         <TextView
             android:id="@+id/round_time"
