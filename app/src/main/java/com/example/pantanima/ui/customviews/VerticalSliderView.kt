@@ -10,6 +10,8 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import com.example.pantanima.R
 import android.view.MotionEvent
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 
 
 class VerticalSliderView : RelativeLayout {
@@ -91,7 +93,14 @@ class VerticalSliderView : RelativeLayout {
 
     private fun drawChooserButton() {
         chooserButton = Button(context)
-        chooserButton.setBackgroundColor(chooserBtnColor)
+
+        val drawable = ContextCompat.getDrawable(context, R.drawable.start_round_button_bg)
+        drawable?.let {
+            val drawableCompat = DrawableCompat.wrap(drawable)
+            DrawableCompat.setTint(drawableCompat, chooserBtnColor)
+            chooserButton.background = drawable
+        }
+
         chooserButton.setOnTouchListener(onTouchListener())
         val lp = LayoutParams(chooserBtnSize.toInt(), chooserBtnSize.toInt())
         lp.addRule(END_OF, variantsContainer.id)

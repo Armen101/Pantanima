@@ -22,7 +22,7 @@
             app:sliderVariantTvColor="@color/app_style_green"
             app:sliderVariantTvSize="@dimen/vertical_slider_tv_size"
             app:sliderVariantTvPadding="@dimen/vertical_slider_tv_padding"
-            app:sliderChooserBtnColor="@color/app_style_red"
+            app:sliderChooserBtnColor="@color/app_style_blue"
             app:sliderChooserBtnSize="@dimen/vertical_slider_chooser_btn_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
