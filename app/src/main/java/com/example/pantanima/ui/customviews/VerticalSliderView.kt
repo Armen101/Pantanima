@@ -14,8 +14,8 @@ import android.view.MotionEvent
 
 class VerticalSliderView : RelativeLayout {
 
-    private var xDelta: Int = 200
-    private var yDelta: Int = 450
+    private var xDelta: Int = 0
+    private var yDelta: Int = 0
     private var variantsTvSize = 30f
     private var chooserBtnSize = 60f
     private var variantsTvPadding = 20
