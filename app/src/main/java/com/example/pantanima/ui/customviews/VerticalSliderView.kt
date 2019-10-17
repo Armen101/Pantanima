@@ -14,7 +14,6 @@ import android.view.MotionEvent
 
 class VerticalSliderView : RelativeLayout {
 
-    private var xDelta: Int = 0
     private var yDelta: Int = 0
     private var variantsTvSize = 30f
     private var chooserBtnSize = 60f
@@ -113,12 +112,9 @@ class VerticalSliderView : RelativeLayout {
 
     private fun onTouchListener(): OnTouchListener {
         return OnTouchListener { view, event ->
-            val x = event.rawX.toInt()
-            val y = event.rawY.toInt()
+            val rawY = event.rawY.toInt()
             when (event.action and MotionEvent.ACTION_MASK) {
-                MotionEvent.ACTION_DOWN -> {
-                    xDelta = (view.x - x).toInt()
-                    yDelta = (view.y - y).toInt()
+                MotionEvent.ACTION_DOWN -> { yDelta = (view.y - rawY).toInt()
                 }
                 MotionEvent.ACTION_UP -> {
                 }
@@ -127,8 +123,13 @@ class VerticalSliderView : RelativeLayout {
                 MotionEvent.ACTION_POINTER_UP -> {
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    val transY = y.toFloat()
-                    view.y = transY + yDelta
+                    val transY = rawY.toFloat()
+                    val newY = transY + yDelta
+                    if (newY > top) {
+                        if (view.height + newY < bottom) {
+                            view.y = newY
+                        }
+                    }
                 }
             }
             invalidate()
