@@ -3,6 +3,8 @@ package com.example.pantanima.ui.customviews
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
+import android.util.Log
+import android.view.FocusFinder
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.Button
 import android.widget.LinearLayout
@@ -123,7 +125,8 @@ class VerticalSliderView : RelativeLayout {
         return OnTouchListener { view, event ->
             val rawY = event.rawY.toInt()
             when (event.action and MotionEvent.ACTION_MASK) {
-                MotionEvent.ACTION_DOWN -> { yDelta = (view.y - rawY).toInt()
+                MotionEvent.ACTION_DOWN -> {
+                    yDelta = (view.y - rawY).toInt()
                 }
                 MotionEvent.ACTION_UP -> {
                 }
@@ -137,6 +140,7 @@ class VerticalSliderView : RelativeLayout {
                     if (newY > top) {
                         if (view.height + newY < bottom) {
                             view.y = newY
+                            getCurrentFocusedPosition(newY)
                         }
                     }
                 }
@@ -144,5 +148,35 @@ class VerticalSliderView : RelativeLayout {
             invalidate()
             true
         }
+    }
+
+    private fun getCurrentFocusedPosition(rawY: Float): Pair<Int, Float> {
+        val totalHeight = variantsContainer.height
+        val oneItemHeight = totalHeight / listStr.size
+        for (i in listStr.indices) {
+            val top = height - (height - i * oneItemHeight)
+            val bottom = top + oneItemHeight
+            if (top < rawY && bottom > rawY) {
+                val scalePercent = getItemScale(top, bottom, rawY)
+                Log.d("====p", "pos: $i, scalePercent $scalePercent")
+                return Pair(i, 0f)
+            }
+        }
+        return Pair(-1, 0f) //default
+    }
+
+    private fun getItemScale(top: Int, bottom: Int, rawY: Float): Float {
+
+        val height = bottom - top
+        val mid = height / 2
+        val diff = Math.max(mid, rawY.toInt()) - Math.min(mid, rawY.toInt())
+
+        var scalePercent = (diff * 100 / height) - 100
+
+//        if (rawY > mid) {
+//            scalePercent = 1 - scalePercent
+//        }
+
+        return scalePercent.toFloat()
     }
 }
