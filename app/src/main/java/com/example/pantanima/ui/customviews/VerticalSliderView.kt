@@ -10,7 +10,6 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import com.example.pantanima.R
 import android.view.MotionEvent
-import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 
@@ -28,7 +27,7 @@ class VerticalSliderView : RelativeLayout {
     lateinit var variantsContainer: LinearLayout
     lateinit var chooserButton: Button
 
-    var listTv: MutableList<View> = ArrayList()
+    var listTv: MutableList<TextView> = ArrayList()
 
     var listStr: List<String> = ArrayList()
         set(value) {
@@ -158,6 +157,7 @@ class VerticalSliderView : RelativeLayout {
                                 val tv = listTv[index]
                                 tv.scaleX = 1 + (scaleXY / 4)
                                 tv.scaleY = 1 + (scaleXY / 4)
+                                tv.translationX = scaleXY * 30
                             }
                         }
                     }

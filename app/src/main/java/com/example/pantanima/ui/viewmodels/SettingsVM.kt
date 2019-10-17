@@ -52,10 +52,10 @@ class SettingsVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
 
     fun getModePickerData(): ArrayList<String> {
         val data = ArrayList<String>()
-        data.add("aaaaaaaaa")
-        data.add("bbbgfgbbbbb")
-        data.add("ccccccccc")
-        data.add("dddddd")
+        data.add("light")
+        data.add("medium")
+        data.add("hard")
+        data.add("famous")
         return data
     }
 
