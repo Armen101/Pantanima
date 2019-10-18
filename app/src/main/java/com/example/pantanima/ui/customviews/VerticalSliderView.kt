@@ -31,17 +31,27 @@ class VerticalSliderView : RelativeLayout {
     private var variantsTvInitialAlpha = 0.75f
     private var focusedVariant: TextView? = null
 
-    lateinit var variantsContainer: LinearLayout
+    private lateinit var variantsContainer: LinearLayout
     lateinit var cursorButton: Button
     private var previousIndex = cursorInitialIndex
+
+
+    private var oneItemHeight: Int = 0
+        get() {
+            if(field <= 0){
+                val totalHeight = variantsContainer.height
+                field = totalHeight / listStr.size
+            }
+            return field
+        }
 
     var listTv: MutableList<TextView> = ArrayList()
 
     var listStr: List<String> = ArrayList()
         set(value) {
             field = value
-            for (text in field) {
-                listTv.add(drawNewTv(text))
+            for (index in field.indices) {
+                listTv.add(drawNewTv(field[index], index))
             }
         }
 
@@ -123,11 +133,15 @@ class VerticalSliderView : RelativeLayout {
         addView(cursorButton)
     }
 
-    private fun drawNewTv(str: String): TextView {
+    private fun drawNewTv(str: String, index: Int): TextView {
         return TextView(context).apply {
             text = str
             textSize = variantsTvSize
-            setTextColor(variantsTvColor)
+            if (cursorInitialIndex != index) {
+                setTextColor(Color.BLACK)
+            } else {
+                setTextColor(variantsTvColor)
+            }
             alpha = variantsTvInitialAlpha
             width = 500
 
@@ -209,13 +223,16 @@ class VerticalSliderView : RelativeLayout {
             scaleY = 1f
             translationX = 0f
             alpha = variantsTvInitialAlpha
+            setTextColor(Color.BLACK)
         }
     }
 
     private fun cursorToCenter(cursorMid: Float) {
         val cursorItemHalfHeight = (cursorButton.bottom - cursorButton.top) / 2
         val currentItemIndex = getCurrentFocusedPosition(cursorMid.toInt()).first
-        val oneItemHeight = getOneItemHeight()
+        if (currentItemIndex == -1) {
+            return
+        }
         val currentItemMid = ((currentItemIndex + 1) * oneItemHeight) - (oneItemHeight / 2)
 
         val translationDiff = if (cursorMid > currentItemMid) { //to Up
@@ -235,17 +252,11 @@ class VerticalSliderView : RelativeLayout {
         cursorButton.animate().translationY(translationY - cursorItemHalfHeight).duration = 50
     }
 
-    private fun getOneItemHeight(): Int {
-        val totalHeight = variantsContainer.height
-        return totalHeight / listStr.size
-    }
-
     private fun getCurrentFocusedPosition(chooserMid: Int): Pair<Int, Float> {
-        val oneItemHeight = getOneItemHeight()
         for (position in listStr.indices) {
             val top = height - (height - position * oneItemHeight)
             val bottom = top + oneItemHeight
-            if (chooserMid in (top + 1) until bottom) {
+            if (chooserMid in top + 1 until bottom - 1) {
                 val scalePercent = getItemScale(top, bottom, chooserMid)
                 return Pair(position, scalePercent)
             }
