@@ -1,5 +1,6 @@
 package com.example.pantanima.ui.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,13 +9,16 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pantanima.BR
 import com.example.pantanima.R
-import android.media.ToneGenerator
-import android.media.AudioManager
+import android.media.MediaPlayer
+import android.os.VibrationEffect
+import android.os.Build
+import android.os.Vibrator
 
 
 class SliderAdapter(val data: ArrayList<String>) :
     RecyclerView.Adapter<SliderAdapter.SliderItemViewHolder>() {
 
+    private var clickPlayer: MediaPlayer? = null
     var callback: Callback? = null
     private var recyclerView: RecyclerView? = null
 
@@ -36,11 +40,28 @@ class SliderAdapter(val data: ArrayList<String>) :
         this.recyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                val tg = ToneGenerator(AudioManager.ADJUST_LOWER, 50)
-                tg.startTone(ToneGenerator.TONE_CDMA_KEYPAD_VOLUME_KEY_LITE, 50)
-                tg.release()
+                playScrollSound(recyclerView.context)
             }
         })
+    }
+
+    private fun playScrollSound(context: Context) {
+        val resID = context.resources?.getIdentifier(
+            "scroll_sound_effect",
+            "raw", context.packageName
+        )
+        vibrate(context)
+        resID?.let {
+            clickPlayer = MediaPlayer.create(context, it)
+            clickPlayer?.start()
+        }
+    }
+
+    private fun vibrate(context: Context) {
+        val v = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator?
+        if (Build.VERSION.SDK_INT >= 26) {
+            v?.vibrate(VibrationEffect.createOneShot(2, VibrationEffect.DEFAULT_AMPLITUDE));
+        }
     }
 
     interface Callback {
