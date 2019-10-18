@@ -22,12 +22,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:list="@{viewModel.getModePickerData()}"
-            app:sliderChooserBtnColor="@color/app_style_green"
-            app:sliderInitialIndex="2"
-            app:sliderChooserBtnSize="@dimen/vertical_slider_chooser_btn_size"
-            app:sliderVariantTvColor="@color/slider_tv_color"
-            app:sliderVariantTvPadding="@dimen/vertical_slider_tv_padding"
-            app:sliderVariantTvSize="@dimen/vertical_slider_tv_size" />
+            app:cursorChooserBtnColor="@color/app_style_green"
+            app:cursorInitialIndex="2"
+            app:cursorChooserBtnSize="@dimen/vertical_slider_chooser_btn_size"
+            app:cursorVariantTvColor="@color/slider_tv_color"
+            app:cursorVariantTvPadding="@dimen/vertical_slider_tv_padding"
+            app:cursorVariantTvSize="@dimen/vertical_slider_tv_size" />
 
         <TextView
             android:id="@+id/round_time"

@@ -3,6 +3,7 @@ package com.example.pantanima.ui.customviews
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
+import android.util.Log
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.Button
 import android.widget.LinearLayout
@@ -17,7 +18,7 @@ import androidx.core.graphics.drawable.DrawableCompat
 
 class VerticalSliderView : RelativeLayout {
 
-    private var sliderInitialIndex: Int = 1
+    private var cursorInitialIndex: Int = 1
     private var chooserBtnStartMargin = 0.0f
     private var yDelta: Int = 0
     private var variantsTvSize = 30f
@@ -70,21 +71,21 @@ class VerticalSliderView : RelativeLayout {
         ).apply {
             try {
                 variantsTvSize =
-                    getDimension(R.styleable.VerticalSliderView_sliderVariantTvSize, variantsTvSize)
+                    getDimension(R.styleable.VerticalSliderView_cursorVariantTvSize, variantsTvSize)
                 variantsTvPadding = getDimension(
-                    R.styleable.VerticalSliderView_sliderVariantTvPadding,
+                    R.styleable.VerticalSliderView_cursorVariantTvPadding,
                     variantsTvPadding.toFloat()
                 ).toInt()
                 variantsTvColor =
-                    getColor(R.styleable.VerticalSliderView_sliderVariantTvColor, variantsTvColor)
+                    getColor(R.styleable.VerticalSliderView_cursorVariantTvColor, variantsTvColor)
                 chooserBtnColor =
-                    getColor(R.styleable.VerticalSliderView_sliderChooserBtnColor, chooserBtnColor)
+                    getColor(R.styleable.VerticalSliderView_cursorChooserBtnColor, chooserBtnColor)
                 chooserBtnSize = getDimension(
-                    R.styleable.VerticalSliderView_sliderChooserBtnSize,
+                    R.styleable.VerticalSliderView_cursorChooserBtnSize,
                     chooserBtnSize
                 )
-                sliderInitialIndex = getInt(
-                    R.styleable.VerticalSliderView_sliderInitialIndex, sliderInitialIndex
+                cursorInitialIndex = getInt(
+                    R.styleable.VerticalSliderView_cursorInitialIndex, cursorInitialIndex
                 )
             } finally {
                 recycle()
@@ -115,7 +116,6 @@ class VerticalSliderView : RelativeLayout {
         val lp = LayoutParams(chooserBtnSize.toInt(), chooserBtnSize.toInt())
         lp.addRule(END_OF, variantsContainer.id)
         lp.marginStart = chooserBtnStartMargin.toInt()
-        lp.addRule(CENTER_VERTICAL, TRUE)
         cursorButton.layoutParams = lp
         addView(cursorButton)
     }
@@ -138,14 +138,12 @@ class VerticalSliderView : RelativeLayout {
 
 
     private fun onTouchListener(): OnTouchListener {
+        var cursorMid = 0f
         return OnTouchListener { view, event ->
             val rawY = event.rawY.toInt()
             when (event.action and MotionEvent.ACTION_MASK) {
-                MotionEvent.ACTION_DOWN -> {
-                    yDelta = (view.y - rawY).toInt()
-                }
-                MotionEvent.ACTION_UP -> {
-                }
+                MotionEvent.ACTION_DOWN ->  yDelta = (view.y - rawY).toInt()
+                MotionEvent.ACTION_UP -> cursorToCenter(cursorMid)
                 MotionEvent.ACTION_POINTER_DOWN -> {
                 }
                 MotionEvent.ACTION_POINTER_UP -> {
@@ -158,7 +156,7 @@ class VerticalSliderView : RelativeLayout {
                             view.y = newY
 
                             val btnHalfHeight = (view.bottom - view.top) / 2
-                            val cursorMid = newY + btnHalfHeight
+                            cursorMid = newY + btnHalfHeight
                             val posAndScale = getCurrentFocusedPosition(cursorMid.toInt())
                             val index = posAndScale.first
                             val scaleXY = posAndScale.second
@@ -176,10 +174,35 @@ class VerticalSliderView : RelativeLayout {
 
     private fun toFocus(index: Int, scale: Float = 1f) {
         focusedVariant = listTv[index]
-        focusedVariant!!.scaleX = 1 + (scale / 4)
-        focusedVariant!!.scaleY = 1 + (scale / 4)
-        focusedVariant!!.translationX = scale * 35
-        focusedVariant!!.alpha = variantsTvInitialAlpha + scale
+        focusedVariant?.apply {
+            scaleX = 1 + (scale / 4)
+            scaleY = 1 + (scale / 4)
+            translationX = scale * 35
+            alpha = variantsTvInitialAlpha + scale
+        }
+    }
+
+    private fun cursorToCenter(cursorMid: Float) {
+        val cursorItemHalfHeight = (cursorButton.bottom - cursorButton.top) / 2
+        val currentItemIndex = getCurrentFocusedPosition(cursorMid.toInt()).first
+        val oneItemHeight = getOneItemHeight()
+        val currentItemMid = ((currentItemIndex + 1) * oneItemHeight) - (oneItemHeight / 2)
+
+        val translationDiff = if (cursorMid > currentItemMid) { //to Up
+            -(cursorMid - currentItemMid)
+        } else { //to Down or center
+            (currentItemMid - cursorMid)
+        }
+
+        val translationY = cursorMid + translationDiff
+
+        Log.d("cursorToCenter", "cursorMid      : $cursorMid ---------------------------")
+        Log.d("cursorToCenter", "itemIndex      : $currentItemIndex")
+        Log.d("cursorToCenter", "oneItemHeight  : $oneItemHeight")
+        Log.d("cursorToCenter", "currentItemMid : $currentItemMid")
+        Log.d("cursorToCenter", "translationY   : $translationY")
+
+        cursorButton.animate().translationY(translationY - cursorItemHalfHeight).duration = 50
     }
 
     private fun getOneItemHeight(): Int {
