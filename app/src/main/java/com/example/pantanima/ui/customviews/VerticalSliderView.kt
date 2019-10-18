@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import com.example.pantanima.ui.adapters.ScrollHelper
+import kotlin.math.roundToInt
 
 
 class VerticalSliderView : RelativeLayout {
@@ -178,13 +179,22 @@ class VerticalSliderView : RelativeLayout {
         }
     }
 
+    private fun manipulateColor(color: Int, factor: Float): Int {
+        val a = Color.alpha(color)
+        val r = (Color.red(color).toFloat().roundToInt() * factor).toInt()
+        val g = (Color.green(color).toFloat().roundToInt() * factor).toInt()
+        val b = (Color.blue(color).toFloat().roundToInt() * factor).toInt()
+        return Color.argb(a, r, g, b)
+    }
+
     private fun toFocus(index: Int, scale: Float = 1f) {
+        val color = manipulateColor(variantsTvColor, scale)
         focusedVariant = listTv[index]
         focusedVariant?.apply {
+            setTextColor(color)
             scaleX = 1 + (scale / 4)
             scaleY = 1 + (scale / 4)
             translationX = scale * 35
-            alpha = variantsTvInitialAlpha + scale
         }
         for (i in listTv.indices) {
             if (i != index) {
