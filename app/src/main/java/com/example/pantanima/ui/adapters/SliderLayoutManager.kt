@@ -2,7 +2,6 @@ package com.example.pantanima.ui.adapters
 
 import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 
 class SliderLayoutManager(context: Context?) : LinearLayoutManager(context) {
@@ -17,9 +16,6 @@ class SliderLayoutManager(context: Context?) : LinearLayoutManager(context) {
     override fun onAttachedToWindow(view: RecyclerView?) {
         super.onAttachedToWindow(view)
         recyclerView = view!!
-
-        // Smart snapping
-        LinearSnapHelper().attachToRecyclerView(recyclerView)
     }
 
     override fun onLayoutChildren(recycler: RecyclerView.Recycler?, state: RecyclerView.State) {

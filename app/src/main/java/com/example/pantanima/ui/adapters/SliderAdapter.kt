@@ -13,6 +13,7 @@ import android.media.MediaPlayer
 import android.os.VibrationEffect
 import android.os.Build
 import android.os.Vibrator
+import androidx.recyclerview.widget.LinearSnapHelper
 
 
 class SliderAdapter(val data: ArrayList<String>) :
@@ -37,9 +38,9 @@ class SliderAdapter(val data: ArrayList<String>) :
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         this.recyclerView = recyclerView
-        this.recyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
+        AppLinearSnapHelper.attachSnapHelperWithListener(recyclerView, LinearSnapHelper(),
+            SnapOnScrollListener.Behavior.NOTIFY_ON_SCROLL, object: OnSnapPositionChangeListener{
+            override fun onSnapPositionChange(position: Int) {
                 playScrollSound(recyclerView.context)
             }
         })
