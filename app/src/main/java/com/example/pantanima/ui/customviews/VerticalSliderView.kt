@@ -14,6 +14,7 @@ import android.view.MotionEvent
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import com.example.pantanima.ui.adapters.ScrollHelper
 
 
 class VerticalSliderView : RelativeLayout {
@@ -31,6 +32,7 @@ class VerticalSliderView : RelativeLayout {
 
     lateinit var variantsContainer: LinearLayout
     lateinit var cursorButton: Button
+    private var previousIndex = cursorInitialIndex
 
     var listTv: MutableList<TextView> = ArrayList()
 
@@ -161,6 +163,10 @@ class VerticalSliderView : RelativeLayout {
                             val index = posAndScale.first
                             val scaleXY = posAndScale.second
                             if (index != -1) {
+                                if (previousIndex != index) {
+                                    previousIndex = index
+                                    ScrollHelper.playScrollSound(view.context)
+                                }
                                 toFocus(index, scaleXY)
                             }
                         }
@@ -179,6 +185,20 @@ class VerticalSliderView : RelativeLayout {
             scaleY = 1 + (scale / 4)
             translationX = scale * 35
             alpha = variantsTvInitialAlpha + scale
+        }
+        for (i in listTv.indices) {
+            if (i != index) {
+                toSecondary(listTv[i])
+            }
+        }
+    }
+
+    private fun toSecondary(tv: TextView) {
+        tv.apply {
+            scaleX = 1f
+            scaleY = 1f
+            translationX = 0f
+            alpha = variantsTvInitialAlpha
         }
     }
 

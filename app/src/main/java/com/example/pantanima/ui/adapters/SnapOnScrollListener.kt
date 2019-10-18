@@ -29,7 +29,7 @@ class SnapOnScrollListener(
     }
 
     private fun maybeNotifySnapPositionChange(recyclerView: RecyclerView) {
-        val snapPosition = AppLinearSnapHelper.getSnapPosition(snapHelper, recyclerView)
+        val snapPosition = ScrollHelper.getSnapPosition(snapHelper, recyclerView)
         val snapPositionChanged = this.snapPosition != snapPosition
         if (snapPositionChanged) {
             onSnapPositionChangeListener?.onSnapPositionChange(snapPosition)
