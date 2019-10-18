@@ -58,10 +58,14 @@ class SliderAdapter(val data: ArrayList<String>) :
         }
     }
 
+    @Suppress("DEPRECATION")
     private fun vibrate(context: Context) {
         val v = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator?
         if (Build.VERSION.SDK_INT >= 26) {
-            v?.vibrate(VibrationEffect.createOneShot(2, VibrationEffect.DEFAULT_AMPLITUDE));
+            val effect: VibrationEffect = VibrationEffect.createOneShot(2, VibrationEffect.DEFAULT_AMPLITUDE)
+            v?.vibrate(effect)
+        } else {
+            v?.vibrate(2)
         }
     }
 

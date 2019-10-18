@@ -3,6 +3,8 @@ package com.example.pantanima.ui.adapters
 import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlin.math.abs
+import kotlin.math.sqrt
 
 class SliderLayoutManager(context: Context?) : LinearLayoutManager(context) {
 
@@ -44,15 +46,15 @@ class SliderLayoutManager(context: Context?) : LinearLayoutManager(context) {
             // Calculating the distance of the child from the center
             val child = getChildAt(i)
             val childMid = (getDecoratedLeft(child!!) + getDecoratedRight(child)) / 2.0f
-            val distanceFromCenter = Math.abs(mid - childMid)
+            val distanceFromCenter = abs(mid - childMid)
 
             // The scaling formula
-            val scale = 1 - Math.sqrt((distanceFromCenter / width).toDouble()).toFloat() * 0.66f
+            val scale = 1 - sqrt((distanceFromCenter / width).toDouble()).toFloat() * 0.66f
 
             // Set scale to view
             child.scaleX = scale
             child.scaleY = scale
-            child.alpha =  Math.abs(width - distanceFromCenter) / 1000
+            child.alpha =  abs(width - distanceFromCenter) / 1000
         }
     }
 
@@ -69,7 +71,7 @@ class SliderLayoutManager(context: Context?) : LinearLayoutManager(context) {
                 val child = recyclerView.getChildAt(i)
                 val childCenterX =
                     getDecoratedLeft(child) + (getDecoratedRight(child) - getDecoratedLeft(child)) / 2
-                val newDistance = Math.abs(childCenterX - recyclerViewCenterX)
+                val newDistance = abs(childCenterX - recyclerViewCenterX)
                 if (newDistance < minDistance) {
                     minDistance = newDistance
                     position = recyclerView.getChildLayoutPosition(child)
