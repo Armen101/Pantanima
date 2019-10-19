@@ -150,6 +150,7 @@ class VerticalSliderView : RelativeLayout {
             setTypeface(typeface)
 
             setOnClickListener {
+                moveCursorTo(index)
                 ScrollHelper.playScrollSound(context)
                 toFocus(index)
             }
@@ -170,12 +171,11 @@ class VerticalSliderView : RelativeLayout {
 
 
     private fun onTouchListener(): OnTouchListener {
-        var cursorMid = 0f
         return OnTouchListener { view, event ->
             val rawY = event.rawY.toInt()
             when (event.action and MotionEvent.ACTION_MASK) {
-                MotionEvent.ACTION_DOWN ->  yDelta = (view.y - rawY).toInt()
-                MotionEvent.ACTION_UP -> cursorToCenter(cursorMid)
+                MotionEvent.ACTION_DOWN -> yDelta = (view.y - rawY).toInt()
+                MotionEvent.ACTION_UP -> cursorToCenter()
                 MotionEvent.ACTION_POINTER_DOWN -> {
                 }
                 MotionEvent.ACTION_POINTER_UP -> {
@@ -188,7 +188,7 @@ class VerticalSliderView : RelativeLayout {
                             view.y = newY
 
                             val btnHalfHeight = (view.bottom - view.top) / 2
-                            cursorMid = newY + btnHalfHeight
+                            val cursorMid = newY + btnHalfHeight
                             val posAndScale = getCurrentFocusedPosition(cursorMid.toInt())
                             val index = posAndScale.first
                             val scaleXY = posAndScale.second
@@ -242,14 +242,14 @@ class VerticalSliderView : RelativeLayout {
         }
     }
 
-    private fun cursorToCenter(cursorMid: Float) {
+    private fun moveCursorTo(index: Int) {
         val cursorItemHalfHeight = (cursorButton.bottom - cursorButton.top) / 2
-        val currentItemIndex = getCurrentFocusedPosition(cursorMid.toInt()).first
-        if (currentItemIndex == -1) {
+        if (index == -1) {
             return
         }
-        val currentItemMid = ((currentItemIndex + 1) * oneItemHeight) - (oneItemHeight / 2)
+        val currentItemMid = ((index + 1) * oneItemHeight) - (oneItemHeight / 2)
 
+        val cursorMid = cursorButton.y - (cursorButton.height / 2)
         val translationDiff = if (cursorMid > currentItemMid) { //to Up
             -(cursorMid - currentItemMid)
         } else { //to Down or center
@@ -259,12 +259,18 @@ class VerticalSliderView : RelativeLayout {
         val translationY = cursorMid + translationDiff
 
         Log.d("cursorToCenter", "cursorMid      : $cursorMid ---------------------------")
-        Log.d("cursorToCenter", "itemIndex      : $currentItemIndex")
+        Log.d("cursorToCenter", "itemIndex      : $index")
         Log.d("cursorToCenter", "oneItemHeight  : $oneItemHeight")
         Log.d("cursorToCenter", "currentItemMid : $currentItemMid")
         Log.d("cursorToCenter", "translationY   : $translationY")
 
         cursorButton.animate().translationY(translationY - cursorItemHalfHeight).duration = 50
+    }
+
+    private fun cursorToCenter() {
+        val cursorMid = cursorButton.y - (cursorButton.height / 2)
+        val itemIndex = getCurrentFocusedPosition(cursorMid.toInt()).first
+        moveCursorTo(itemIndex)
     }
 
     private fun getCurrentFocusedPosition(chooserMid: Int): Pair<Int, Float> {
