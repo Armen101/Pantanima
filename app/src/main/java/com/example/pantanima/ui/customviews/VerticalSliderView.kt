@@ -137,18 +137,22 @@ class VerticalSliderView : RelativeLayout {
         return TextView(context).apply {
             text = str
             textSize = variantsTvSize
-            if (cursorInitialIndex != index) {
-                setTextColor(Color.BLACK)
+            val color = if (cursorInitialIndex != index) {
+                Color.BLACK
             } else {
-                setTextColor(variantsTvColor)
+                variantsTvColor
             }
+            setTextColor(color)
             alpha = variantsTvInitialAlpha
-            width = 500
 
             val typeface = ResourcesCompat.getFont(context, R.font.caviar_dreams_bold)
             setTypeface(typeface)
 
-            setPadding(variantsTvPadding, variantsTvPadding, variantsTvPadding, variantsTvPadding)
+            setPadding(variantsTvPadding, variantsTvPadding / 2, variantsTvPadding * 3, variantsTvPadding / 2)
+
+            val lp = LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+            layoutParams = lp
+
             variantsContainer.addView(this)
         }
     }
