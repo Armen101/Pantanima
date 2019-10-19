@@ -11,6 +11,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import com.example.pantanima.R
 import android.view.MotionEvent
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
@@ -38,7 +39,7 @@ class VerticalSliderView : RelativeLayout {
 
     private var oneItemHeight: Int = 0
         get() {
-            if(field <= 0){
+            if (field <= 0) {
                 val totalHeight = variantsContainer.height
                 field = totalHeight / listStr.size
             }
@@ -148,9 +149,19 @@ class VerticalSliderView : RelativeLayout {
             val typeface = ResourcesCompat.getFont(context, R.font.caviar_dreams_bold)
             setTypeface(typeface)
 
-            setPadding(variantsTvPadding, variantsTvPadding / 2, variantsTvPadding * 3, variantsTvPadding / 2)
+            setOnClickListener {
+                ScrollHelper.playScrollSound(context)
+                toFocus(index)
+            }
 
-            val lp = LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+            setPadding(
+                variantsTvPadding,
+                variantsTvPadding / 2,
+                variantsTvPadding * 3,
+                variantsTvPadding / 2
+            )
+
+            val lp = LayoutParams(MATCH_PARENT, WRAP_CONTENT)
             layoutParams = lp
 
             variantsContainer.addView(this)
@@ -172,7 +183,7 @@ class VerticalSliderView : RelativeLayout {
                 MotionEvent.ACTION_MOVE -> {
                     val transY = rawY.toFloat()
                     val newY = transY + yDelta
-                    if (newY > top) {
+                    if (newY > 0) {
                         if (view.height + newY < bottom) {
                             view.y = newY
 
@@ -258,10 +269,13 @@ class VerticalSliderView : RelativeLayout {
 
     private fun getCurrentFocusedPosition(chooserMid: Int): Pair<Int, Float> {
         for (position in listStr.indices) {
-            val top = height - (height - position * oneItemHeight)
+            val top = height - (height - (position * oneItemHeight))
             val bottom = top + oneItemHeight
-            if (chooserMid in top + 1 until bottom - 1) {
-                val scalePercent = getItemScale(top, bottom, chooserMid)
+            if (chooserMid in top + 1 until bottom) {
+                var scalePercent = getItemScale(top, bottom, chooserMid)
+                if (scalePercent < 0f) {
+                    scalePercent = 0f
+                }
                 return Pair(position, scalePercent)
             }
         }
