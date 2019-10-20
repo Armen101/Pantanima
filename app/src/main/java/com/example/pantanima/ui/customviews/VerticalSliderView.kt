@@ -179,12 +179,20 @@ class VerticalSliderView : RelativeLayout {
                     val transY = rawY.toFloat()
                     val newY = transY + yDelta
                     if (newY > 0) {
-                        if (view.height + newY < bottom) {
+                        Timber.d("ACTION_MOVE, newY     : $newY  -------------------------")
+                        Timber.d("ACTION_MOVE, rawY     : $rawY  ")
+                        Timber.d("ACTION_MOVE, top      : $top")
+                        Timber.d("ACTION_MOVE, bottom   : $bottom")
+                        Timber.d("ACTION_MOVE, v.y      : ${view.y}")
+                        Timber.d("ACTION_MOVE, v.height : ${view.height}")
+
+                        val viewBottomY = view.y + view.height
+                        if (top + viewBottomY < bottom) {
                             view.y = newY
 
                             val btnHalfHeight = (view.bottom - view.top) / 2
                             cursorMid = newY + btnHalfHeight
-                            Timber.d("cursorMid   : $cursorMid  ---------------------------")
+                            Timber.d("ACTION_MOVE, cursorMid   : $cursorMid")
 
                             val posAndScale = getCurrentFocusedPosition(cursorMid.toInt())
                             val index = posAndScale.first
