@@ -240,9 +240,6 @@ class VerticalSliderView : RelativeLayout {
 
     private fun moveCursorTo(index: Int) {
         val cursorItemHalfHeight = (cursorBtn.bottom - cursorBtn.top) / 2
-        if (index == -1) {
-            return
-        }
         val currentItemY = index * oneItemHeight
         val currentItemMid = currentItemY + (oneItemHeight / 2)
         val cursorMid = cursorBtn.y - (cursorBtn.height / 2)
@@ -269,8 +266,10 @@ class VerticalSliderView : RelativeLayout {
         Timber.d("cursorBtn.y      : ${cursorBtn.y} ---------")
         Timber.d("cursorBtn.height : ${cursorBtn.height}")
         Timber.d("cursorMid        : $cursorMid")
-        moveCursorTo(itemIndex)
-        toFocus(itemIndex)
+        if (itemIndex != -1) {
+            moveCursorTo(itemIndex)
+            toFocus(itemIndex)
+        }
     }
 
     private fun getCurrentFocusedPosition(cursorMid: Int): Pair<Int, Float> {
