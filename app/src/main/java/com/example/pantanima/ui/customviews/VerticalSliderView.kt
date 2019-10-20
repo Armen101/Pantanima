@@ -3,7 +3,6 @@ package com.example.pantanima.ui.customviews
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
-import android.util.Log
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.Button
 import android.widget.LinearLayout
@@ -16,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import com.example.pantanima.ui.adapters.ScrollHelper
+import timber.log.Timber
 import kotlin.math.roundToInt
 
 
@@ -190,7 +190,7 @@ class VerticalSliderView : RelativeLayout {
 
                             val btnHalfHeight = (view.bottom - view.top) / 2
                             cursorMid = newY + btnHalfHeight
-                            Log.d("actionMove", "cursorMid   : $cursorMid  ---------------------------")
+                            Timber.d("cursorMid   : $cursorMid  ---------------------------")
 
                             val posAndScale = getCurrentFocusedPosition(cursorMid.toInt())
                             val index = posAndScale.first
@@ -261,43 +261,43 @@ class VerticalSliderView : RelativeLayout {
 
         val translationY = cursorMid + translationDiff
 
-        Log.d("moveCursorTo", "cursorMid      : $cursorMid ---------------------------")
-        Log.d("moveCursorTo", "itemIndex      : $index")
-        Log.d("moveCursorTo", "oneItemHeight  : $oneItemHeight")
-        Log.d("moveCursorTo", "currentItemMid : $currentItemMid")
-        Log.d("moveCursorTo", "translationY   : $translationY")
+        Timber.d("cursorMid      : $cursorMid ------------------")
+        Timber.d("itemIndex      : $index")
+        Timber.d("oneItemHeight  : $oneItemHeight")
+        Timber.d("currentItemMid : $currentItemMid")
+        Timber.d("translationY   : $translationY")
 
         cursorButton.animate().translationY(translationY - cursorItemHalfHeight).duration = 50
     }
 
     private fun cursorToCenter(cursorMid: Float) {
         val itemIndex = getCurrentFocusedPosition(cursorMid.toInt()).first
-        Log.d("cursorToCenter", "cursorButton.y      : ${cursorButton.y} ---------------------------")
-        Log.d("cursorToCenter", "cursorButton.height : ${cursorButton.height}")
-        Log.d("cursorToCenter", "cursorMid           : $cursorMid")
+        Timber.d("cursorBtn.y      : ${cursorButton.y} ---------")
+        Timber.d("cursorBtn.height : ${cursorButton.height}")
+        Timber.d("cursorMid        : $cursorMid")
         moveCursorTo(itemIndex)
     }
 
     private fun getCurrentFocusedPosition(cursorMid: Int): Pair<Int, Float> {
-        Log.d("getPosition", "cursorMid   : $cursorMid  ---------------------------")
+        Timber.d("cursorMid   : $cursorMid  --------------------")
         for (position in listStr.indices) {
             val top = height - (height - (position * oneItemHeight))
             val bottom = top + oneItemHeight
 
-            Log.d("getPosition", "top          : $top")
-            Log.d("getPosition", "bottom       : $bottom")
+            Timber.d("top          : $top")
+            Timber.d("bottom       : $bottom")
 
             if (cursorMid in top + 1 until bottom) {
                 var scalePercent = getItemScale(top, bottom, cursorMid)
                 if (scalePercent < 0f) {
                     scalePercent = 0f
                 }
-                Log.d("getPosition", "position     : $position")
-                Log.d("getPosition", "scalePercent : $scalePercent")
+                Timber.d("position     : $position")
+                Timber.d("scalePercent : $scalePercent")
                 return Pair(position, scalePercent)
             }
         }
-        Log.d("getPosition", "return def values -> Pair(-1, 0f)")
+        Timber.d("return def values -> Pair(-1, 0f)")
 
         return Pair(-1, 0f) //default
     }

@@ -77,4 +77,7 @@ dependencies {
     implementation "com.google.dagger:dagger:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    //timber log
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }

@@ -1,11 +1,11 @@
 package com.example.pantanima.ui.database.repository
 
-import android.util.Log
 import com.example.pantanima.ui.Constants
 import com.example.pantanima.ui.helpers.GamePrefs
 import com.example.pantanima.ui.database.dao.NounDao
 import com.example.pantanima.ui.database.entity.Noun
 import com.example.pantanima.ui.enums.Level
+import timber.log.Timber
 
 object NounRepo {
 
@@ -27,7 +27,7 @@ object NounRepo {
         insertMediumLevelNouns(nouns)
         insertHardLevelNouns(nouns)
         val result = dao.insert(nouns)
-        Log.i("nouns adding", "result = $result, nouns: $nouns")
+        Timber.d("result = $result, nouns: $nouns")
     }
 
     fun updateLastUsedTime(nouns: List<Noun>) {
