@@ -49,7 +49,9 @@ class VerticalSliderView : RelativeLayout {
         set(value) {
             field = value
             for (index in field.indices) {
-                listTv.add(drawNewTv(field[index], index))
+                val tv = drawNewTv(field[index], index)
+                variantsContainer.addView(tv)
+                listTv.add(tv)
             }
         }
 
@@ -159,8 +161,6 @@ class VerticalSliderView : RelativeLayout {
 
             val lp = LayoutParams(MATCH_PARENT, WRAP_CONTENT)
             layoutParams = lp
-
-            variantsContainer.addView(this)
         }
     }
 
@@ -243,7 +243,8 @@ class VerticalSliderView : RelativeLayout {
         if (index == -1) {
             return
         }
-        val currentItemMid = ((index + 1) * oneItemHeight) - (oneItemHeight / 2)
+        val currentItemY = index * oneItemHeight
+        val currentItemMid = currentItemY + (oneItemHeight / 2)
         val cursorMid = cursorBtn.y - (cursorBtn.height / 2)
         val diff = when {
             cursorMid > currentItemMid -> -(cursorMid - currentItemMid) //to Up
@@ -254,6 +255,7 @@ class VerticalSliderView : RelativeLayout {
         val translationY = cursorMid + diff
 
         Timber.d("cursorMid      : $cursorMid ------------------")
+        Timber.d("diff           : $diff")
         Timber.d("itemIndex      : $index")
         Timber.d("oneItemHeight  : $oneItemHeight")
         Timber.d("currentItemMid : $currentItemMid")
@@ -268,6 +270,7 @@ class VerticalSliderView : RelativeLayout {
         Timber.d("cursorBtn.height : ${cursorBtn.height}")
         Timber.d("cursorMid        : $cursorMid")
         moveCursorTo(itemIndex)
+        toFocus(itemIndex)
     }
 
     private fun getCurrentFocusedPosition(cursorMid: Int): Pair<Int, Float> {
