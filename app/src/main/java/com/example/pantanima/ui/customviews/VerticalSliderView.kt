@@ -171,11 +171,12 @@ class VerticalSliderView : RelativeLayout {
 
 
     private fun onTouchListener(): OnTouchListener {
+        var cursorMid = 0f
         return OnTouchListener { view, event ->
             val rawY = event.rawY.toInt()
             when (event.action and MotionEvent.ACTION_MASK) {
                 MotionEvent.ACTION_DOWN -> yDelta = (view.y - rawY).toInt()
-                MotionEvent.ACTION_UP -> cursorToCenter()
+                MotionEvent.ACTION_UP -> cursorToCenter(cursorMid)
                 MotionEvent.ACTION_POINTER_DOWN -> {
                 }
                 MotionEvent.ACTION_POINTER_UP -> {
@@ -188,7 +189,9 @@ class VerticalSliderView : RelativeLayout {
                             view.y = newY
 
                             val btnHalfHeight = (view.bottom - view.top) / 2
-                            val cursorMid = newY + btnHalfHeight
+                            cursorMid = newY + btnHalfHeight
+                            Log.d("actionMove", "cursorMid   : $cursorMid  ---------------------------")
+
                             val posAndScale = getCurrentFocusedPosition(cursorMid.toInt())
                             val index = posAndScale.first
                             val scaleXY = posAndScale.second
@@ -258,33 +261,44 @@ class VerticalSliderView : RelativeLayout {
 
         val translationY = cursorMid + translationDiff
 
-        Log.d("cursorToCenter", "cursorMid      : $cursorMid ---------------------------")
-        Log.d("cursorToCenter", "itemIndex      : $index")
-        Log.d("cursorToCenter", "oneItemHeight  : $oneItemHeight")
-        Log.d("cursorToCenter", "currentItemMid : $currentItemMid")
-        Log.d("cursorToCenter", "translationY   : $translationY")
+        Log.d("moveCursorTo", "cursorMid      : $cursorMid ---------------------------")
+        Log.d("moveCursorTo", "itemIndex      : $index")
+        Log.d("moveCursorTo", "oneItemHeight  : $oneItemHeight")
+        Log.d("moveCursorTo", "currentItemMid : $currentItemMid")
+        Log.d("moveCursorTo", "translationY   : $translationY")
 
         cursorButton.animate().translationY(translationY - cursorItemHalfHeight).duration = 50
     }
 
-    private fun cursorToCenter() {
-        val cursorMid = cursorButton.y - (cursorButton.height / 2)
+    private fun cursorToCenter(cursorMid: Float) {
         val itemIndex = getCurrentFocusedPosition(cursorMid.toInt()).first
+        Log.d("cursorToCenter", "cursorButton.y      : ${cursorButton.y} ---------------------------")
+        Log.d("cursorToCenter", "cursorButton.height : ${cursorButton.height}")
+        Log.d("cursorToCenter", "cursorMid           : $cursorMid")
         moveCursorTo(itemIndex)
     }
 
-    private fun getCurrentFocusedPosition(chooserMid: Int): Pair<Int, Float> {
+    private fun getCurrentFocusedPosition(cursorMid: Int): Pair<Int, Float> {
+        Log.d("getPosition", "cursorMid   : $cursorMid  ---------------------------")
         for (position in listStr.indices) {
             val top = height - (height - (position * oneItemHeight))
             val bottom = top + oneItemHeight
-            if (chooserMid in top + 1 until bottom) {
-                var scalePercent = getItemScale(top, bottom, chooserMid)
+
+            Log.d("getPosition", "top          : $top")
+            Log.d("getPosition", "bottom       : $bottom")
+
+            if (cursorMid in top + 1 until bottom) {
+                var scalePercent = getItemScale(top, bottom, cursorMid)
                 if (scalePercent < 0f) {
                     scalePercent = 0f
                 }
+                Log.d("getPosition", "position     : $position")
+                Log.d("getPosition", "scalePercent : $scalePercent")
                 return Pair(position, scalePercent)
             }
         }
+        Log.d("getPosition", "return def values -> Pair(-1, 0f)")
+
         return Pair(-1, 0f) //default
     }
 
