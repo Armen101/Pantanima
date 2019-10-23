@@ -1,5 +1,6 @@
 package com.example.pantanima.ui.customviews
 
+import android.animation.Animator
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
@@ -185,14 +186,14 @@ class VerticalSliderView : RelativeLayout {
                         Timber.d("ACTION_MOVE, bottom   : $bottom")
                         Timber.d("ACTION_MOVE, v.y      : ${view.y}")
                         Timber.d("ACTION_MOVE, v.height : ${view.height}")
+                        Timber.d("ACTION_MOVE, yDelta   : $yDelta")
 
-                        val viewBottomY = view.y + view.height
-                        if (top + viewBottomY < bottom) {
+                        val viewBottomY = newY + view.height + top
+                        if (viewBottomY < bottom) {
                             view.y = newY
 
                             val btnHalfHeight = (view.bottom - view.top) / 2
                             cursorMid = newY + btnHalfHeight
-                            Timber.d("ACTION_MOVE, cursorMid   : $cursorMid")
 
                             val posAndScale = getCurrentFocusedPosition(cursorMid.toInt())
                             val index = posAndScale.first
@@ -204,11 +205,11 @@ class VerticalSliderView : RelativeLayout {
                                 }
                                 toFocus(index, scaleXY)
                             }
+                            invalidate()
                         }
                     }
                 }
             }
-            invalidate()
             true
         }
     }
@@ -266,7 +267,9 @@ class VerticalSliderView : RelativeLayout {
         Timber.d("currentItemMid : $currentItemMid")
         Timber.d("translationY   : $translationY")
 
-        cursorBtn.animate().translationY(translationY - cursorItemHalfHeight).duration = 50
+        cursorBtn.animate()
+            .translationY(translationY - cursorItemHalfHeight)
+            .duration = 0
     }
 
     private fun cursorToCenter(cursorMid: Float) {
