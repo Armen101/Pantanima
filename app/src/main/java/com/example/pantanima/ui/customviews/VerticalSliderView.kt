@@ -11,12 +11,12 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import com.example.pantanima.R
 import android.view.MotionEvent
+import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import com.example.pantanima.ui.adapters.ScrollHelper
-import timber.log.Timber
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
@@ -33,7 +33,6 @@ class VerticalSliderView : RelativeLayout {
     private var tvColor = Color.BLACK
     private var cursorBtnColor = Color.RED
     private var focusedTv: TextView? = null
-
     private lateinit var variantsContainer: LinearLayout
     private lateinit var cursorBtn: Button
     private var cursorIndex = cursorInitialIndex
@@ -130,20 +129,22 @@ class VerticalSliderView : RelativeLayout {
         lp.addRule(END_OF, variantsContainer.id)
         lp.marginStart = cursorBtnStartMargin.toInt()
         cursorBtn.layoutParams = lp
+        cursorBtn.visibility = View.INVISIBLE
         addView(cursorBtn)
+    }
+
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        val h = bottom - top
+        oneItemHeight = h / listStr.size
+        moveCursorTo(cursorInitialIndex)
+        toFocus(cursorInitialIndex)
+        super.onLayout(changed, left, top, right, bottom)
     }
 
     private fun drawNewTv(str: String, index: Int): TextView {
         return TextView(context).apply {
             text = str
             textSize = tvSize
-            val color = if (cursorInitialIndex != index) {
-                Color.BLACK
-            } else {
-                tvColor
-            }
-            setTextColor(color)
-
             val typeface = ResourcesCompat.getFont(context, R.font.caviar_dreams_bold)
             setTypeface(typeface)
 
@@ -180,18 +181,9 @@ class VerticalSliderView : RelativeLayout {
                     val transY = rawY.toFloat()
                     val newY = transY + yDelta
                     if (newY > 0) {
-                        Timber.d("ACTION_MOVE, newY     : $newY  -------------------------")
-                        Timber.d("ACTION_MOVE, rawY     : $rawY  ")
-                        Timber.d("ACTION_MOVE, top      : $top")
-                        Timber.d("ACTION_MOVE, bottom   : $bottom")
-                        Timber.d("ACTION_MOVE, v.y      : ${view.y}")
-                        Timber.d("ACTION_MOVE, v.height : ${view.height}")
-                        Timber.d("ACTION_MOVE, yDelta   : $yDelta")
-
                         val viewBottomY = newY + view.height + top
                         if (viewBottomY < bottom) {
                             view.y = newY
-
                             val btnHalfHeight = (view.bottom - view.top) / 2
                             cursorMid = newY + btnHalfHeight
 
@@ -248,7 +240,7 @@ class VerticalSliderView : RelativeLayout {
     }
 
     private fun moveCursorTo(index: Int) {
-        val cursorItemHalfHeight = (cursorBtn.bottom - cursorBtn.top) / 2
+        val cursorItemHalfHeight = cursorBtnSize / 2
         val currentItemY = index * oneItemHeight
         val currentItemMid = currentItemY + (oneItemHeight / 2)
         val cursorMid = cursorBtn.y - (cursorBtn.height / 2)
@@ -260,23 +252,29 @@ class VerticalSliderView : RelativeLayout {
 
         val translationY = cursorMid + diff
 
-        Timber.d("cursorMid      : $cursorMid ------------------")
-        Timber.d("diff           : $diff")
-        Timber.d("itemIndex      : $index")
-        Timber.d("oneItemHeight  : $oneItemHeight")
-        Timber.d("currentItemMid : $currentItemMid")
-        Timber.d("translationY   : $translationY")
-
         cursorBtn.animate()
             .translationY(translationY - cursorItemHalfHeight)
+            .setListener(object : Animator.AnimatorListener {
+                override fun onAnimationEnd(p0: Animator?) {
+                    if (cursorBtn.visibility != View.VISIBLE) {
+                        cursorBtn.visibility = View.VISIBLE
+                    }
+                }
+
+                override fun onAnimationCancel(p0: Animator?) {
+                }
+
+                override fun onAnimationStart(p0: Animator?) {
+                }
+
+                override fun onAnimationRepeat(p0: Animator?) {
+                }
+            })
             .duration = 0
     }
 
     private fun cursorToCenter(cursorMid: Float) {
         val itemIndex = getCurrentFocusedPosition(cursorMid.toInt()).first
-        Timber.d("cursorBtn.y      : ${cursorBtn.y} ---------")
-        Timber.d("cursorBtn.height : ${cursorBtn.height}")
-        Timber.d("cursorMid        : $cursorMid")
         if (itemIndex != -1) {
             moveCursorTo(itemIndex)
             toFocus(itemIndex)
@@ -284,23 +282,18 @@ class VerticalSliderView : RelativeLayout {
     }
 
     private fun getCurrentFocusedPosition(cursorMid: Int): Pair<Int, Float> {
-        Timber.d("cursorMid: $cursorMid  --------------------")
         for (position in listStr.indices) {
             val top = height - (height - (position * oneItemHeight))
             val bottom = top + oneItemHeight
-
-            Timber.d("top: $top, bottom: $bottom")
 
             if (cursorMid in top + 1 until bottom) {
                 var scalePercent = getItemScale(top, bottom, cursorMid)
                 if (scalePercent < 0f) {
                     scalePercent = 0f
                 }
-                Timber.d("position: $position, scalePercent : $scalePercent")
                 return Pair(position, scalePercent)
             }
         }
-        Timber.d("return def values -> Pair(-1, 0f)")
         return Pair(-1, 0f) //default
     }
 
