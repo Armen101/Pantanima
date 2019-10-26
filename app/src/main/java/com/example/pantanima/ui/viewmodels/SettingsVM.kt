@@ -6,6 +6,8 @@ import com.example.pantanima.ui.DisplayHelper
 import com.example.pantanima.ui.activities.NavActivity
 import com.example.pantanima.ui.adapters.SliderAdapter
 import com.example.pantanima.ui.adapters.SliderLayoutManager
+import com.example.pantanima.ui.customviews.VerticalSliderView
+import timber.log.Timber
 import java.lang.ref.WeakReference
 
 class SettingsVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
@@ -23,6 +25,11 @@ class SettingsVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
     var scoreSliderAdapter = ObservableField(SliderAdapter(scorePikerData))
     var scoreInitialPosition = 80
     var scoreChooseText = ObservableField<String>(scorePikerData[scoreInitialPosition])
+    var modePositionChangeListener = object : VerticalSliderView.OnCursorPositionChangeListener {
+        override fun onChanged(newPosition: Int) {
+            Timber.d("newPosition : $newPosition")
+        }
+    }
 
     init {
         timeLayoutManager.get()?.scrollToPosition(timeInitialPosition)

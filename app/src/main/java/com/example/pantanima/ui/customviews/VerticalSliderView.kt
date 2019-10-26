@@ -24,6 +24,7 @@ import kotlin.math.roundToInt
 
 class VerticalSliderView : RelativeLayout {
 
+    private var listener: OnCursorPositionChangeListener? = null
     private var cursorInitialIndex: Int = 1
     private var cursorBtnStartMargin = 0.0f
     private var yDelta: Int = 0
@@ -71,6 +72,10 @@ class VerticalSliderView : RelativeLayout {
     ) {
         init(attrs)
         draw()
+    }
+
+    fun setOnCursorPositionChangedListener(listener: OnCursorPositionChangeListener) {
+        this.listener = listener
     }
 
     private fun draw() {
@@ -152,6 +157,7 @@ class VerticalSliderView : RelativeLayout {
                 moveCursorTo(index)
                 ScrollHelper.playScrollSound(context)
                 toFocus(index)
+                listener?.onChanged(index)
             }
 
             setPadding(
@@ -215,16 +221,17 @@ class VerticalSliderView : RelativeLayout {
     }
 
     private fun toFocus(index: Int, scale: Float = 1f) {
-        val color = manipulateColor(tvColor, scale)
-        focusedTv = listTv[index]
-        focusedTv?.apply {
-            setTextColor(color)
-            scaleX = 1 + (scale / 4)
-            scaleY = 1 + (scale / 4)
-            translationX = scale * 35
-        }
         for (i in listTv.indices) {
-            if (i != index) {
+            if (i == index) {
+                val color = manipulateColor(tvColor, scale)
+                focusedTv = listTv[index]
+                focusedTv?.apply {
+                    setTextColor(color)
+                    scaleX = 1 + (scale / 4)
+                    scaleY = 1 + (scale / 4)
+                    translationX = scale * 35
+                }
+            } else {
                 toSecondary(listTv[i])
             }
         }
@@ -276,6 +283,7 @@ class VerticalSliderView : RelativeLayout {
     private fun cursorToCenter(cursorMid: Float) {
         val itemIndex = getCurrentFocusedPosition(cursorMid.toInt()).first
         if (itemIndex != -1) {
+            listener?.onChanged(itemIndex)
             moveCursorTo(itemIndex)
             toFocus(itemIndex)
         }
@@ -306,5 +314,9 @@ class VerticalSliderView : RelativeLayout {
         val scalePercent = itemMid - diff
         val result = scalePercent * 100.0f / itemMid
         return result * 0.01f
+    }
+
+    interface OnCursorPositionChangeListener {
+        fun onChanged(newPosition: Int)
     }
 }

@@ -22,6 +22,7 @@
             app:cursorChooserBtnColor="@color/app_style_green"
             app:cursorChooserBtnSize="@dimen/vertical_slider_chooser_btn_size"
             app:cursorInitialIndex="2"
+            app:cursorPositionChangeListener="@{viewModel.modePositionChangeListener}"
             app:cursorVariantTvColor="@color/app_style_green"
             app:cursorVariantTvPadding="@dimen/vertical_slider_tv_padding"
             app:cursorVariantTvSize="@dimen/vertical_slider_tv_size"

@@ -52,3 +52,10 @@ fun RecyclerView.scrollTo(pos: Int) {
 fun VerticalSliderView.setList(list: List<String>) {
     listStr = list
 }
+
+@BindingAdapter("cursorPositionChangeListener")
+fun VerticalSliderView.cursorPositionChangeListener(
+    listener: VerticalSliderView.OnCursorPositionChangeListener
+) {
+    setOnCursorPositionChangedListener(listener)
+}
