@@ -154,10 +154,13 @@ class VerticalSliderView : RelativeLayout {
             setTypeface(typeface)
 
             setOnClickListener {
-                moveCursorTo(index)
-                ScrollHelper.playScrollSound(context)
-                toFocus(index)
-                listener?.onChanged(index)
+                if (cursorIndex != index) {
+                    cursorIndex = index
+                    moveCursorTo(index)
+                    ScrollHelper.playScrollSound(context)
+                    toFocus(index)
+                    listener?.onChanged(index)
+                }
             }
 
             setPadding(
