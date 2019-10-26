@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import com.example.pantanima.ui.adapters.ScrollHelper
+import timber.log.Timber
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
@@ -31,8 +32,8 @@ class VerticalSliderView : RelativeLayout {
     private var tvSize = 30f
     private var cursorBtnSize = 60f
     private var tvPadding = 10
-    private var tvColor = Color.BLACK
-    private var cursorBtnColor = Color.RED
+    private var tvColor = Color.BLUE
+    private var cursorBtnColor = Color.GREEN
     private var focusedTv: TextView? = null
     private lateinit var variantsContainer: LinearLayout
     private lateinit var cursorBtn: Button
@@ -215,18 +216,32 @@ class VerticalSliderView : RelativeLayout {
         }
     }
 
-    private fun manipulateColor(color: Int, factor: Float): Int {
-        val a = Color.alpha(color)
-        val r = (Color.red(color).toFloat().roundToInt() * factor).toInt()
-        val g = (Color.green(color).toFloat().roundToInt() * factor).toInt()
-        val b = (Color.blue(color).toFloat().roundToInt() * factor).toInt()
+    private fun manipulateColor(colorFrom: Int, colorTo: Int, factor: Float): Int {
+        val a = Color.alpha(colorFrom)
+
+        val redScalePair = getColorScale(Color.red(colorFrom), Color.red(colorTo))
+        val greenScalePair = getColorScale(Color.green(colorFrom), Color.green(colorTo))
+        val blueScalePair = getColorScale(Color.blue(colorFrom), Color.blue(colorTo))
+
+        val r = (Color.red(colorFrom).toFloat() + (redScalePair * factor)).toInt()
+        val g = (Color.green(colorFrom).toFloat() + (greenScalePair * factor)).toInt()
+        val b = (Color.blue(colorFrom).toFloat() + (blueScalePair * factor)).toInt()
+
         return Color.argb(a, r, g, b)
+    }
+
+    private fun getColorScale(colorFrom: Int, colorTo: Int): Float {
+        return if (colorFrom > colorTo) {
+            -(colorFrom - colorTo).toFloat()
+        } else {
+            (colorTo - colorFrom).toFloat()
+        }
     }
 
     private fun toFocus(index: Int, scale: Float = 1f) {
         for (i in listTv.indices) {
             if (i == index) {
-                val color = manipulateColor(tvColor, scale)
+                val color = manipulateColor(tvColor, cursorBtnColor, scale)
                 focusedTv = listTv[index]
                 focusedTv?.apply {
                     setTextColor(color)
@@ -245,7 +260,7 @@ class VerticalSliderView : RelativeLayout {
             scaleX = 1f
             scaleY = 1f
             translationX = 0f
-            setTextColor(Color.BLACK)
+            setTextColor(tvColor)
         }
     }
 
