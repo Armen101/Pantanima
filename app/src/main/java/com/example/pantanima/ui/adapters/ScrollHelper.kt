@@ -1,12 +1,13 @@
 package com.example.pantanima.ui.adapters
 
 import android.content.Context
-import android.media.MediaPlayer
+import android.media.AudioManager
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
+import android.media.ToneGenerator
 
 object ScrollHelper {
 
@@ -28,23 +29,25 @@ object ScrollHelper {
         rv.addOnScrollListener(snapOnScrollListener)
     }
 
-    fun playScrollSound(context: Context) {
-        val resID = context.resources?.getIdentifier(
-            "scroll_sound_effect",
-            "raw", context.packageName
+    private fun createPlayer() {
+        val gen = ToneGenerator(AudioManager.STREAM_MUSIC, 20)
+        gen.startTone(
+            ToneGenerator.TONE_CDMA_CALL_SIGNAL_ISDN_INTERGROUP,
+            5
         )
+    }
+
+    fun playScrollSound(context: Context) {
         vibrate(context)
-        resID?.let {
-            val clickPlayer = MediaPlayer.create(context, it)
-            clickPlayer?.start()
-        }
+        createPlayer()
     }
 
     @Suppress("DEPRECATION")
     private fun vibrate(context: Context) {
         val v = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator?
         if (Build.VERSION.SDK_INT >= 26) {
-            val effect: VibrationEffect = VibrationEffect.createOneShot(2, VibrationEffect.DEFAULT_AMPLITUDE)
+            val effect: VibrationEffect =
+                VibrationEffect.createOneShot(2, VibrationEffect.DEFAULT_AMPLITUDE)
             v?.vibrate(effect)
         } else {
             v?.vibrate(2)
