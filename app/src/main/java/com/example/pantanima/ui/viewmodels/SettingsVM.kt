@@ -23,7 +23,7 @@ class SettingsVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
     var scoreLayoutManager = ObservableField(SliderLayoutManager(activity.get()))
     private val scorePikerData = getScorePickerData()
     var scoreSliderAdapter = ObservableField(SliderAdapter(scorePikerData))
-    var scoreInitialPosition = 80
+    var scoreInitialPosition = 8
     var scoreChooseText = ObservableField<String>(scorePikerData[scoreInitialPosition])
     var modePositionChangeListener = object : VerticalSliderView.OnCursorPositionChangeListener {
         override fun onChanged(newPosition: Int) {
@@ -76,8 +76,8 @@ class SettingsVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
 
     private fun getScorePickerData(): ArrayList<String> {
         val data = ArrayList<String>()
-        for (x in 20..160) {
-            data.add(x.toString())
+        for (x in 4..36) {
+            data.add((x * 5).toString())
         }
         return data
     }
