@@ -7,7 +7,7 @@ import com.example.pantanima.ui.activities.NavActivity
 import com.example.pantanima.ui.adapters.SliderAdapter
 import com.example.pantanima.ui.adapters.SliderLayoutManager
 import com.example.pantanima.ui.customviews.VerticalSliderView
-import timber.log.Timber
+import com.example.pantanima.ui.helpers.GamePrefs
 import java.lang.ref.WeakReference
 
 class SettingsVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
@@ -25,9 +25,13 @@ class SettingsVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
     var scoreSliderAdapter = ObservableField(SliderAdapter(scorePikerData))
     var scoreInitialPosition = 8
     var scoreChooseText = ObservableField<String>(scorePikerData[scoreInitialPosition])
+
+    var modeInitialPosition = 2
+    var modePikerData = getModePickerData()
+    var modeChooseText = modePikerData[modeInitialPosition]
     var modePositionChangeListener = object : VerticalSliderView.OnCursorPositionChangeListener {
         override fun onChanged(newPosition: Int) {
-            Timber.d("newPosition : $newPosition")
+            modeChooseText = modePikerData[newPosition]
         }
     }
 
@@ -57,7 +61,7 @@ class SettingsVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
         }
     }
 
-    fun getModePickerData(): ArrayList<String> {
+    private fun getModePickerData(): ArrayList<String> {
         val data = ArrayList<String>()
         data.add("light")
         data.add("medium")
@@ -102,7 +106,13 @@ class SettingsVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
     }
 
     fun onConfirmClick() {
-        //todo save settings
+        saveSettings()
         activity?.onBackPressed()
+    }
+
+    private fun saveSettings() {
+        GamePrefs.GOL_POINTS = scoreChooseText.get()!!.toInt()
+        GamePrefs.ROUND_TIME = timeChooseText.get()!!.toInt()
+        GamePrefs.MODE = modeChooseText
     }
 }

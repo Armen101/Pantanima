@@ -22,7 +22,7 @@
             android:layout_margin="@dimen/_5sdp"
             app:cursorChooserBtnColor="@color/app_style_green"
             app:cursorChooserBtnSize="@dimen/vertical_slider_chooser_btn_size"
-            app:cursorInitialIndex="2"
+            app:cursorInitialPosition="@{viewModel.modeInitialPosition}"
             app:cursorPositionChangeListener="@{viewModel.modePositionChangeListener}"
             app:cursorVariantTvColor="@color/slider_tv_color"
             app:cursorVariantTvPadding="@dimen/vertical_slider_tv_padding"
@@ -31,7 +31,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:list="@{viewModel.getModePickerData()}" />
+            app:list="@{viewModel.modePikerData}" />
 
         <TextView
             android:id="@+id/round_time"

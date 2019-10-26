@@ -59,3 +59,8 @@ fun VerticalSliderView.cursorPositionChangeListener(
 ) {
     setOnCursorPositionChangedListener(listener)
 }
+
+@BindingAdapter("cursorInitialPosition")
+fun VerticalSliderView.cursorInitialPosition(index: Int) {
+    setCursorInitialIndex(index)
+}

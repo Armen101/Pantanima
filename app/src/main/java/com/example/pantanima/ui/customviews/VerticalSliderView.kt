@@ -79,6 +79,10 @@ class VerticalSliderView : RelativeLayout {
         this.listener = listener
     }
 
+    fun setCursorInitialIndex(index: Int) {
+        this.cursorInitialIndex = index
+    }
+
     private fun draw() {
         drawVerticalListContainer()
         drawCursorButton()

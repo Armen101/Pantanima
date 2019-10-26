@@ -10,5 +10,6 @@ object GamePrefs {
     var ROUND_TIME = 40
     var SOUND_TIME = 5L
     var GOL_POINTS = 100
+    var MODE = "" //todo
 
 }
