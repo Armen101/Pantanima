@@ -1,8 +1,11 @@
 package com.example.pantanima.ui.adapters
 
 import android.content.Context
+import androidx.core.view.marginEnd
+import androidx.core.view.marginStart
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import timber.log.Timber
 import kotlin.math.abs
 import kotlin.math.sqrt
 
@@ -45,16 +48,18 @@ class SliderLayoutManager(context: Context?) : LinearLayoutManager(context) {
 
             // Calculating the distance of the child from the center
             val child = getChildAt(i)
-            val childMid = (getDecoratedLeft(child!!) + getDecoratedRight(child)) / 2.0f
+            val childWidth = getDecoratedLeft(child!!) + getDecoratedRight(child)
+            val childMid = childWidth / 2.0f
             val distanceFromCenter = abs(mid - childMid)
 
             // The scaling formula
-            val scale = 1 - sqrt((distanceFromCenter / width).toDouble()).toFloat() * 0.66f
+            val scale = 1 - sqrt((distanceFromCenter / width)) * 0.60f
 
             // Set scale to view
             child.scaleX = scale
             child.scaleY = scale
-            child.alpha =  abs(width - distanceFromCenter) / 1000
+            val distancePercent = abs((distanceFromCenter * 100) / (width / 2))
+            child.alpha = 1f - (distancePercent * 0.01f)
         }
     }
 
