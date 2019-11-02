@@ -1,11 +1,8 @@
 package com.example.pantanima.ui.adapters
 
 import android.content.Context
-import androidx.core.view.marginEnd
-import androidx.core.view.marginStart
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import timber.log.Timber
 import kotlin.math.abs
 import kotlin.math.sqrt
 
