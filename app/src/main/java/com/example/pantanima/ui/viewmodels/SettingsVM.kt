@@ -2,11 +2,13 @@ package com.example.pantanima.ui.viewmodels
 
 import android.view.View
 import androidx.databinding.ObservableField
+import com.example.pantanima.ui.Constants
 import com.example.pantanima.ui.DisplayHelper
 import com.example.pantanima.ui.activities.NavActivity
 import com.example.pantanima.ui.adapters.SliderAdapter
 import com.example.pantanima.ui.adapters.SliderLayoutManager
 import com.example.pantanima.ui.customviews.VerticalSliderView
+import com.example.pantanima.ui.database.preference.Preferences
 import com.example.pantanima.ui.helpers.GamePrefs
 import java.lang.ref.WeakReference
 
@@ -17,17 +19,17 @@ class SettingsVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
     var timeLayoutManager = ObservableField(SliderLayoutManager(activity.get()))
     private val timePikerData = getTimePickerData()
     var timeSliderAdapter = ObservableField(SliderAdapter(timePikerData))
-    var timeInitialPosition = 7
+    var timeInitialPosition = timePikerData.indexOf(GamePrefs.ROUND_TIME.toString())
     var timeChooseText = ObservableField<String>(timePikerData[timeInitialPosition])
 
     var scoreLayoutManager = ObservableField(SliderLayoutManager(activity.get()))
     private val scorePikerData = getScorePickerData()
     var scoreSliderAdapter = ObservableField(SliderAdapter(scorePikerData))
-    var scoreInitialPosition = 8
+    var scoreInitialPosition = scorePikerData.indexOf(GamePrefs.GOL_POINTS.toString())
     var scoreChooseText = ObservableField<String>(scorePikerData[scoreInitialPosition])
 
-    var modeInitialPosition = 2
     var modePikerData = getModePickerData()
+    var modeInitialPosition = modePikerData.indexOf(GamePrefs.MODE)
     var modeChooseText = modePikerData[modeInitialPosition]
     var modePositionChangeListener = object : VerticalSliderView.OnCursorPositionChangeListener {
         override fun onChanged(newPosition: Int) {
@@ -111,8 +113,8 @@ class SettingsVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
     }
 
     private fun saveSettings() {
-        GamePrefs.GOL_POINTS = scoreChooseText.get()!!.toInt()
-        GamePrefs.ROUND_TIME = timeChooseText.get()!!.toInt()
-        GamePrefs.MODE = modeChooseText
+        Preferences.save(Constants.PREF_MODE, modeChooseText)
+        Preferences.save(Constants.PREF_GOL_POINTS, scoreChooseText.get()!!.toInt())
+        Preferences.save(Constants.PREF_ROUND_TIME, timeChooseText.get()!!.toInt())
     }
 }
