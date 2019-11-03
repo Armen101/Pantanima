@@ -1,11 +1,11 @@
 package com.example.pantanima.ui.customviews
 
 import android.animation.Animator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -17,10 +17,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import com.example.pantanima.ui.adapters.ScrollHelper
-import timber.log.Timber
 import kotlin.math.max
 import kotlin.math.min
-import kotlin.math.roundToInt
 
 
 class VerticalSliderView : RelativeLayout {
@@ -36,7 +34,7 @@ class VerticalSliderView : RelativeLayout {
     private var cursorBtnColor = Color.GREEN
     private var focusedTv: TextView? = null
     private lateinit var variantsContainer: LinearLayout
-    private lateinit var cursorBtn: Button
+    private lateinit var cursorView: View
     private var cursorIndex = cursorInitialIndex
     private var oneItemHeight: Int = 0
         get() {
@@ -46,7 +44,7 @@ class VerticalSliderView : RelativeLayout {
             }
             return field
         }
-    var listTv: MutableList<TextView> = ArrayList()
+    private var listTv: MutableList<TextView> = ArrayList()
     var listStr: List<String> = ArrayList()
         set(value) {
             field = value
@@ -124,23 +122,24 @@ class VerticalSliderView : RelativeLayout {
         addView(variantsContainer)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun drawCursorButton() {
-        cursorBtn = Button(context)
+        cursorView = View(context)
 
-        val drawable = ContextCompat.getDrawable(context, R.drawable.start_round_button_bg)
+        val drawable = ContextCompat.getDrawable(context, R.drawable.ic_mode_cursor)
         drawable?.let {
             val drawableCompat = DrawableCompat.wrap(drawable)
             DrawableCompat.setTint(drawableCompat, cursorBtnColor)
-            cursorBtn.background = drawable
+            cursorView.background = drawable
         }
 
-        cursorBtn.setOnTouchListener(onTouchListener())
-        val lp = LayoutParams(cursorBtnSize.toInt(), cursorBtnSize.toInt())
+        cursorView.setOnTouchListener(onTouchListener())
+        val lp = LayoutParams(cursorBtnSize.toInt() + (cursorBtnSize.toInt() / 6), cursorBtnSize.toInt())
         lp.addRule(END_OF, variantsContainer.id)
         lp.marginStart = cursorBtnStartMargin.toInt()
-        cursorBtn.layoutParams = lp
-        cursorBtn.visibility = View.INVISIBLE
-        addView(cursorBtn)
+        cursorView.layoutParams = lp
+        cursorView.visibility = View.INVISIBLE
+        addView(cursorView)
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
@@ -272,7 +271,7 @@ class VerticalSliderView : RelativeLayout {
         val cursorItemHalfHeight = cursorBtnSize / 2
         val currentItemY = index * oneItemHeight
         val currentItemMid = currentItemY + (oneItemHeight / 2)
-        val cursorMid = cursorBtn.y - (cursorBtn.height / 2)
+        val cursorMid = cursorView.y - (cursorView.height / 2)
         val diff = when {
             cursorMid > currentItemMid -> -(cursorMid - currentItemMid) //to Up
             currentItemMid > cursorMid -> currentItemMid - cursorMid    //to Down
@@ -281,12 +280,12 @@ class VerticalSliderView : RelativeLayout {
 
         val translationY = cursorMid + diff
 
-        cursorBtn.animate()
+        cursorView.animate()
             .translationY(translationY - cursorItemHalfHeight)
             .setListener(object : Animator.AnimatorListener {
                 override fun onAnimationEnd(p0: Animator?) {
-                    if (cursorBtn.visibility != View.VISIBLE) {
-                        cursorBtn.visibility = View.VISIBLE
+                    if (cursorView.visibility != View.VISIBLE) {
+                        cursorView.visibility = View.VISIBLE
                     }
                 }
 
