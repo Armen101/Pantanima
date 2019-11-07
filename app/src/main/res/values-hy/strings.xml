@@ -17,4 +17,14 @@
     <string name="round_time">round time</string>
     <string name="for_victory">for victory</string>
     <string name="confirm">confirm</string>
+
+    <string name="score">միավոր</string>
+    <string name="score_description">որքան միավոր է անհրաժեշտ խաղը հաղթելու համար</string>
+
+    <string name="duration">տևողություն</string>
+    <string name="duration_description">մեկ խաղափուլի տևողությունը</string>
+
+    <string name="mode">ռեժիմ</string>
+    <string name="mode_description">ընտրեք խաղի ռեժիմը</string>
+
 </resources>

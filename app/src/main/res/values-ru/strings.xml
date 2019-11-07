@@ -17,4 +17,14 @@
     <string name="round_time">round time</string>
     <string name="for_victory">for victory</string>
     <string name="confirm">confirm</string>
+
+    <string name="score">балли</string>
+    <string name="score_description">сколько очков нужно, чтобы выиграть игру?</string>
+
+    <string name="duration">длительность</string>
+    <string name="duration_description">duration of one round</string>
+
+    <string name="mode">режим</string>
+    <string name="mode_description">выберите режим игры</string>
+
 </resources>

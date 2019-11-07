@@ -186,10 +186,6 @@ class VerticalSliderView : RelativeLayout {
             when (event.action and MotionEvent.ACTION_MASK) {
                 MotionEvent.ACTION_DOWN -> yDelta = (view.y - rawY).toInt()
                 MotionEvent.ACTION_UP -> cursorToCenter(cursorMid)
-                MotionEvent.ACTION_POINTER_DOWN -> {
-                }
-                MotionEvent.ACTION_POINTER_UP -> {
-                }
                 MotionEvent.ACTION_MOVE -> {
                     val transY = rawY.toFloat()
                     val newY = transY + yDelta

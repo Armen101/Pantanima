@@ -28,4 +28,13 @@
     <string name="for_victory">for victory</string>
     <string name="confirm">confirm</string>
 
+    <string name="score">scores</string>
+    <string name="score_description">how much score is needed to win the game?</string>
+
+    <string name="duration">duration</string>
+    <string name="duration_description">one round duration</string>
+
+    <string name="mode">mode</string>
+    <string name="mode_description">select game mode</string>
+
 </resources>
