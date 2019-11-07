@@ -29,6 +29,7 @@ object ScrollHelper {
         rv.addOnScrollListener(snapOnScrollListener)
     }
 
+    //todo -> investigate crash on Samsung-Tablet
     private fun createPlayer() {
         val gen = ToneGenerator(AudioManager.STREAM_MUSIC, 50)
         gen.startTone(
