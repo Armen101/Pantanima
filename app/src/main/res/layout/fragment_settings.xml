@@ -41,15 +41,18 @@
                 android:gravity="center"
                 android:text="@string/mode"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/_20sdp" />
+                android:textSize="@dimen/settings_title_tv_size" />
 
             <TextView
                 android:id="@+id/mode_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:paddingLeft="@dimen/settings_description_tv_right_left_padding"
+                android:paddingRight="@dimen/settings_description_tv_right_left_padding"
                 android:text="@string/mode_description"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/settings_description_tv_size" />
 
         </LinearLayout>
 
@@ -99,15 +102,18 @@
                 android:gravity="center"
                 android:text="@string/duration"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/_20sdp" />
+                android:textSize="@dimen/settings_title_tv_size" />
 
             <TextView
                 android:id="@+id/duration_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:paddingLeft="@dimen/settings_description_tv_right_left_padding"
+                android:paddingRight="@dimen/settings_description_tv_right_left_padding"
                 android:text="@string/duration_description"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/settings_description_tv_size" />
 
         </LinearLayout>
 
@@ -156,15 +162,18 @@
                 android:gravity="center"
                 android:text="@string/score"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/_20sdp" />
+                android:textSize="@dimen/settings_title_tv_size" />
 
             <TextView
                 android:id="@+id/score_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:paddingLeft="@dimen/settings_description_tv_right_left_padding"
+                android:paddingRight="@dimen/settings_description_tv_right_left_padding"
                 android:text="@string/score_description"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/settings_description_tv_size" />
 
         </LinearLayout>
 
