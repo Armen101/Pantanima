@@ -19,7 +19,7 @@
             android:id="@+id/mode_description_bg"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
-            android:background="@drawable/drawable_bottom_left_radious"
+            android:background="@color/app_style_orange"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -78,11 +78,21 @@
             android:id="@+id/duration_description_bg"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/settings_left_round_bg"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@color/app_style_orange"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mode_slider" />
+
+        <View
+            android:id="@+id/duration_description_bootom_arrow"
+            android:layout_width="@dimen/settings_description_bottom_arrow_width"
+            android:layout_height="@dimen/settings_description_bottom_arrow_height"
+            android:background="@drawable/ic_settings_arrow"
+            android:backgroundTint="@color/app_style_orange"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/duration_description_bg" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -138,11 +148,21 @@
             android:id="@+id/score_description_bg"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/settings_left_round_bg"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@color/app_style_orange"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/timeHorizontalPicker" />
+
+        <View
+            android:id="@+id/scoreduration_description_bootom_arrow"
+            android:layout_width="@dimen/settings_description_bottom_arrow_width"
+            android:layout_height="@dimen/settings_description_bottom_arrow_height"
+            android:background="@drawable/ic_settings_arrow"
+            android:backgroundTint="@color/app_style_orange"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/score_description_bg" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -199,7 +219,7 @@
             android:layout_width="@dimen/_150sdp"
             android:layout_height="@dimen/start_screen_button_height"
             android:background="@drawable/start_screen_button"
-            android:backgroundTint="@color/app_style_orange"
+            android:backgroundTint="@color/app_style_green"
             android:fontFamily="@font/caviar_dreams_bold"
             android:onClick="@{(view) -> viewModel.onConfirmClick()}"
             android:text="@string/confirm"
