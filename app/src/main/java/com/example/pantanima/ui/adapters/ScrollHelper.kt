@@ -2,12 +2,10 @@ package com.example.pantanima.ui.adapters
 
 import android.content.Context
 import android.media.AudioManager
-import android.os.Build
-import android.os.VibrationEffect
-import android.os.Vibrator
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import android.media.ToneGenerator
+import android.os.*
 
 object ScrollHelper {
 
@@ -29,13 +27,16 @@ object ScrollHelper {
         rv.addOnScrollListener(snapOnScrollListener)
     }
 
-    //todo -> investigate crash on Samsung-Tablet
     private fun createPlayer() {
         val gen = ToneGenerator(AudioManager.STREAM_MUSIC, 50)
         gen.startTone(
             ToneGenerator.TONE_CDMA_CALL_SIGNAL_ISDN_INTERGROUP,
             5
         )
+        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed({
+            gen.release()
+        }, 100L)
     }
 
     fun playScrollSound(context: Context) {
