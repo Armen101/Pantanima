@@ -13,4 +13,13 @@
         <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
 
+    <style name="MyTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textColorHint">@color/gray_inactive</item>
+        <item name="boxStrokeColor">@color/app_style_orange</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/_6sdp</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/_6sdp</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/_6sdp</item>
+        <item name="boxCornerRadiusTopStart">@dimen/_6sdp</item>
+    </style>
+
 </resources>

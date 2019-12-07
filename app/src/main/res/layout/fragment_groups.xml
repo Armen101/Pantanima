@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.example.pantanima.ui.viewmodels.GroupsVM" />
@@ -14,157 +16,154 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/row_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/group_row_start_end_margin"
-            android:layout_marginTop="@dimen/_100sdp"
-            android:layout_marginEnd="@dimen/group_row_start_end_margin"
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:src="@drawable/ic_group"
+            android:tint="@color/app_style_orange"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:layout_width="@dimen/groups_screen_left_icon_size"
-                android:layout_height="@dimen/groups_screen_et_height"
-                android:layout_marginEnd="@dimen/groups_screen_left_icon_margin"
-                android:src="@drawable/ic_group" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            style="@style/MyTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            app:helperText="@{viewModel.group1.length() == @integer/group_name_max_length ? @string/group_name_max_limit_desc : ``}"
+            app:helperTextEnabled="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageView">
 
-            <EditText
-                android:id="@+id/group_name_1"
-                android:layout_width="@dimen/groups_screen_et_width"
-                android:layout_height="@dimen/groups_screen_et_height"
-                android:backgroundTint="@color/gray_inactive"
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/caviar_dreams_bold"
                 android:gravity="start"
+                android:hint="@string/first_group_name"
                 android:inputType="text"
+                android:maxLength="@integer/group_name_max_length"
+                android:paddingStart="15dp"
+                android:paddingEnd="@dimen/_10sdp"
                 android:text="@string/first_def_group_name"
-                android:textAlignment="textStart"
                 android:textChangeObserver="@{viewModel.group1}"
-                android:textColor="@color/app_style_blue"
+                android:textColor="@color/app_style_green"
+                android:textIsMandatory="@{true}"
                 android:textSize="@dimen/groups_screen_et_text_size" />
 
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
-            android:id="@+id/row_2"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout2"
+            style="@style/MyTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/group_row_start_end_margin"
-            android:layout_marginTop="@dimen/group_rows_between_margin"
-            android:layout_marginEnd="@dimen/group_row_start_end_margin"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            app:helperText="@{viewModel.group2.length() == @integer/group_name_max_length ? @string/group_name_max_limit_desc : ``}"
+            app:helperTextEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/row_1">
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout">
 
-            <ImageView
-                android:layout_width="@dimen/groups_screen_left_icon_size"
-                android:layout_height="@dimen/groups_screen_et_height"
-                android:layout_marginEnd="@dimen/groups_screen_left_icon_margin"
-                android:src="@drawable/ic_group"
-                android:tint="@color/app_style_red" />
-
-            <EditText
-                android:id="@+id/group_name_2"
-                android:layout_width="@dimen/groups_screen_et_width"
-                android:layout_height="@dimen/groups_screen_et_height"
-                android:backgroundTint="@color/gray_inactive"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/second_tet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/caviar_dreams_bold"
                 android:gravity="start"
+                android:hint="@string/second_group_name"
                 android:inputType="text"
+                android:maxLength="@integer/group_name_max_length"
+                android:paddingStart="15dp"
+                android:paddingEnd="@dimen/_10sdp"
                 android:text="@string/second_def_group_name"
-                android:textAlignment="textStart"
                 android:textChangeObserver="@{viewModel.group2}"
-                android:textColor="@color/app_style_red"
+                android:textColor="@color/app_style_green"
+                android:textIsMandatory="@{true}"
                 android:textSize="@dimen/groups_screen_et_text_size" />
 
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
-            android:id="@+id/row_3"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout3"
+            style="@style/MyTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/group_row_start_end_margin"
-            android:layout_marginTop="@dimen/group_rows_between_margin"
-            android:layout_marginEnd="@dimen/group_row_start_end_margin"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:visibility="@{viewModel.group1.length() > 0 &amp;&amp; viewModel.group2.length() > 0 ? View.VISIBLE: View.INVISIBLE}"
+            app:helperText="@{viewModel.group3.length() == @integer/group_name_max_length ? @string/group_name_max_limit_desc : ``}"
+            app:helperTextEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/row_2">
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout2">
 
-            <ImageView
-                android:layout_width="@dimen/groups_screen_left_icon_size"
-                android:layout_height="@dimen/groups_screen_et_height"
-                android:layout_marginEnd="@dimen/groups_screen_left_icon_margin"
-                android:src="@drawable/ic_group"
-                android:tint="@{viewModel.group3.length() == 0 ? @color/gray_inactive : @color/app_style_green}" />
-
-            <EditText
-                android:id="@+id/group_name_3"
-                android:layout_width="@dimen/groups_screen_et_width"
-                android:layout_height="@dimen/groups_screen_et_height"
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:backgroundTint="@color/gray_inactive"
                 android:fontFamily="@font/caviar_dreams_bold"
                 android:gravity="start"
-                android:hint="@string/new_group"
+                android:hint="@string/third_group_name"
                 android:inputType="text"
-                android:textAlignment="textStart"
+                android:maxLength="@integer/group_name_max_length"
+                android:paddingStart="15dp"
+                android:paddingEnd="@dimen/_10sdp"
                 android:textChangeObserver="@{viewModel.group3}"
                 android:textColor="@color/app_style_green"
-                android:textColorHint="@color/gray_inactive"
                 android:textSize="@dimen/groups_screen_et_text_size" />
 
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
-            android:id="@+id/row_4"
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout4"
+            style="@style/MyTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/group_row_start_end_margin"
-            android:layout_marginTop="@dimen/group_rows_between_margin"
-            android:layout_marginEnd="@dimen/group_row_start_end_margin"
-            android:visibility="@{viewModel.group3.length() > 0}"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:visibility="@{viewModel.group1.length() > 0 &amp;&amp; viewModel.group2.length() > 0 &amp;&amp; viewModel.group3.length() > 0  ? View.VISIBLE: View.INVISIBLE}"
+            app:helperText="@{viewModel.group4.length() == @integer/group_name_max_length ? @string/group_name_max_limit_desc : ``}"
+            app:helperTextEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/row_3">
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout3">
 
-            <ImageView
-                android:layout_width="@dimen/groups_screen_left_icon_size"
-                android:layout_height="@dimen/groups_screen_et_height"
-                android:layout_marginEnd="@dimen/groups_screen_left_icon_margin"
-                android:src="@drawable/ic_group"
-                android:tint="@{viewModel.group4.length() == 0 ? @color/gray_inactive : @color/app_style_orange}" />
-
-            <EditText
-                android:id="@+id/group_name_4"
-                android:layout_width="@dimen/groups_screen_et_width"
-                android:layout_height="@dimen/groups_screen_et_height"
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:backgroundTint="@color/gray_inactive"
                 android:fontFamily="@font/caviar_dreams_bold"
                 android:gravity="start"
-                android:hint="@string/new_group"
+                android:hint="@string/fourth_group_name"
                 android:inputType="text"
-                android:textAlignment="textStart"
+                android:maxLength="@integer/group_name_max_length"
+                android:paddingStart="15dp"
+                android:paddingEnd="@dimen/_10sdp"
                 android:textChangeObserver="@{viewModel.group4}"
-                android:textColor="@color/app_style_orange"
-                android:textColorHint="@color/gray_inactive"
+                android:textColor="@color/app_style_green"
                 android:textSize="@dimen/groups_screen_et_text_size" />
 
-        </LinearLayout>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.7" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline_horizontal">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
 
             <Button
                 android:id="@+id/new_game"
@@ -173,7 +172,7 @@
                 android:background="@drawable/start_screen_button"
                 android:backgroundTint="@color/app_style_green"
                 android:fontFamily="@font/caviar_dreams_bold"
-                android:onClick="@{(view) -> viewModel.goToPlay()}"
+                android:onClick="@{(view) -> viewModel.onStartClick()}"
                 android:text="@string/start"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"

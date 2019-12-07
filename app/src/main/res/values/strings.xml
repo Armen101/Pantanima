@@ -36,5 +36,11 @@
 
     <string name="mode">mode</string>
     <string name="mode_description">select game mode</string>
+    <string name="first_group_name">first group name</string>
+    <string name="second_group_name">second group name</string>
+    <string name="third_group_name">third group name</string>
+    <string name="fourth_group_name">fourth group name</string>
+    <string name="group_name_max_limit_desc">maximum length of group name is 18</string>
+    <string name="group_name_min_limit_desc">you must have at least two groups</string>
 
 </resources>

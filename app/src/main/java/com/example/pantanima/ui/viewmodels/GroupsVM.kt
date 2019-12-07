@@ -14,10 +14,14 @@ class GroupsVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
     var group3: ObservableField<String?> = ObservableField("")
     var group4: ObservableField<String?> = ObservableField("")
 
-    fun goToPlay() {
-        val bundle = Bundle()
-        bundle.putStringArrayList(Constants.BUNDLE_GROUPS, getGroups())
-        setNewDestination(R.id.navigateToPlay, bundle)
+    fun onStartClick() {
+        if(group1.get().isNullOrEmpty() || group2.get().isNullOrEmpty()){
+            //todo open error dialog
+        } else {
+            val bundle = Bundle()
+            bundle.putStringArrayList(Constants.BUNDLE_GROUPS, getGroups())
+            setNewDestination(R.id.navigateToPlay, bundle)
+        }
     }
 
     fun goToSettings() {

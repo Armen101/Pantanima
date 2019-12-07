@@ -26,5 +26,11 @@
 
     <string name="mode">ռեժիմ</string>
     <string name="mode_description">ընտրեք խաղի ռեժիմը</string>
+    <string name="first_group_name">առաջին խմբի անունը</string>
+    <string name="second_group_name">երկրորդ խմբի անուն</string>
+    <string name="third_group_name">երրորդ խմբի անուն</string>
+    <string name="fourth_group_name">չորրորդ խմբի անուն</string>
+    <string name="group_name_max_limit_desc">խմբի անվան առավելագույն երկարությունը 18 է</string>
+    <string name="group_name_min_limit_desc">դուք պետք է ունենաք առնվազն երկու խումբ</string>
 
 </resources>
