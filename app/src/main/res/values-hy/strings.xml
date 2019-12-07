@@ -14,9 +14,7 @@
     <string name="second_def_group_name">խումբ 2</string>
     <string name="new_group">նոր խումբ</string>
     <string name="start">սկսել</string>
-    <string name="round_time">round time</string>
-    <string name="for_victory">for victory</string>
-    <string name="confirm">confirm</string>
+    <string name="confirm">հաստատել</string>
 
     <string name="score">միավոր</string>
     <string name="score_description">որքան միավոր է անհրաժեշտ խաղը հաղթելու համար</string>
@@ -26,7 +24,7 @@
 
     <string name="mode">ռեժիմ</string>
     <string name="mode_description">ընտրեք խաղի ռեժիմը</string>
-    <string name="first_group_name">առաջին խմբի անունը</string>
+    <string name="first_group_name">առաջին խմբի անուն</string>
     <string name="second_group_name">երկրորդ խմբի անուն</string>
     <string name="third_group_name">երրորդ խմբի անուն</string>
     <string name="fourth_group_name">չորրորդ խմբի անուն</string>
