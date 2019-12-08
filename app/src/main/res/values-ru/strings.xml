@@ -29,6 +29,6 @@
     <string name="third_group_name">имя третьей группы</string>
     <string name="fourth_group_name">имя четвертой группы</string>
     <string name="group_name_max_limit_desc">максимальная длина имени группы 18</string>
-    <string name="group_name_min_limit_desc">у вас должно быть как минимум две группы</string>
+    <string name="group_name_min_limit_desc">обязательное поле</string>
 
 </resources>

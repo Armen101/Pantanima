@@ -7,21 +7,16 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableField
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
-import com.example.pantanima.R
 import com.example.pantanima.ui.customviews.VerticalSliderView
 import com.google.android.material.textfield.TextInputEditText
-
 
 @BindingAdapter("android:visibility")
 fun View.setVisibility(value: Boolean) {
     visibility = if (value) View.VISIBLE else View.GONE
 }
 
-@BindingAdapter(
-    value = ["android:textChangeObserver", "android:textIsMandatory"],
-    requireAll = false
-)
-fun TextInputEditText.textListener(value: ObservableField<String>, textIsMandatory: Boolean?) {
+@BindingAdapter("android:textChangeObserver")
+fun TextInputEditText.textListener(value: ObservableField<String>) {
     addTextChangedListener(object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, start: Int, count: Int, after: Int) {
 
@@ -32,12 +27,6 @@ fun TextInputEditText.textListener(value: ObservableField<String>, textIsMandato
         }
 
         override fun afterTextChanged(p0: Editable?) {
-            val count = p0!!.length
-            error = if (textIsMandatory != null && textIsMandatory && count == 0) {
-                context.getString(R.string.group_name_min_limit_desc)
-            } else {
-                null
-            }
         }
     })
 }

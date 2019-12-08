@@ -25,7 +25,8 @@
             android:tint="@color/app_style_orange"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/title_groups" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
@@ -35,11 +36,13 @@
             android:layout_marginStart="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_24sdp"
             android:layout_marginEnd="@dimen/_16sdp"
+            app:errorTextAppearance="@style/ErrorAppearance"
             app:helperText="@{viewModel.group1.length() == @integer/group_name_max_length ? @string/group_name_max_limit_desc : ``}"
             app:helperTextEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageView">
+            app:layout_constraintTop_toBottomOf="@id/imageView"
+            app:setError="@{viewModel.group1.length() == 0 ? @string/group_name_min_limit_desc : ``}">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -54,7 +57,6 @@
                 android:text="@string/first_def_group_name"
                 android:textChangeObserver="@{viewModel.group1}"
                 android:textColor="@color/app_style_green"
-                android:textIsMandatory="@{true}"
                 android:textSize="@dimen/groups_screen_et_text_size" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -71,7 +73,8 @@
             app:helperTextEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayout">
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout"
+            app:setError="@{viewModel.group2.length() == 0 ? @string/group_name_min_limit_desc : ``}">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/second_tet"
@@ -87,7 +90,6 @@
                 android:text="@string/second_def_group_name"
                 android:textChangeObserver="@{viewModel.group2}"
                 android:textColor="@color/app_style_green"
-                android:textIsMandatory="@{true}"
                 android:textSize="@dimen/groups_screen_et_text_size" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -190,7 +192,8 @@
                 android:padding="@dimen/_12sdp"
                 app:srcCompat="@drawable/ic_settings"
                 tools:layout_editor_absoluteX="332dp"
-                tools:layout_editor_absoluteY="520dp" />
+                tools:layout_editor_absoluteY="520dp"
+                android:contentDescription="@string/title_settings" />
         </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,6 +29,6 @@
     <string name="third_group_name">երրորդ խմբի անուն</string>
     <string name="fourth_group_name">չորրորդ խմբի անուն</string>
     <string name="group_name_max_limit_desc">խմբի անվան առավելագույն երկարությունը 18 է</string>
-    <string name="group_name_min_limit_desc">դուք պետք է ունենաք առնվազն երկու խումբ</string>
+    <string name="group_name_min_limit_desc">պարտադիր լրացման դաշտ</string>
 
 </resources>
