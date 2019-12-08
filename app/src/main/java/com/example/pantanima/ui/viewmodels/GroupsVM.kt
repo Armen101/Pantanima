@@ -1,6 +1,7 @@
 package com.example.pantanima.ui.viewmodels
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.databinding.ObservableField
 import com.example.pantanima.R
 import com.example.pantanima.ui.Constants
@@ -10,13 +11,14 @@ import java.lang.ref.WeakReference
 class GroupsVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
 
     var group1: ObservableField<String?> = ObservableField(getString(R.string.first_def_group_name))
-    var group2: ObservableField<String?> = ObservableField(getString(R.string.second_def_group_name))
+    var group2: ObservableField<String?> =
+        ObservableField(getString(R.string.second_def_group_name))
     var group3: ObservableField<String?> = ObservableField("")
     var group4: ObservableField<String?> = ObservableField("")
 
     fun onStartClick() {
-        if(group1.get().isNullOrEmpty() || group2.get().isNullOrEmpty()){
-            //todo open error dialog
+        if (group1.get().isNullOrEmpty() || group2.get().isNullOrEmpty()) {
+            showGroupsRulesDialog()
         } else {
             val bundle = Bundle()
             bundle.putStringArrayList(Constants.BUNDLE_GROUPS, getGroups())
@@ -25,7 +27,16 @@ class GroupsVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
     }
 
     fun goToSettings() {
-        setNewDestination(R.id.navigateToSettings)
+        if (group1.get().isNullOrEmpty() || group2.get().isNullOrEmpty()) {
+            showGroupsRulesDialog()
+        } else {
+            setNewDestination(R.id.navigateToSettings)
+        }
+    }
+
+    private fun showGroupsRulesDialog() {
+        //todo open error dialog, the toast is temporary solution
+        Toast.makeText(activity, getString(R.string.group_name_min_limit_desc), Toast.LENGTH_LONG).show()
     }
 
     private fun getGroups(): ArrayList<String> {
