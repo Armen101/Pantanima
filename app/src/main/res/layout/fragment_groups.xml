@@ -21,12 +21,12 @@
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
             android:layout_marginTop="@dimen/_50sdp"
+            android:contentDescription="@string/title_groups"
             android:src="@drawable/ic_group"
             android:tint="@color/app_style_orange"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/title_groups" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
@@ -36,9 +36,7 @@
             android:layout_marginStart="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_24sdp"
             android:layout_marginEnd="@dimen/_16sdp"
-            app:errorTextAppearance="@style/ErrorAppearance"
-            app:helperText="@{viewModel.group1.length() == @integer/group_name_max_length ? @string/group_name_max_limit_desc : ``}"
-            app:helperTextEnabled="true"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imageView"
@@ -49,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/caviar_dreams_bold"
                 android:gravity="start"
+                android:backgroundTint="@color/gray_inactive"
                 android:hint="@string/first_group_name"
                 android:inputType="text"
                 android:maxLength="@integer/group_name_max_length"
@@ -57,6 +56,7 @@
                 android:text="@string/first_def_group_name"
                 android:textChangeObserver="@{viewModel.group1}"
                 android:textColor="@color/app_style_green"
+                android:textColorHint="@color/colorAccent"
                 android:textSize="@dimen/groups_screen_et_text_size" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -69,18 +69,17 @@
             android:layout_marginStart="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginEnd="@dimen/_16sdp"
-            app:helperText="@{viewModel.group2.length() == @integer/group_name_max_length ? @string/group_name_max_limit_desc : ``}"
-            app:helperTextEnabled="true"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textInputLayout"
             app:setError="@{viewModel.group2.length() == 0 ? @string/group_name_min_limit_desc : ``}">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/second_tet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/caviar_dreams_bold"
+                android:backgroundTint="@color/gray_inactive"
                 android:gravity="start"
                 android:hint="@string/second_group_name"
                 android:inputType="text"
@@ -90,6 +89,7 @@
                 android:text="@string/second_def_group_name"
                 android:textChangeObserver="@{viewModel.group2}"
                 android:textColor="@color/app_style_green"
+                android:textColorHint="@color/colorAccent"
                 android:textSize="@dimen/groups_screen_et_text_size" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -102,8 +102,7 @@
             android:layout_marginStart="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginEnd="@dimen/_16sdp"
-            app:helperText="@{viewModel.group3.length() == @integer/group_name_max_length ? @string/group_name_max_limit_desc : ``}"
-            app:helperTextEnabled="true"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textInputLayout2">
@@ -121,6 +120,7 @@
                 android:paddingEnd="@dimen/_10sdp"
                 android:textChangeObserver="@{viewModel.group3}"
                 android:textColor="@color/app_style_green"
+                android:textColorHint="@color/colorAccent"
                 android:textSize="@dimen/groups_screen_et_text_size" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -135,8 +135,7 @@
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginEnd="@dimen/_16sdp"
             android:visibility="@{viewModel.group3.length() > 0  ? View.VISIBLE: View.INVISIBLE}"
-            app:helperText="@{viewModel.group4.length() == @integer/group_name_max_length ? @string/group_name_max_limit_desc : ``}"
-            app:helperTextEnabled="true"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textInputLayout3">
@@ -154,6 +153,7 @@
                 android:paddingEnd="@dimen/_10sdp"
                 android:textChangeObserver="@{viewModel.group4}"
                 android:textColor="@color/app_style_green"
+                android:textColorHint="@color/colorAccent"
                 android:textSize="@dimen/groups_screen_et_text_size" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -187,12 +187,11 @@
                 android:layout_toEndOf="@+id/new_game"
                 android:background="@drawable/start_round_button_bg"
                 android:backgroundTint="@color/app_style_green"
+                android:contentDescription="@string/title_settings"
                 android:onClick="@{(view) -> viewModel.goToSettings()}"
                 android:padding="@dimen/_12sdp"
-                app:srcCompat="@drawable/ic_settings"
-                tools:layout_editor_absoluteX="332dp"
-                tools:layout_editor_absoluteY="520dp"
-                android:contentDescription="@string/title_settings" />
+                app:srcCompat="@drawable/ic_settings" />
+
         </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
