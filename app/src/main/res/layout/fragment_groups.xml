@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -28,135 +27,105 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputLayout
+        <EditText
             android:id="@+id/textInputLayout"
-            style="@style/MyTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_24sdp"
             android:layout_marginEnd="@dimen/_16sdp"
-            app:hintEnabled="false"
+            android:backgroundTint="@color/gray_inactive"
+            android:fontFamily="@font/caviar_dreams_bold"
+            android:gravity="start"
+            android:hint="@string/first_group_name"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:maxLength="@integer/group_name_max_length"
+            android:paddingStart="15dp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:text="@string/first_def_group_name"
+            android:textChangeObserver="@{viewModel.group1}"
+            android:textColor="@color/app_style_blue"
+            android:textColorHint="@color/colorAccent"
+            android:textSize="@dimen/groups_screen_et_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageView"
-            app:setError="@{viewModel.group1.length() == 0 ? @string/group_name_min_limit_desc : ``}">
+            app:layout_constraintTop_toBottomOf="@id/imageView" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/caviar_dreams_bold"
-                android:gravity="start"
-                android:backgroundTint="@color/gray_inactive"
-                android:hint="@string/first_group_name"
-                android:inputType="text"
-                android:maxLength="@integer/group_name_max_length"
-                android:paddingStart="15dp"
-                android:paddingEnd="@dimen/_10sdp"
-                android:text="@string/first_def_group_name"
-                android:textChangeObserver="@{viewModel.group1}"
-                android:textColor="@color/app_style_green"
-                android:textColorHint="@color/colorAccent"
-                android:textSize="@dimen/groups_screen_et_text_size" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
+        <EditText
             android:id="@+id/textInputLayout2"
-            style="@style/MyTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginEnd="@dimen/_16sdp"
-            app:hintEnabled="false"
+            android:backgroundTint="@color/gray_inactive"
+            android:fontFamily="@font/caviar_dreams_bold"
+            android:gravity="start"
+            android:hint="@string/second_group_name"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:maxLength="@integer/group_name_max_length"
+            android:paddingStart="15dp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:text="@string/second_def_group_name"
+            android:textChangeObserver="@{viewModel.group2}"
+            android:textColor="@color/app_style_red"
+            android:textColorHint="@color/colorAccent"
+            android:textSize="@dimen/groups_screen_et_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayout"
-            app:setError="@{viewModel.group2.length() == 0 ? @string/group_name_min_limit_desc : ``}">
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/caviar_dreams_bold"
-                android:backgroundTint="@color/gray_inactive"
-                android:gravity="start"
-                android:hint="@string/second_group_name"
-                android:inputType="text"
-                android:maxLength="@integer/group_name_max_length"
-                android:paddingStart="15dp"
-                android:paddingEnd="@dimen/_10sdp"
-                android:text="@string/second_def_group_name"
-                android:textChangeObserver="@{viewModel.group2}"
-                android:textColor="@color/app_style_green"
-                android:textColorHint="@color/colorAccent"
-                android:textSize="@dimen/groups_screen_et_text_size" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
+        <EditText
             android:id="@+id/textInputLayout3"
-            style="@style/MyTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginEnd="@dimen/_16sdp"
-            app:hintEnabled="false"
+            android:backgroundTint="@color/gray_inactive"
+            android:fontFamily="@font/caviar_dreams_bold"
+            android:gravity="start"
+            android:hint="@string/third_group_name"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:maxLength="@integer/group_name_max_length"
+            android:paddingStart="15dp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:textChangeObserver="@{viewModel.group3}"
+            android:textColor="@color/app_style_green"
+            android:textColorHint="@color/colorAccent"
+            android:textSize="@dimen/groups_screen_et_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayout2">
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout2" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/gray_inactive"
-                android:fontFamily="@font/caviar_dreams_bold"
-                android:gravity="start"
-                android:hint="@string/third_group_name"
-                android:inputType="text"
-                android:maxLength="@integer/group_name_max_length"
-                android:paddingStart="15dp"
-                android:paddingEnd="@dimen/_10sdp"
-                android:textChangeObserver="@{viewModel.group3}"
-                android:textColor="@color/app_style_green"
-                android:textColorHint="@color/colorAccent"
-                android:textSize="@dimen/groups_screen_et_text_size" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
+        <EditText
             android:id="@+id/textInputLayout4"
-            style="@style/MyTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginEnd="@dimen/_16sdp"
+            android:backgroundTint="@color/gray_inactive"
+            android:fontFamily="@font/caviar_dreams_bold"
+            android:gravity="start"
+            android:hint="@string/fourth_group_name"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:maxLength="@integer/group_name_max_length"
+            android:paddingStart="15dp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:textChangeObserver="@{viewModel.group4}"
+            android:textColor="@color/app_style_orange"
+            android:textColorHint="@color/colorAccent"
+            android:textSize="@dimen/groups_screen_et_text_size"
             android:visibility="@{viewModel.group3.length() > 0  ? View.VISIBLE: View.INVISIBLE}"
-            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayout3">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/gray_inactive"
-                android:fontFamily="@font/caviar_dreams_bold"
-                android:gravity="start"
-                android:hint="@string/fourth_group_name"
-                android:inputType="text"
-                android:maxLength="@integer/group_name_max_length"
-                android:paddingStart="15dp"
-                android:paddingEnd="@dimen/_10sdp"
-                android:textChangeObserver="@{viewModel.group4}"
-                android:textColor="@color/app_style_green"
-                android:textColorHint="@color/colorAccent"
-                android:textSize="@dimen/groups_screen_et_text_size" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout3" />
 
         <RelativeLayout
             android:layout_width="wrap_content"

@@ -3,12 +3,12 @@ package com.example.pantanima.ui.binding
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableField
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.example.pantanima.ui.customviews.VerticalSliderView
-import com.google.android.material.textfield.TextInputEditText
 
 @BindingAdapter("android:visibility")
 fun View.setVisibility(value: Boolean) {
@@ -16,7 +16,7 @@ fun View.setVisibility(value: Boolean) {
 }
 
 @BindingAdapter("android:textChangeObserver")
-fun TextInputEditText.textListener(value: ObservableField<String>) {
+fun EditText.textListener(value: ObservableField<String>) {
     addTextChangedListener(object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, start: Int, count: Int, after: Int) {
 
