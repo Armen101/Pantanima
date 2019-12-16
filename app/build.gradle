@@ -80,4 +80,6 @@ dependencies {
 
     //timber log
     implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation 'com.github.douglasjunior:android-simple-tooltip:0.2.3'
+
 }

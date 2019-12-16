@@ -1,14 +1,15 @@
 package com.example.pantanima.ui.binding
 
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
+import androidx.core.widget.doOnTextChanged
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableField
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
+import com.example.pantanima.R
 import com.example.pantanima.ui.customviews.VerticalSliderView
+import com.example.pantanima.ui.helpers.UIHelper
 
 @BindingAdapter("android:visibility")
 fun View.setVisibility(value: Boolean) {
@@ -17,18 +18,12 @@ fun View.setVisibility(value: Boolean) {
 
 @BindingAdapter("android:textChangeObserver")
 fun EditText.textListener(value: ObservableField<String>) {
-    addTextChangedListener(object : TextWatcher {
-        override fun beforeTextChanged(p0: CharSequence?, start: Int, count: Int, after: Int) {
-
+    doOnTextChanged { text, _, _, _ ->
+            value.set(text.toString())
+            if (text?.length == 0) {
+                UIHelper.drawTooltip(this, R.string.group_name_max_limit_desc)
+            }
         }
-
-        override fun onTextChanged(newText: CharSequence?, start: Int, before: Int, count: Int) {
-            value.set(newText.toString())
-        }
-
-        override fun afterTextChanged(p0: Editable?) {
-        }
-    })
 }
 
 @BindingAdapter("android:lottie_play")
