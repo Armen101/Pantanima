@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -27,105 +28,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/textInputLayout"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/groupsRv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_24sdp"
-            android:layout_marginEnd="@dimen/_16sdp"
-            android:backgroundTint="@color/gray_inactive"
-            android:fontFamily="@font/caviar_dreams_bold"
-            android:gravity="start"
-            android:hint="@string/first_group_name"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:maxLength="@integer/group_name_max_length"
-            android:paddingStart="15dp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:text="@string/first_def_group_name"
-            android:textChangeObserver="@{viewModel.group1}"
-            android:textColor="@color/app_style_blue"
-            android:textColorHint="@color/colorAccent"
-            android:textSize="@dimen/groups_screen_et_text_size"
+            android:layout_height="@dimen/_250sdp"
+            android:layout_marginTop="@dimen/_50sdp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageView" />
-
-
-        <EditText
-            android:id="@+id/textInputLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:layout_marginEnd="@dimen/_16sdp"
-            android:backgroundTint="@color/gray_inactive"
-            android:fontFamily="@font/caviar_dreams_bold"
-            android:gravity="start"
-            android:hint="@string/second_group_name"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:maxLength="@integer/group_name_max_length"
-            android:paddingStart="15dp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:text="@string/second_def_group_name"
-            android:textChangeObserver="@{viewModel.group2}"
-            android:textColor="@color/app_style_red"
-            android:textColorHint="@color/colorAccent"
-            android:textSize="@dimen/groups_screen_et_text_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayout" />
-
-        <EditText
-            android:id="@+id/textInputLayout3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:layout_marginEnd="@dimen/_16sdp"
-            android:backgroundTint="@color/gray_inactive"
-            android:fontFamily="@font/caviar_dreams_bold"
-            android:gravity="start"
-            android:hint="@string/third_group_name"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:maxLength="@integer/group_name_max_length"
-            android:paddingStart="15dp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:textChangeObserver="@{viewModel.group3}"
-            android:textColor="@color/app_style_green"
-            android:textColorHint="@color/colorAccent"
-            android:textSize="@dimen/groups_screen_et_text_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayout2" />
-
-        <EditText
-            android:id="@+id/textInputLayout4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:layout_marginEnd="@dimen/_16sdp"
-            android:backgroundTint="@color/gray_inactive"
-            android:fontFamily="@font/caviar_dreams_bold"
-            android:gravity="start"
-            android:hint="@string/fourth_group_name"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:maxLength="@integer/group_name_max_length"
-            android:paddingStart="15dp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:textChangeObserver="@{viewModel.group4}"
-            android:textColor="@color/app_style_orange"
-            android:textColorHint="@color/colorAccent"
-            android:textSize="@dimen/groups_screen_et_text_size"
-            android:visibility="@{viewModel.group3.length() > 0  ? View.VISIBLE: View.INVISIBLE}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayout3" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:adapter="@{viewModel.adapterObservable}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:layout_editor_absoluteY="221dp" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -133,7 +47,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
+            app:layout_constraintTop_toBottomOf="@+id/groupsRv">
 
             <Button
                 android:id="@+id/new_game"

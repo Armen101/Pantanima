@@ -12,7 +12,7 @@ object NounRepo {
     private lateinit var dao: NounDao
 
     fun injectDao(dao: NounDao) {
-        NounRepo.dao = dao
+        this.dao = dao
     }
 
     fun getNouns() =
@@ -21,7 +21,7 @@ object NounRepo {
     fun getNouns(level: Level) =
         dao.getAll(level, GamePrefs.LANGUAGE, GamePrefs.ASSORTMENT_WORDS_COUNT)
 
-    fun insertNouns() {
+    fun insertInitialNouns() {
         val nouns = ArrayList<Noun>()
         insertLightLevelNouns(nouns)
         insertMediumLevelNouns(nouns)

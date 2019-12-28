@@ -43,7 +43,7 @@ ext {
     rxandroidVersion = '2.1.1'
     navigationVersion = '2.1.0'
     coroutinesVersion = '1.1.1'
-    roomVersion = '2.2.2'
+    roomVersion = '2.2.3'
     lottieVersion = '3.0.7'
     daggerVersion = '2.23.2'
 }

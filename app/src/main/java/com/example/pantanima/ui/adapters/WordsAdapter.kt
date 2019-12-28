@@ -9,12 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pantanima.BR
 import com.example.pantanima.R
 import com.example.pantanima.ui.database.entity.Noun
+import com.example.pantanima.ui.listeners.AdapterOnItemClickListener
 
-interface WordsAdapterListener {
-    fun onItemClick(item: Noun)
-}
 
-class WordsAdapter(val listener: WordsAdapterListener) :
+class WordsAdapter(val listener: AdapterOnItemClickListener<Noun>) :
     RecyclerView.Adapter<WordsAdapter.WordsViewHolder>() {
 
     private var data: List<Noun>? = null

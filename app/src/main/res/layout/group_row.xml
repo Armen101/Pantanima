@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="listener"
+            type="com.example.pantanima.ui.listeners.AdapterOnItemClickListener" />
+
+        <variable
+            name="item"
+            type="com.example.pantanima.ui.database.entity.Group" />
+    </data>
+
+
+    <com.example.pantanima.ui.customviews.SwipeRevealLayout
+        android:id="@+id/swipeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/start_screen_button_height"
+        android:descendantFocusability="blocksDescendants"
+        app:dragEdge="right"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:mode="same_level"
+        app:scroll="@{deleteBtn}">
+
+        <Button
+            android:id="@+id/delete_btn"
+            android:layout_width="@dimen/start_screen_button_height"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:background="@drawable/start_screen_button"
+            android:backgroundTint="@color/app_style_red"
+            android:fontFamily="@font/caviar_dreams_bold"
+            android:text="@string/start"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/start_screen_button_text_size"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_50sdp"
+                android:background="@drawable/start_screen_button"
+                android:backgroundTint="@color/app_style_green"
+                android:fontFamily="@font/caviar_dreams_bold"
+                android:onClick="@{(view)-> listener.onItemClick(item)}"
+                android:text="@string/start"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/start_screen_button_text_size"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </com.example.pantanima.ui.customviews.SwipeRevealLayout>
+
+</layout>

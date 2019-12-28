@@ -8,7 +8,7 @@
 
         <variable
             name="listener"
-            type="com.example.pantanima.ui.adapters.WordsAdapterListener" />
+            type="com.example.pantanima.ui.listeners.AdapterOnItemClickListener" />
 
         <variable
             name="item"

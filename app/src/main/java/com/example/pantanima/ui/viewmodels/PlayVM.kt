@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pantanima.ui.GroupManager
 import com.example.pantanima.ui.activities.NavActivity
 import com.example.pantanima.ui.adapters.WordsAdapter
-import com.example.pantanima.ui.adapters.WordsAdapterListener
 import com.example.pantanima.ui.database.entity.Noun
 import com.example.pantanima.ui.database.repository.NounRepo
 import io.reactivex.Flowable
@@ -20,11 +19,12 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import android.media.MediaPlayer
 import com.example.pantanima.ui.helpers.GamePrefs
+import com.example.pantanima.ui.listeners.AdapterOnItemClickListener
 import com.example.pantanima.ui.models.Group
 import java.lang.StringBuilder
 
 class PlayVM(activity: WeakReference<NavActivity>, groupNames: ArrayList<String>) : BaseVM(activity),
-    WordsAdapterListener {
+    AdapterOnItemClickListener<Noun> {
 
     private var clickPlayer: MediaPlayer? = null
     private var tickTockPlayer: MediaPlayer? = null

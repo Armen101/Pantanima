@@ -7,6 +7,7 @@ import com.example.pantanima.R
 import com.example.pantanima.ui.database.repository.NounRepo
 import com.example.pantanima.ui.database.preference.PrefConstants
 import com.example.pantanima.ui.database.preference.Preferences
+import com.example.pantanima.ui.database.repository.GroupRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -37,7 +38,8 @@ class MainActivity : NavActivity() {
         val isFirstRunning = Preferences.getBoolean(PrefConstants.FIRST_RUNNING, true)
         if (isFirstRunning) {
             compositeJob.add(GlobalScope.launch(Dispatchers.IO) {
-                NounRepo.insertNouns()
+                NounRepo.insertInitialNouns()
+                GroupRepo.insertInitialGroups()
                 Preferences.save(PrefConstants.FIRST_RUNNING, false)
             })
         }

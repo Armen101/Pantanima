@@ -32,6 +32,11 @@ android {
         enabled = true
     }
 
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -80,6 +85,5 @@ dependencies {
 
     //timber log
     implementation 'com.jakewharton.timber:timber:4.7.1'
-    implementation 'com.github.douglasjunior:android-simple-tooltip:0.2.3'
 
 }

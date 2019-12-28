@@ -7,6 +7,7 @@ import com.example.pantanima.ui.database.AppDatabase
 import com.example.pantanima.ui.database.DbConstants
 import com.example.pantanima.ui.database.repository.NounRepo
 import com.example.pantanima.ui.database.preference.Preferences
+import com.example.pantanima.ui.database.repository.GroupRepo
 import com.example.pantanima.ui.di.components.AppComponent
 import com.example.pantanima.ui.di.components.DaggerAppComponent
 import timber.log.Timber
@@ -27,6 +28,7 @@ class PantanimaApplication : Application() {
 
         Preferences.init(applicationContext)
         NounRepo.injectDao(database.nounDao())
+        GroupRepo.injectDao(database.groupDao())
     }
 
     private fun initTimber() {

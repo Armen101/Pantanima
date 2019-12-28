@@ -19,6 +19,7 @@
     <dimen name="groups_screen_left_icon_margin">@dimen/_15sdp</dimen>
     <dimen name="group_row_start_end_margin">@dimen/_30sdp</dimen>
     <dimen name="group_rows_between_margin">@dimen/_15sdp</dimen>
+    <dimen name="group_rows_button_h">@dimen/_46sdp</dimen>
 
     <!-- SETTINGS SCREEN -->
     <dimen name="vertical_slider_tv_size">@dimen/_7sdp</dimen>

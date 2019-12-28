@@ -7,7 +7,9 @@ object GamePrefs {
 
     //Immutable prefs
     const val ASSORTMENT_WORDS_COUNT = 30
+    const val ASSORTMENT_GROUPS_COUNT = 8
     const val WORDS_COUNT = 5
+    const val INITIAL_GROUPS_COUNT = 2
     var SOUND_TIME = 5L
 
     //Mutable prefs
