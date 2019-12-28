@@ -7,6 +7,7 @@ object Constants {
 
     const val PREF_ROUND_TIME = "PREF_ROUND_TIME"
     const val PREF_GOL_POINTS = "PREF_GOL_POINTS"
+    const val PREF_MAX_GROUPS = 4
     const val PREF_MODE = "PREF_MODE"
     const val PREF_LANGUAGE = "PREF_LANGUAGE"
 

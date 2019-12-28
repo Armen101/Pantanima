@@ -28,19 +28,21 @@
         app:mode="same_level"
         app:scroll="@{deleteBtn}">
 
-        <Button
+        <ImageView
             android:id="@+id/delete_btn"
             android:layout_width="@dimen/start_screen_button_height"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:background="@drawable/start_screen_button"
-            android:backgroundTint="@color/app_style_red"
-            android:fontFamily="@font/caviar_dreams_bold"
-            android:text="@string/start"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/start_screen_button_text_size"
-            android:textStyle="bold" />
+            android:layout_marginTop="14dp"
+            android:onClick="@{(view)-> listener.onDeleteClick(item)}"
+            android:background="@drawable/start_round_button_bg"
+            android:contentDescription="@string/title_settings"
+            android:padding="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.474"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/groupsRv"
+            app:srcCompat="@drawable/ic_minus"
+            android:tint="@android:color/white"/>
 
         <RelativeLayout
             android:layout_width="match_parent"

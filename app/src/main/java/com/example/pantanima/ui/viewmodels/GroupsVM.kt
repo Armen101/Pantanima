@@ -24,12 +24,10 @@ class GroupsVM(activity: WeakReference<NavActivity>) : BaseVM(activity),
     val adapterObservable = ObservableField<RecyclerView.Adapter<*>>(adapter)
 
     init {
-        updateAdapterData {
-
-        }
+        updateAdapterData()
     }
 
-    private fun updateAdapterData(code: () -> Unit) {
+    private fun updateAdapterData() {
         disposable.add(GroupRepo.getGroups()
             .map { it.shuffled() }
             .map { it.drop(GamePrefs.ASSORTMENT_GROUPS_COUNT - GamePrefs.INITIAL_GROUPS_COUNT) }
@@ -39,7 +37,6 @@ class GroupsVM(activity: WeakReference<NavActivity>) : BaseVM(activity),
             .subscribe { list ->
                 groups.addAll(GroupRepo.getNamesOfGroups(list))
                 adapter.notifyDataSetChanged()
-                code()
             }
         )
     }
@@ -54,7 +51,17 @@ class GroupsVM(activity: WeakReference<NavActivity>) : BaseVM(activity),
         setNewDestination(R.id.navigateToSettings)
     }
 
-    override fun onItemClick(item: String) {
+    fun addGroup() {
+        if (groups.size >= Constants.PREF_MAX_GROUPS) {
+            return
+        }
+        getNewGroup {
+            groups.add(it)
+            adapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun getNewGroup(linking: (String) -> Unit?) {
         disposable.add(GroupRepo.getGroups(groups)
             .map { it.shuffled() }
             .map { it[Random.nextInt(it.size)] }
@@ -62,11 +69,26 @@ class GroupsVM(activity: WeakReference<NavActivity>) : BaseVM(activity),
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { group ->
-                val index = groups.indexOf(item)
-                groups.removeAt(index)
-                groups.add(index, group.value)
-                adapter.notifyDataSetChanged()
+                linking(group.value)
             }
         )
+    }
+
+    override fun onItemClick(item: String) {
+        getNewGroup {
+            val index = groups.indexOf(item)
+            groups.removeAt(index)
+            groups.add(index, it)
+            adapter.notifyDataSetChanged()
+        }
+    }
+
+    override fun onDeleteClick(item: String) {
+        super.onDeleteClick(item)
+        val index = groups.indexOf(item)
+        if (index > 1) { // we can't delete last two groups
+            groups.removeAt(index)
+            adapter.notifyDataSetChanged()
+        }
     }
 }
