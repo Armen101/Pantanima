@@ -11,7 +11,7 @@
 
         <variable
             name="item"
-            type="com.example.pantanima.ui.database.entity.Group" />
+            type="String" />
     </data>
 
 
@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/start_screen_button_height"
         android:descendantFocusability="blocksDescendants"
+        android:layout_marginTop="@dimen/_15sdp"
         app:dragEdge="right"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +55,7 @@
                 android:backgroundTint="@color/app_style_green"
                 android:fontFamily="@font/caviar_dreams_bold"
                 android:onClick="@{(view)-> listener.onItemClick(item)}"
-                android:text="@string/start"
+                android:text="@{item}"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/start_screen_button_text_size"

@@ -100,15 +100,13 @@ class PlayVM(activity: WeakReference<NavActivity>, groupNames: ArrayList<String>
         disposable.add(NounRepo.getNouns()
             .map { it.shuffled() }
             .map { it.drop( GamePrefs.ASSORTMENT_WORDS_COUNT - GamePrefs.WORDS_COUNT) }
+            .doOnSuccess {  NounRepo.updateLastUsedTime(it) }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { list ->
                 currentWords = list
                 adapter.setData(list)
                 adapter.notifyDataSetChanged()
-                compositeJob.add(GlobalScope.launch(Dispatchers.IO) {
-                    NounRepo.updateLastUsedTime(list)
-                })
                 code()
             }
         )

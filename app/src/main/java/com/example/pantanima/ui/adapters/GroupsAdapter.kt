@@ -9,10 +9,9 @@ import com.example.pantanima.BR
 import com.example.pantanima.R
 import com.example.pantanima.databinding.GroupRowBinding
 import com.example.pantanima.ui.customviews.ViewBinderHelper
-import com.example.pantanima.ui.database.entity.Group
 import com.example.pantanima.ui.listeners.AdapterOnItemClickListener
 
-class GroupsAdapter(val listener: AdapterOnItemClickListener<Group>, val data: MutableList<Group>) :
+class GroupsAdapter(val listener: AdapterOnItemClickListener<String>, val data: MutableList<String>) :
     RecyclerView.Adapter<GroupsAdapter.GroupVH>() {
 
     private val viewBinderHelper: ViewBinderHelper = ViewBinderHelper()
@@ -39,8 +38,8 @@ class GroupsAdapter(val listener: AdapterOnItemClickListener<Group>, val data: M
 
         private val binding: GroupRowBinding? = DataBindingUtil.bind(itemView)
 
-        internal fun bind(item: Group?) {
-            viewBinderHelper.bind(binding?.swipeLayout, item?.value)
+        internal fun bind(item: String) {
+            viewBinderHelper.bind(binding?.swipeLayout, item)
             binding?.setVariable(BR.listener, listener)
             binding?.setVariable(BR.item, item)
             binding?.executePendingBindings()
