@@ -10,6 +10,10 @@
             type="com.example.pantanima.ui.listeners.AdapterOnItemClickListener" />
 
         <variable
+            name="holder"
+            type="com.example.pantanima.ui.adapters.GroupsAdapter.GroupVH" />
+
+        <variable
             name="item"
             type="String" />
     </data>
@@ -34,8 +38,10 @@
             android:layout_height="match_parent"
             android:layout_marginTop="14dp"
             android:background="@drawable/start_round_button_bg"
+            android:backgroundTint="@{holder.adapterPosition > 1 ? @color/app_style_red : @color/gray_inactive}"
             android:contentDescription="@string/title_settings"
             android:onClick="@{(view)-> listener.onDeleteClick(item)}"
+            android:clickable="@{holder.adapterPosition > 1}"
             android:padding="@dimen/_12sdp"
             android:tint="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"

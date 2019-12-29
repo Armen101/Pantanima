@@ -42,6 +42,7 @@ class GroupsAdapter(val listener: AdapterOnItemClickListener<String>, val data: 
             viewBinderHelper.bind(binding?.swipeLayout, item)
             binding?.setVariable(BR.listener, listener)
             binding?.setVariable(BR.item, item)
+            binding?.setVariable(BR.holder, this)
             binding?.executePendingBindings()
         }
     }

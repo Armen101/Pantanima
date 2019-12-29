@@ -1,6 +1,7 @@
 package com.example.pantanima.ui.viewmodels
 
 import android.os.Bundle
+import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pantanima.R
@@ -22,6 +23,7 @@ class GroupsVM(activity: WeakReference<NavActivity>) : BaseVM(activity),
     private var groups: MutableList<String> = arrayListOf()
     private val adapter = GroupsAdapter(this, groups)
     val adapterObservable = ObservableField<RecyclerView.Adapter<*>>(adapter)
+    var addGroupIsAvailable = ObservableBoolean(true)
 
     init {
         updateAdapterData()
@@ -52,12 +54,12 @@ class GroupsVM(activity: WeakReference<NavActivity>) : BaseVM(activity),
     }
 
     fun addGroup() {
-        if (groups.size >= Constants.PREF_MAX_GROUPS) {
-            return
-        }
         getNewGroup {
             groups.add(it)
             adapter.notifyDataSetChanged()
+            if (groups.size >= Constants.PREF_MAX_GROUPS) {
+                addGroupIsAvailable.set(false)
+            }
         }
     }
 
@@ -85,10 +87,8 @@ class GroupsVM(activity: WeakReference<NavActivity>) : BaseVM(activity),
 
     override fun onDeleteClick(item: String) {
         super.onDeleteClick(item)
-        val index = groups.indexOf(item)
-        if (index > 1) { // we can't delete last two groups
-            groups.removeAt(index)
-            adapter.notifyDataSetChanged()
-        }
+        groups.remove(item)
+        adapter.notifyDataSetChanged()
+        addGroupIsAvailable.set(true)
     }
 }
