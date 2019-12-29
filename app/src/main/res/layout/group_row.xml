@@ -19,8 +19,8 @@
         android:id="@+id/swipeLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/start_screen_button_height"
+        android:layout_marginBottom="@dimen/_15sdp"
         android:descendantFocusability="blocksDescendants"
-        android:layout_marginTop="@dimen/_15sdp"
         app:dragEdge="right"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,33 +33,35 @@
             android:layout_width="@dimen/start_screen_button_height"
             android:layout_height="match_parent"
             android:layout_marginTop="14dp"
-            android:onClick="@{(view)-> listener.onDeleteClick(item)}"
             android:background="@drawable/start_round_button_bg"
             android:contentDescription="@string/title_settings"
+            android:onClick="@{(view)-> listener.onDeleteClick(item)}"
             android:padding="@dimen/_12sdp"
+            android:tint="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.474"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/groupsRv"
-            app:srcCompat="@drawable/ic_minus"
-            android:tint="@android:color/white"/>
+            app:srcCompat="@drawable/ic_minus" />
 
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/content"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/_200sdp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/_50sdp"
+                android:layout_marginStart="@dimen/_60sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@drawable/start_screen_button"
-                android:backgroundTint="@color/app_style_green"
+                android:backgroundTint="@android:color/white"
+                android:elevation="@dimen/_4sdp"
                 android:fontFamily="@font/caviar_dreams_bold"
                 android:onClick="@{(view)-> listener.onItemClick(item)}"
                 android:text="@{item}"
                 android:textAllCaps="false"
-                android:textColor="@android:color/white"
+                android:textColor="@color/text_color_dark_gray"
                 android:textSize="@dimen/start_screen_button_text_size"
                 android:textStyle="bold" />
 
