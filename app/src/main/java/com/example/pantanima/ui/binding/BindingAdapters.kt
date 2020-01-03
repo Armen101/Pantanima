@@ -18,6 +18,8 @@ fun SwipeRevealLayout.listener(v: View) {
         override fun onSlide(view: SwipeRevealLayout?, slideOffset: Float) {
             super.onSlide(view, slideOffset)
             v.alpha = slideOffset
+            val nexX = v.width - (v.width * slideOffset)
+            v.animate().translationX(-nexX).duration = 0
             v.scaleX = slideOffset
             v.scaleY = slideOffset
         }
@@ -27,6 +29,7 @@ fun SwipeRevealLayout.listener(v: View) {
             v.alpha = 0.0f
             v.scaleX = 0.0f
             v.scaleY = 0.0f
+            v.animate().translationX(v.width.toFloat()).duration = 0
         }
 
         override fun onOpened(view: SwipeRevealLayout?) {
@@ -34,6 +37,7 @@ fun SwipeRevealLayout.listener(v: View) {
             v.alpha = 1.0f
             v.scaleX = 1.0f
             v.scaleY = 1.0f
+            v.animate().translationX(0f).duration = 0
         }
     })
 }
