@@ -40,7 +40,7 @@
             android:background="@drawable/start_round_button_bg"
             android:backgroundTint="@{holder.adapterPosition > 1 ? @color/app_style_red : @color/gray_inactive}"
             android:contentDescription="@string/title_settings"
-            android:onClick="@{(view)-> listener.onDeleteClick(item)}"
+            android:onClick="@{(view)-> holder.onDeleteClick(item)}"
             android:clickable="@{holder.adapterPosition > 1}"
             android:padding="@dimen/_12sdp"
             android:tint="@android:color/white"

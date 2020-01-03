@@ -39,11 +39,16 @@ class GroupsAdapter(val listener: AdapterOnItemClickListener<String>, val data: 
         private val binding: GroupRowBinding? = DataBindingUtil.bind(itemView)
 
         internal fun bind(item: String) {
-            viewBinderHelper.bind(binding?.swipeLayout, item)
+            viewBinderHelper.bind(binding?.swipeLayout, adapterPosition.toString())
             binding?.setVariable(BR.listener, listener)
             binding?.setVariable(BR.item, item)
             binding?.setVariable(BR.holder, this)
             binding?.executePendingBindings()
+        }
+
+        fun onDeleteClick(item: String) {
+            binding?.swipeLayout?.close(true)
+            listener.onDeleteClick(item)
         }
     }
 }
