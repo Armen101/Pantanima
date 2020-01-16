@@ -13,25 +13,21 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <View
-            android:id="@+id/mode_description_bg"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
-            android:background="@color/app_style_orange"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:background="@color/background_gray">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/mode_description"
+            android:layout_width="@dimen/_260sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/start_screen_button"
+            android:backgroundTint="@android:color/white"
+            android:elevation="@dimen/_5sdp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/mode_description_bg"
-            app:layout_constraintEnd_toEndOf="@+id/mode_description_bg"
-            app:layout_constraintStart_toStartOf="@+id/mode_description_bg"
-            app:layout_constraintTop_toTopOf="@+id/mode_description_bg">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/mode_title"
@@ -40,7 +36,7 @@
                 android:fontFamily="@font/caviar_dreams_bold"
                 android:gravity="center"
                 android:text="@string/mode"
-                android:textColor="@android:color/white"
+                android:textColor="@color/text_color_dark_gray"
                 android:textSize="@dimen/settings_title_tv_size" />
 
             <TextView
@@ -51,7 +47,7 @@
                 android:paddingLeft="@dimen/settings_description_tv_right_left_padding"
                 android:paddingRight="@dimen/settings_description_tv_right_left_padding"
                 android:text="@string/mode_description"
-                android:textColor="@android:color/white"
+                android:textColor="@color/text_color_dark_gray"
                 android:textSize="@dimen/settings_description_tv_size" />
 
         </LinearLayout>
@@ -62,7 +58,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_5sdp"
-            app:cursorChooserBtnColor="@color/app_style_green"
             app:cursorChooserBtnSize="@dimen/vertical_slider_chooser_btn_size"
             app:cursorInitialPosition="@{viewModel.modeInitialPosition}"
             app:cursorPositionChangeListener="@{viewModel.modePositionChangeListener}"
@@ -71,38 +66,21 @@
             app:cursorVariantTvSize="@dimen/vertical_slider_tv_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mode_description_bg"
+            app:layout_constraintTop_toBottomOf="@id/mode_description"
             app:list="@{viewModel.modePikerData}" />
-
-        <View
-            android:id="@+id/duration_description_bg"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:background="@color/app_style_orange"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mode_slider" />
-
-        <View
-            android:id="@+id/duration_description_bootom_arrow"
-            android:layout_width="@dimen/settings_description_bottom_arrow_width"
-            android:layout_height="@dimen/settings_description_bottom_arrow_height"
-            android:background="@drawable/ic_settings_arrow"
-            android:backgroundTint="@color/app_style_orange"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/duration_description_bg" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_260sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/start_screen_button"
+            android:backgroundTint="@android:color/white"
+            android:elevation="@dimen/_5sdp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/duration_description_bg"
-            app:layout_constraintEnd_toEndOf="@+id/duration_description_bg"
-            app:layout_constraintStart_toStartOf="@+id/duration_description_bg"
-            app:layout_constraintTop_toTopOf="@+id/duration_description_bg">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mode_slider">
 
             <TextView
                 android:id="@+id/duration_title"
@@ -111,8 +89,9 @@
                 android:fontFamily="@font/caviar_dreams_bold"
                 android:gravity="center"
                 android:text="@string/duration"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/settings_title_tv_size" />
+                android:textColor="@color/text_color_dark_gray"
+                android:textSize="@dimen/settings_title_tv_size"
+                tools:text="jnsn " />
 
             <TextView
                 android:id="@+id/duration_desc"
@@ -122,7 +101,7 @@
                 android:paddingLeft="@dimen/settings_description_tv_right_left_padding"
                 android:paddingRight="@dimen/settings_description_tv_right_left_padding"
                 android:text="@string/duration_description"
-                android:textColor="@android:color/white"
+                android:textColor="@color/text_color_dark_gray"
                 android:textSize="@dimen/settings_description_tv_size" />
 
         </LinearLayout>
@@ -141,38 +120,20 @@
             app:layoutManager="@{viewModel.timeLayoutManager}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/duration_description_bg" />
-
-
-        <View
-            android:id="@+id/score_description_bg"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:background="@color/app_style_orange"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeHorizontalPicker" />
-
-        <View
-            android:id="@+id/scoreduration_description_bootom_arrow"
-            android:layout_width="@dimen/settings_description_bottom_arrow_width"
-            android:layout_height="@dimen/settings_description_bottom_arrow_height"
-            android:background="@drawable/ic_settings_arrow"
-            android:backgroundTint="@color/app_style_orange"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/score_description_bg" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
         <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/linearLayoutScores"
+            android:layout_width="@dimen/_260sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/start_screen_button"
+            android:backgroundTint="@android:color/white"
+            android:elevation="@dimen/_5sdp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/score_description_bg"
-            app:layout_constraintEnd_toEndOf="@+id/score_description_bg"
-            app:layout_constraintStart_toStartOf="@+id/score_description_bg"
-            app:layout_constraintTop_toTopOf="@+id/score_description_bg">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timeHorizontalPicker">
 
             <TextView
                 android:id="@+id/score_title"
@@ -181,7 +142,7 @@
                 android:fontFamily="@font/caviar_dreams_bold"
                 android:gravity="center"
                 android:text="@string/score"
-                android:textColor="@android:color/white"
+                android:textColor="@color/text_color_dark_gray"
                 android:textSize="@dimen/settings_title_tv_size" />
 
             <TextView
@@ -192,7 +153,7 @@
                 android:paddingLeft="@dimen/settings_description_tv_right_left_padding"
                 android:paddingRight="@dimen/settings_description_tv_right_left_padding"
                 android:text="@string/score_description"
-                android:textColor="@android:color/white"
+                android:textColor="@color/text_color_dark_gray"
                 android:textSize="@dimen/settings_description_tv_size" />
 
         </LinearLayout>
@@ -212,7 +173,7 @@
             app:layoutManager="@{viewModel.scoreLayoutManager}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/score_description_bg" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutScores" />
 
         <Button
             android:id="@+id/button"

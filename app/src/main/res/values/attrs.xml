@@ -6,7 +6,6 @@
         <attr name="cursorVariantTvFont" format="reference" />
         <attr name="cursorVariantTvPadding" format="dimension" />
         <attr name="cursorChooserBtnSize" format="dimension" />
-        <attr name="cursorChooserBtnColor" format="color" />
         <attr name="cursorInitialIndex" format="integer" />
     </declare-styleable>
 

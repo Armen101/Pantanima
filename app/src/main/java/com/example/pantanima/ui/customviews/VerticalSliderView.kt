@@ -31,7 +31,7 @@ class VerticalSliderView : RelativeLayout {
     private var cursorBtnSize = 60f
     private var tvPadding = 10
     private var tvColor = Color.BLUE
-    private var cursorBtnColor = Color.GREEN
+    private var cursorBtnColor = ContextCompat.getColor(context, R.color.app_style_green)
     private var focusedTv: TextView? = null
     private lateinit var variantsContainer: LinearLayout
     private lateinit var cursorView: View
@@ -98,8 +98,6 @@ class VerticalSliderView : RelativeLayout {
                     tvPadding.toFloat()
                 ).toInt()
                 tvColor = getColor(R.styleable.VerticalSliderView_cursorVariantTvColor, tvColor)
-                cursorBtnColor =
-                    getColor(R.styleable.VerticalSliderView_cursorChooserBtnColor, cursorBtnColor)
                 cursorBtnSize = getDimension(
                     R.styleable.VerticalSliderView_cursorChooserBtnSize,
                     cursorBtnSize
@@ -126,15 +124,15 @@ class VerticalSliderView : RelativeLayout {
     private fun drawCursorButton() {
         cursorView = View(context)
 
-        val drawable = ContextCompat.getDrawable(context, R.drawable.ic_mode_cursor)
+        val drawable = ContextCompat.getDrawable(context, R.drawable.circle_border_6sdp)
         drawable?.let {
-            val drawableCompat = DrawableCompat.wrap(drawable)
-            DrawableCompat.setTint(drawableCompat, cursorBtnColor)
+//            val drawableCompat = DrawableCompat.wrap(drawable)
+//            DrawableCompat.setTint(drawableCompat, cursorBtnColor)
             cursorView.background = drawable
         }
 
         cursorView.setOnTouchListener(onTouchListener())
-        val lp = LayoutParams(cursorBtnSize.toInt() + (cursorBtnSize.toInt() / 6), cursorBtnSize.toInt())
+        val lp = LayoutParams(cursorBtnSize.toInt(), cursorBtnSize.toInt())
         lp.addRule(END_OF, variantsContainer.id)
         lp.marginStart = cursorBtnStartMargin.toInt()
         cursorView.layoutParams = lp
