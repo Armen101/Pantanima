@@ -1,5 +1,6 @@
 package com.example.pantanima.ui.viewmodels
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
@@ -27,6 +28,11 @@ class GroupsVM(activity: WeakReference<NavActivity>) : BaseVM(activity),
 
     init {
         updateAdapterData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        adapter.notifyDataSetChanged(closeAllSwipedItems = true)
     }
 
     private fun updateAdapterData() {

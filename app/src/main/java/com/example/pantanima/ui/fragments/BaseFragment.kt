@@ -77,7 +77,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseVM> : Fragment() {
     }
 
     private fun getNavController(): NavController? {
-        return (activity as NavActivity).getNavController()
+        return (activity as NavActivity).navController
     }
 
     override fun onStart() {

@@ -1,5 +1,6 @@
 package com.example.pantanima.ui.adapters
 
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +12,14 @@ import com.example.pantanima.databinding.GroupRowBinding
 import com.example.pantanima.ui.customviews.ViewBinderHelper
 import com.example.pantanima.ui.listeners.AdapterOnItemClickListener
 
-class GroupsAdapter(val listener: AdapterOnItemClickListener<String>, val data: MutableList<String>) :
+class GroupsAdapter(
+    val listener: AdapterOnItemClickListener<String>,
+    val data: MutableList<String>
+) :
     RecyclerView.Adapter<GroupsAdapter.GroupVH>() {
 
     private val viewBinderHelper: ViewBinderHelper = ViewBinderHelper()
+    private var closeAllSwipedItems = false
 
     init {
         viewBinderHelper.setOpenOnlyOne(true)
@@ -34,12 +39,23 @@ class GroupsAdapter(val listener: AdapterOnItemClickListener<String>, val data: 
         holder.bind(data[position])
     }
 
+    fun notifyDataSetChanged(closeAllSwipedItems: Boolean) {
+        this.closeAllSwipedItems = closeAllSwipedItems
+        notifyDataSetChanged()
+        Handler().postDelayed({
+            this.closeAllSwipedItems = false
+        },200)
+    }
+
     inner class GroupVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val binding: GroupRowBinding? = DataBindingUtil.bind(itemView)
 
         internal fun bind(item: String) {
             viewBinderHelper.bind(binding?.swipeLayout, adapterPosition.toString())
+            if (closeAllSwipedItems) {
+                binding?.swipeLayout?.close(true)
+            }
             binding?.setVariable(BR.listener, listener)
             binding?.setVariable(BR.item, item)
             binding?.setVariable(BR.holder, this)
