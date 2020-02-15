@@ -15,8 +15,7 @@ object NounRepo {
         this.dao = dao
     }
 
-    fun getNouns() =
-        dao.getAll(GamePrefs.LANGUAGE, GamePrefs.ASSORTMENT_WORDS_COUNT)
+    fun getNouns() = dao.getAll(GamePrefs.LANGUAGE, GamePrefs.ASSORTMENT_WORDS_COUNT)
 
     fun getNouns(level: Level) =
         dao.getAll(level, GamePrefs.LANGUAGE, GamePrefs.ASSORTMENT_WORDS_COUNT)

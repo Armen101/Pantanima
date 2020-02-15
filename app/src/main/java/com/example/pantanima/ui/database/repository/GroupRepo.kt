@@ -72,11 +72,12 @@ object GroupRepo {
 
     fun getGroups() = dao.getAll(GamePrefs.LANGUAGE, GamePrefs.ASSORTMENT_GROUPS_COUNT)
 
-    fun getGroups(withoutList: List<String>) = dao.getAll(GamePrefs.LANGUAGE, withoutList, GamePrefs.ASSORTMENT_GROUPS_COUNT)
+    fun getGroups(withoutList: List<String>): MutableList<Group>
+            = dao.getAll(GamePrefs.LANGUAGE, withoutList, GamePrefs.ASSORTMENT_GROUPS_COUNT)
 
     fun updateLastUsedTime(groups: List<Group>) {
-        for (group in groups) {
-            group.lastUsedTime = System.currentTimeMillis()
+        groups.forEach {
+            it.lastUsedTime = System.currentTimeMillis()
         }
         dao.update(groups)
     }

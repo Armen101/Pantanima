@@ -19,8 +19,7 @@ interface GroupDao {
         LIMIT :count 
         """
     )
-    fun getAll(language: String, count: Int): Single<MutableList<Group>>
-
+    fun getAll(language: String, count: Int): MutableList<Group>
 
     @Query(
         """
@@ -30,7 +29,7 @@ interface GroupDao {
         LIMIT :count 
         """
     )
-    fun getAll(language: String, withoutList: List<String>, count: Int): Single<MutableList<Group>>
+    fun getAll(language: String, withoutList: List<String>, count: Int): MutableList<Group>
 
     @Update
     fun update(groups: List<Group>)

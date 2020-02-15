@@ -18,6 +18,7 @@ import java.lang.ref.WeakReference
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import android.media.MediaPlayer
+import androidx.lifecycle.viewModelScope
 import com.example.pantanima.ui.helpers.GamePrefs
 import com.example.pantanima.ui.listeners.AdapterOnItemClickListener
 import com.example.pantanima.ui.models.Group
@@ -97,19 +98,16 @@ class PlayVM(activity: WeakReference<NavActivity>, groupNames: ArrayList<String>
     }
 
     private fun updateAdapterData(code: () -> Unit) {
-        disposable.add(NounRepo.getNouns()
-            .map { it.shuffled() }
-            .map { it.drop( GamePrefs.ASSORTMENT_WORDS_COUNT - GamePrefs.WORDS_COUNT) }
-            .doOnSuccess {  NounRepo.updateLastUsedTime(it) }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { list ->
-                currentWords = list
-                adapter.setData(list)
+        viewModelScope.launch (Dispatchers.IO) {
+            val nouns = NounRepo.getNouns().subList(0, GamePrefs.WORDS_COUNT)
+            NounRepo.updateLastUsedTime(nouns)
+            viewModelScope.launch (Dispatchers.Main){
+                currentWords = nouns
+                adapter.setData(nouns)
                 adapter.notifyDataSetChanged()
                 code()
             }
-        )
+        }
     }
 
     private fun playTickTockSound() {

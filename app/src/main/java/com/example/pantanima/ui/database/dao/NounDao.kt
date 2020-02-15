@@ -22,7 +22,7 @@ interface NounDao {
         LIMIT :count 
         """
     )
-    fun getAll(language: String, count: Int): Single<MutableList<Noun>>
+    fun getAll(language: String, count: Int): MutableList<Noun>
 
     @Query(
         """
