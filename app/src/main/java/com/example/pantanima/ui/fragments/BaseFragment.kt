@@ -32,7 +32,6 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseVM> : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = createViewModel()
-        viewModel.onCreate()
     }
 
     override fun onCreateView(
@@ -78,31 +77,6 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseVM> : Fragment() {
 
     private fun getNavController(): NavController? {
         return (activity as NavActivity).navController
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.onStart()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        viewModel.onPause()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        viewModel.onStop()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.onDestroy()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

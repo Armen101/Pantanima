@@ -40,18 +40,5 @@ abstract class BaseVM(activityRef: WeakReference<NavActivity>) : ViewModel() {
         compositeJob.cancel()
     }
 
-    open fun onCreate() {}
-
-    open fun onStart() {}
-
-    open fun onResume() {}
-
-    open fun onPause() {}
-
-    open fun onStop() {}
-
-    open fun onDestroy() {}
-
     open fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {}
-
 }

@@ -3,6 +3,8 @@ package com.example.pantanima.ui.viewmodels
 import android.os.Bundle
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pantanima.R
@@ -30,8 +32,8 @@ class GroupsVM(activity: WeakReference<NavActivity>) : BaseVM(activity),
         updateAdapterData()
     }
 
-    override fun onResume() {
-        super.onResume()
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    fun onResume() {
         adapter.notifyDataSetChanged(closeAllSwipedItems = true)
     }
 
