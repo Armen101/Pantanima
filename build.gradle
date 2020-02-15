@@ -41,7 +41,7 @@ ext {
     espressoVersion = '3.2.0'
     rxjava2Version = '2.1.9'
     rxandroidVersion = '2.1.1'
-    navigationVersion = '2.1.0'
+    navigationVersion = '2.2.1'
     coroutinesVersion = '1.1.1'
     roomVersion = '2.2.3'
     lottieVersion = '3.0.7'

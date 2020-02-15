@@ -3,8 +3,10 @@ package com.example.pantanima.ui.viewmodels
 import androidx.databinding.ObservableField
 import com.example.pantanima.R
 import com.example.pantanima.ui.activities.NavActivity
-import com.example.pantanima.ui.helpers.LocaleHelper
+import com.example.pantanima.ui.fragments.ReentrantLockDemonstration
 import java.lang.ref.WeakReference
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.atomic.AtomicInteger
 
 class StartScreenVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
 
@@ -19,12 +21,7 @@ class StartScreenVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
     }
 
     fun onLanguageClick() {
-        val newLanguage = getNextLanguage()
-        LocaleHelper.changeLanguage(resources, newLanguage)
-
-        language.set(newLanguage)
-        newGame.set(getString(R.string.new_game))
-        tutorial.set(getString(R.string.tutorial))
+        ReentrantLockDemonstration().demonstrate()
     }
 
     private fun getNextLanguage(): String {

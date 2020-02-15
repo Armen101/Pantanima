@@ -9,7 +9,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.example.pantanima.ui.viewmodels.BaseVM
 import androidx.navigation.NavController
 import com.example.pantanima.ui.EventObserver
@@ -62,7 +62,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseVM> : Fragment() {
     private fun createViewModel(): V {
         val vm = getViewModel()
         val factory = ViewModelUtils.createFor(vm)
-        viewModel = ViewModelProviders.of(this, factory).get(vm::class.java)
+        viewModel = ViewModelProvider(this, factory).get(vm::class.java)
         return viewModel
     }
 
