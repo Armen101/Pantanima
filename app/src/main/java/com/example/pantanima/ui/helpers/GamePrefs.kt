@@ -15,7 +15,7 @@ object GamePrefs {
     //Mutable prefs
     var LANGUAGE = Constants.LANGUAGE_AM
         get() {
-            return Preferences.getString(Constants.PREF_LANGUAGE, field)
+            return Preferences.getString(Constants.PREF_LANGUAGE, field) ?: field
         }
     var ROUND_TIME = 40
         get() {
@@ -28,6 +28,6 @@ object GamePrefs {
 
     var MODE = "medium" //todo
         get() {
-            return Preferences.getString(Constants.PREF_MODE, field)
+            return Preferences.getString(Constants.PREF_MODE, field) ?: field
         }
 }

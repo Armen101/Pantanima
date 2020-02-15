@@ -32,7 +32,7 @@ class WordsAdapter(val listener: AdapterOnItemClickListener<Noun>) :
     }
 
     override fun onBindViewHolder(holder: WordsViewHolder, position: Int) {
-        holder.bind(data!![position])
+        data?.let { holder.bind(it[position]) }
     }
 
     inner class WordsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

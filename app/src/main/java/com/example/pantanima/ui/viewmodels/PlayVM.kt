@@ -23,7 +23,7 @@ import com.example.pantanima.ui.listeners.AdapterOnItemClickListener
 import com.example.pantanima.ui.models.Group
 import java.lang.StringBuilder
 
-class PlayVM(groupNames: ArrayList<String>) : BaseVM(), AdapterOnItemClickListener<Noun> {
+class PlayVM(groupNames: ArrayList<String>?) : BaseVM(), AdapterOnItemClickListener<Noun> {
 
     private var clickPlayer: MediaPlayer? = null
     private var tickTockPlayer: MediaPlayer? = null
@@ -41,7 +41,9 @@ class PlayVM(groupNames: ArrayList<String>) : BaseVM(), AdapterOnItemClickListen
 
     init {
         getApplication<PantanimaApplication>().getComponent().injectHomeViewModel(this)
-        initGroups(groupNames)
+        if (groupNames != null) {
+            initGroups(groupNames)
+        }
     }
 
     override fun onItemClick(item: Noun) {
@@ -87,8 +89,8 @@ class PlayVM(groupNames: ArrayList<String>) : BaseVM(), AdapterOnItemClickListen
     }
 
     private fun allItemsIsInactive(): Boolean {
-        for (noun in currentWords!!) {
-            if (noun.isActive.get()) {
+        currentWords?.forEach {
+            if (it.isActive.get()) {
                 return false
             }
         }
@@ -109,7 +111,7 @@ class PlayVM(groupNames: ArrayList<String>) : BaseVM(), AdapterOnItemClickListen
     }
 
     private fun playTickTockSound() {
-        if (tickTockPlayer != null && tickTockPlayer!!.isPlaying) {
+        if (tickTockPlayer?.isPlaying == true) {
             return
         }
         val resID = resources.value.getIdentifier(

@@ -16,7 +16,7 @@ class PlayFragment : BaseFragment<FragmentPlayBinding, PlayVM>() {
 
     override fun getViewModel(): PlayVM {
         val groups = arguments?.getStringArrayList(Constants.BUNDLE_GROUPS)
-        return PlayVM(groups!!)
+        return PlayVM(groups)
     }
 
 }

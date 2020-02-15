@@ -15,9 +15,9 @@ class SliderLayoutManager(context: Context?) : LinearLayoutManager(context) {
     var callback: OnItemSelectedListener? = null
     private lateinit var recyclerView: RecyclerView
 
-    override fun onAttachedToWindow(view: RecyclerView?) {
+    override fun onAttachedToWindow(view: RecyclerView) {
         super.onAttachedToWindow(view)
-        recyclerView = view!!
+        recyclerView = view
     }
 
     override fun onLayoutChildren(recycler: RecyclerView.Recycler?, state: RecyclerView.State) {
@@ -44,19 +44,20 @@ class SliderLayoutManager(context: Context?) : LinearLayoutManager(context) {
         for (i in 0 until childCount) {
 
             // Calculating the distance of the child from the center
-            val child = getChildAt(i)
-            val childWidth = getDecoratedLeft(child!!) + getDecoratedRight(child)
-            val childMid = childWidth / 2.0f
-            val distanceFromCenter = abs(mid - childMid)
+            getChildAt(i)?.let {
+                val childWidth = getDecoratedLeft(it) + getDecoratedRight(it)
+                val childMid = childWidth / 2.0f
+                val distanceFromCenter = abs(mid - childMid)
 
-            // The scaling formula
-            val scale = 1 - sqrt((distanceFromCenter / width)) * 0.60f
+                // The scaling formula
+                val scale = 1 - sqrt((distanceFromCenter / width)) * 0.60f
 
-            // Set scale to view
-            child.scaleX = scale
-            child.scaleY = scale
-            val distancePercent = abs((distanceFromCenter * 100) / (width / 2))
-            child.alpha = 1f - (distancePercent * 0.01f)
+                // Set scale to view
+                it.scaleX = scale
+                it.scaleY = scale
+                val distancePercent = abs((distanceFromCenter * 100) / (width / 2))
+                it.alpha = 1f - (distancePercent * 0.01f)
+            }
         }
     }
 

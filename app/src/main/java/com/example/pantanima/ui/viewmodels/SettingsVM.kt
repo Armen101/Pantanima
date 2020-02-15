@@ -9,6 +9,7 @@ import com.example.pantanima.ui.adapters.SliderLayoutManager
 import com.example.pantanima.ui.customviews.VerticalSliderView
 import com.example.pantanima.ui.database.preference.Preferences
 import com.example.pantanima.ui.fragments.SettingsFragmentCallback
+import com.example.pantanima.ui.getIfNotNull
 import com.example.pantanima.ui.helpers.GamePrefs
 
 class SettingsVM(var fragmentCallback: SettingsFragmentCallback) : BaseVM() {
@@ -113,7 +114,11 @@ class SettingsVM(var fragmentCallback: SettingsFragmentCallback) : BaseVM() {
 
     private fun saveSettings() {
         Preferences.save(Constants.PREF_MODE, modeChooseText)
-        Preferences.save(Constants.PREF_GOL_POINTS, scoreChooseText.get()!!.toInt())
-        Preferences.save(Constants.PREF_ROUND_TIME, timeChooseText.get()!!.toInt())
+        scoreChooseText.getIfNotNull {
+            Preferences.save(Constants.PREF_GOL_POINTS, it.toInt())
+        }
+        timeChooseText.getIfNotNull {
+            Preferences.save(Constants.PREF_ROUND_TIME, it.toInt())
+        }
     }
 }

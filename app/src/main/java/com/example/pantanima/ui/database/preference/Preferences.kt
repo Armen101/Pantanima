@@ -35,8 +35,8 @@ object Preferences {
         completeSaving(editor, async)
     }
 
-    fun getString(KEY_NAME: String, default: String? = ""): String {
-        return sharedPref.getString(KEY_NAME, default)!!
+    fun getString(KEY_NAME: String, default: String?): String? {
+        return sharedPref.getString(KEY_NAME, default)
     }
 
     fun getInt(KEY_NAME: String, default: Int = 0): Int {
