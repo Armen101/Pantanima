@@ -9,7 +9,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pantanima.R
 import com.example.pantanima.ui.Constants
-import com.example.pantanima.ui.activities.NavActivity
 import com.example.pantanima.ui.adapters.GroupsAdapter
 import com.example.pantanima.ui.database.repository.GroupRepo
 import com.example.pantanima.ui.helpers.GamePrefs
@@ -17,11 +16,9 @@ import com.example.pantanima.ui.listeners.AdapterOnItemClickListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.lang.ref.WeakReference
 import java.util.*
 
-class GroupsVM(activity: WeakReference<NavActivity>) : BaseVM(activity),
-    AdapterOnItemClickListener<String> {
+class GroupsVM : BaseVM(), AdapterOnItemClickListener<String> {
 
     private var groupNames: MutableList<String> = arrayListOf()
     private val adapter = GroupsAdapter(this, groupNames)

@@ -1,10 +1,10 @@
 package com.example.pantanima.ui.viewmodels
 
+import android.app.Application
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pantanima.ui.GroupManager
-import com.example.pantanima.ui.activities.NavActivity
 import com.example.pantanima.ui.adapters.WordsAdapter
 import com.example.pantanima.ui.database.entity.Noun
 import com.example.pantanima.ui.database.repository.NounRepo
@@ -12,20 +12,18 @@ import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.lang.ref.WeakReference
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import android.media.MediaPlayer
 import androidx.lifecycle.viewModelScope
+import com.example.pantanima.ui.PantanimaApplication
 import com.example.pantanima.ui.helpers.GamePrefs
 import com.example.pantanima.ui.listeners.AdapterOnItemClickListener
 import com.example.pantanima.ui.models.Group
 import java.lang.StringBuilder
 
-class PlayVM(activity: WeakReference<NavActivity>, groupNames: ArrayList<String>) : BaseVM(activity),
-    AdapterOnItemClickListener<Noun> {
+class PlayVM(groupNames: ArrayList<String>) : BaseVM(), AdapterOnItemClickListener<Noun> {
 
     private var clickPlayer: MediaPlayer? = null
     private var tickTockPlayer: MediaPlayer? = null
@@ -36,13 +34,13 @@ class PlayVM(activity: WeakReference<NavActivity>, groupNames: ArrayList<String>
     private var currentWords: List<Noun>? = null
     var countDownTimerText = ObservableField<String>((GamePrefs.ROUND_TIME).toString())
     var roundStarted = ObservableBoolean(false)
-    var history  = ObservableField("")
+    var history = ObservableField("")
 
     private val adapter = WordsAdapter(this)
     val adapterObservable = ObservableField<RecyclerView.Adapter<*>>(adapter)
 
     init {
-        getApp().getComponent().injectHomeViewModel(this)
+        getApplication<PantanimaApplication>().getComponent().injectHomeViewModel(this)
         initGroups(groupNames)
     }
 
@@ -82,7 +80,7 @@ class PlayVM(activity: WeakReference<NavActivity>, groupNames: ArrayList<String>
     }
 
     private fun initGroups(names: ArrayList<String>) {
-        for (name in names){
+        for (name in names) {
             groupManager.groups.add(Group(name))
         }
         groupManager.setGroup()
@@ -98,10 +96,10 @@ class PlayVM(activity: WeakReference<NavActivity>, groupNames: ArrayList<String>
     }
 
     private fun updateAdapterData(code: () -> Unit) {
-        viewModelScope.launch (Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
             val nouns = NounRepo.getNouns().subList(0, GamePrefs.WORDS_COUNT)
             NounRepo.updateLastUsedTime(nouns)
-            viewModelScope.launch (Dispatchers.Main){
+            viewModelScope.launch(Dispatchers.Main) {
                 currentWords = nouns
                 adapter.setData(nouns)
                 adapter.notifyDataSetChanged()
@@ -111,13 +109,14 @@ class PlayVM(activity: WeakReference<NavActivity>, groupNames: ArrayList<String>
     }
 
     private fun playTickTockSound() {
-        if(tickTockPlayer != null && tickTockPlayer!!.isPlaying){
+        if (tickTockPlayer != null && tickTockPlayer!!.isPlaying) {
             return
         }
-        val resID = resources?.getIdentifier("tikc_tock", "raw",
-            activity?.packageName
+        val resID = resources.value.getIdentifier(
+            "tikc_tock", "raw",
+            getApplication<Application>().packageName
         )
-        tickTockPlayer = MediaPlayer.create(activity, resID!!)
+        tickTockPlayer = MediaPlayer.create(getApplication(), resID)
         tickTockPlayer?.setOnCompletionListener {
             playTickTockSound()
         }
@@ -127,14 +126,14 @@ class PlayVM(activity: WeakReference<NavActivity>, groupNames: ArrayList<String>
     private fun playClickSound(active: Boolean) {
         clickPlayer?.stop()
 
-        val resName = if(active) {
+        val resName = if (active) {
             "button_click_on"
         } else {
             "button_click_off"
         }
 
-        val resID = resources?.getIdentifier(resName, "raw", activity?.packageName)
-        clickPlayer = MediaPlayer.create(activity, resID!!)
+        val resID = resources.value.getIdentifier(resName, "raw", packageName.value)
+        clickPlayer = MediaPlayer.create(getApplication(), resID)
         clickPlayer?.start()
     }
 
@@ -149,10 +148,10 @@ class PlayVM(activity: WeakReference<NavActivity>, groupNames: ArrayList<String>
 
     private fun showHistory() {
         val strBuilder = StringBuilder()
-        for (group in groupManager.groups){
+        for (group in groupManager.groups) {
             strBuilder.append(group.name)
             var total = 0
-            for (round in group.statistics){
+            for (round in group.statistics) {
                 total += round
             }
             strBuilder.append(":\t").append(total)

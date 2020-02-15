@@ -2,13 +2,11 @@ package com.example.pantanima.ui.viewmodels
 
 import androidx.databinding.ObservableField
 import com.example.pantanima.R
-import com.example.pantanima.ui.activities.NavActivity
 import com.example.pantanima.ui.helpers.LocaleHelper
-import java.lang.ref.WeakReference
 
-class StartScreenVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
+class StartScreenVM : BaseVM() {
 
-    private var languageList = activity.get()?.resources?.getStringArray(R.array.languages_list)!!
+    private var languageList = resources.value.getStringArray(R.array.languages_list)
 
     var newGame = ObservableField<String>(getString(R.string.new_game))
     var tutorial = ObservableField<String>(getString(R.string.tutorial))
@@ -20,7 +18,7 @@ class StartScreenVM(activity: WeakReference<NavActivity>) : BaseVM(activity) {
 
     fun onLanguageClick() {
         val newLanguage = getNextLanguage()
-        LocaleHelper.changeLanguage(resources, newLanguage)
+        LocaleHelper.changeLanguage(resources.value, newLanguage)
 
         language.set(newLanguage)
         newGame.set(getString(R.string.new_game))

@@ -15,6 +15,6 @@ class StartScreenFragment : BaseFragment<FragmentStartScreenBinding, StartScreen
 
     override fun getNavHostId() = R.id.nav_host_fragment
 
-    override fun getViewModel() = StartScreenVM(WeakReference(activity as NavActivity))
+    override fun getViewModel() = StartScreenVM()
 
 }

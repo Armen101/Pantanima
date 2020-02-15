@@ -3,9 +3,7 @@ package com.example.pantanima.ui.fragments
 import com.example.pantanima.BR
 import com.example.pantanima.R
 import com.example.pantanima.databinding.FragmentGroupsBinding
-import com.example.pantanima.ui.activities.NavActivity
 import com.example.pantanima.ui.viewmodels.GroupsVM
-import java.lang.ref.WeakReference
 
 class GroupsFragment : BaseFragment<FragmentGroupsBinding, GroupsVM>() {
 
@@ -15,6 +13,6 @@ class GroupsFragment : BaseFragment<FragmentGroupsBinding, GroupsVM>() {
 
     override fun getNavHostId() = R.id.nav_host_fragment
 
-    override fun getViewModel() = GroupsVM(WeakReference(activity as NavActivity))
+    override fun getViewModel() = GroupsVM()
 
 }

@@ -4,9 +4,7 @@ import com.example.pantanima.BR
 import com.example.pantanima.R
 import com.example.pantanima.databinding.FragmentPlayBinding
 import com.example.pantanima.ui.Constants
-import com.example.pantanima.ui.activities.NavActivity
 import com.example.pantanima.ui.viewmodels.PlayVM
-import java.lang.ref.WeakReference
 
 class PlayFragment : BaseFragment<FragmentPlayBinding, PlayVM>() {
 
@@ -18,7 +16,7 @@ class PlayFragment : BaseFragment<FragmentPlayBinding, PlayVM>() {
 
     override fun getViewModel(): PlayVM {
         val groups = arguments?.getStringArrayList(Constants.BUNDLE_GROUPS)
-        return PlayVM(WeakReference(activity as NavActivity), groups!!)
+        return PlayVM(groups!!)
     }
 
 }

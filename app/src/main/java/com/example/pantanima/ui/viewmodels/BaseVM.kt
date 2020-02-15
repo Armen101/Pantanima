@@ -1,24 +1,22 @@
 package com.example.pantanima.ui.viewmodels
 
+import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import androidx.annotation.StringRes
+import androidx.lifecycle.AndroidViewModel
 import io.reactivex.disposables.CompositeDisposable
 import androidx.lifecycle.LiveData
 import com.example.pantanima.ui.Event
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.pantanima.ui.PantanimaApplication
-import com.example.pantanima.ui.activities.NavActivity
-import com.example.pantanima.ui.asynchronous.CompositeJob
-import java.lang.ref.WeakReference
 
-abstract class BaseVM(activityRef: WeakReference<NavActivity>) : ViewModel() {
+abstract class BaseVM : AndroidViewModel(PantanimaApplication.instance) {
 
     protected var disposable: CompositeDisposable = CompositeDisposable()
-    protected var compositeJob: CompositeJob = CompositeJob()
-    val resources = activityRef.get()?.resources
-    val activity = activityRef.get()
+
+    val resources = lazy { getApplication<Application>().resources }
+    val packageName = lazy { getApplication<Application>().packageName }
 
     private val newDestination = MutableLiveData<Event<Pair<Int, Bundle?>>>()
 
@@ -30,14 +28,11 @@ abstract class BaseVM(activityRef: WeakReference<NavActivity>) : ViewModel() {
         return newDestination
     }
 
-    fun getApp() = activity?.application as PantanimaApplication
-
-    fun getString(@StringRes resource: Int): String? = activity?.getString(resource)
+    fun getString(@StringRes resource: Int): String? = resources.value.getString(resource)
 
     override fun onCleared() {
         super.onCleared()
         disposable.clear()
-        compositeJob.cancel()
     }
 
     open fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {}

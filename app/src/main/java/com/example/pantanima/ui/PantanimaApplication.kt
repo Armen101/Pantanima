@@ -19,6 +19,7 @@ class PantanimaApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        instance = this
 
         initTimber()
 
@@ -47,5 +48,8 @@ class PantanimaApplication : Application() {
 
     fun getComponent() = component
 
-    fun getDatabase() = database
+    companion object {
+        lateinit var instance: PantanimaApplication
+            private set
+    }
 }
