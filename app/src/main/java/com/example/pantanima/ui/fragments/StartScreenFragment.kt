@@ -4,8 +4,6 @@ import com.example.pantanima.BR
 import com.example.pantanima.databinding.FragmentStartScreenBinding
 import com.example.pantanima.ui.viewmodels.StartScreenVM
 import com.example.pantanima.R
-import com.example.pantanima.ui.activities.NavActivity
-import java.lang.ref.WeakReference
 
 class StartScreenFragment : BaseFragment<FragmentStartScreenBinding, StartScreenVM>() {
 

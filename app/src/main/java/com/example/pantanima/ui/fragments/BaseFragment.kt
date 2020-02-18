@@ -19,7 +19,6 @@ import com.example.pantanima.ui.activities.NavActivity
 
 abstract class BaseFragment<T : ViewDataBinding, V : BaseVM> : Fragment() {
 
-    private lateinit var binding: Unit
     private lateinit var viewDataBinding: T
     private lateinit var viewModel: V
 
@@ -28,20 +27,6 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseVM> : Fragment() {
      * @return variable id
      */
     abstract fun getBindingVariable(): Int
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = createViewModel()
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        viewDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
-        return viewDataBinding.root
-    }
 
     /**
      * Override for set view model
@@ -58,11 +43,18 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseVM> : Fragment() {
         return viewDataBinding
     }
 
-    private fun createViewModel(): V {
-        val vm = getViewModel()
-        val factory = ViewModelUtils.createFor(vm)
-        viewModel = ViewModelProvider(this, factory).get(vm::class.java)
-        return viewModel
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = createViewModel()
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        viewDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
+        return viewDataBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -77,6 +69,13 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseVM> : Fragment() {
 
     private fun getNavController(): NavController? {
         return (activity as NavActivity).navController
+    }
+
+    private fun createViewModel(): V {
+        val vm = getViewModel()
+        val factory = ViewModelUtils.createFor(vm)
+        viewModel = ViewModelProvider(this, factory).get(vm::class.java)
+        return viewModel
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
