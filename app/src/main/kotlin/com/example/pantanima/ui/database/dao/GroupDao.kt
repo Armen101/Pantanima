@@ -1,9 +1,7 @@
 package com.example.pantanima.ui.database.dao
 
 import androidx.room.*
-import com.example.pantanima.ui.database.DbConstants
 import com.example.pantanima.ui.database.entity.Group
-import io.reactivex.Single
 
 @Dao
 interface GroupDao {
@@ -13,7 +11,7 @@ interface GroupDao {
 
     @Query(
         """
-        SELECT * FROM ${DbConstants.GROUP_TABLE_NAME}
+        SELECT * FROM groupTable
         WHERE language = :language
         ORDER BY lastUsedTime *1 ASC
         LIMIT :count 
@@ -23,7 +21,7 @@ interface GroupDao {
 
     @Query(
         """
-        SELECT * FROM ${DbConstants.GROUP_TABLE_NAME}
+        SELECT * FROM groupTable
         WHERE language = :language AND value NOT IN (:withoutList)
         ORDER BY lastUsedTime *1 ASC
         LIMIT :count 

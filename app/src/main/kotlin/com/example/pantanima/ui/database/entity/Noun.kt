@@ -5,11 +5,10 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.example.pantanima.ui.database.DbConstants
 import com.example.pantanima.ui.database.converters.LevelConverter
 import com.example.pantanima.ui.enums.Level
 
-@Entity(tableName = DbConstants.NOUN_TABLE_NAME)
+@Entity(tableName = "nounTable")
 data class Noun(@PrimaryKey var value: String) {
 
     var lastUsedTime: Long = 0

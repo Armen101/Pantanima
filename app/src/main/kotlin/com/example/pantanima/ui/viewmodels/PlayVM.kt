@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pantanima.ui.GroupManager
 import com.example.pantanima.ui.adapters.WordsAdapter
 import com.example.pantanima.ui.database.entity.Noun
-import com.example.pantanima.ui.database.repository.NounRepo
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -16,13 +15,15 @@ import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 import android.media.MediaPlayer
 import androidx.lifecycle.viewModelScope
+import com.example.pantanima.ui.database.repository.NounRepo
 import com.example.pantanima.ui.helpers.GamePrefs
 import com.example.pantanima.ui.listeners.AdapterOnItemClickListener
-import com.example.pantanima.ui.models.Group
 import java.lang.StringBuilder
 
-class PlayVM(private val groupManager: GroupManager, groupNames: ArrayList<String>?)
-    : BaseVM(), AdapterOnItemClickListener<Noun> {
+class PlayVM(
+    private val groupManager: GroupManager,
+    private val nounRepo: NounRepo
+) : BaseVM(), AdapterOnItemClickListener<Noun> {
 
     private var clickPlayer: MediaPlayer? = null
     private var tickTockPlayer: MediaPlayer? = null
@@ -34,12 +35,6 @@ class PlayVM(private val groupManager: GroupManager, groupNames: ArrayList<Strin
 
     private val adapter = WordsAdapter(this)
     val adapterObservable = ObservableField<RecyclerView.Adapter<*>>(adapter)
-
-    init {
-        if (groupNames != null) {
-            initGroups(groupNames)
-        }
-    }
 
     override fun onItemClick(item: Noun) {
         val oldIsActiveValue = item.isActive.get()
@@ -76,14 +71,6 @@ class PlayVM(private val groupManager: GroupManager, groupNames: ArrayList<Strin
         }
     }
 
-    private fun initGroups(names: ArrayList<String>) {
-        groupManager.groups.clear()
-        names.forEach {
-            groupManager.groups.add(Group(it))
-        }
-        groupManager.setGroup()
-    }
-
     private fun allItemsIsInactive(): Boolean {
         currentWords?.forEach {
             if (it.isActive.get()) {
@@ -95,8 +82,8 @@ class PlayVM(private val groupManager: GroupManager, groupNames: ArrayList<Strin
 
     private fun updateAdapterData(code: () -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
-            val nouns = NounRepo.getNouns().subList(0, GamePrefs.WORDS_COUNT)
-            NounRepo.updateLastUsedTime(nouns)
+            val nouns = nounRepo.getNouns().subList(0, GamePrefs.WORDS_COUNT)
+            nounRepo.updateLastUsedTime(nouns)
             viewModelScope.launch(Dispatchers.Main) {
                 currentWords = nouns
                 adapter.setData(nouns)

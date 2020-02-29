@@ -7,7 +7,7 @@ import com.example.pantanima.ui.database.dao.NounDao
 import com.example.pantanima.ui.database.entity.Group
 import com.example.pantanima.ui.database.entity.Noun
 
-@Database(entities = [Noun::class, Group::class], version = DbConstants.DB_VERSION)
+@Database(entities = [Noun::class, Group::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun nounDao(): NounDao

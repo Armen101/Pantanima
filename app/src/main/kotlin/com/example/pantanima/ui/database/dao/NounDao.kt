@@ -5,7 +5,6 @@ import com.example.pantanima.ui.database.converters.LevelConverter
 import com.example.pantanima.ui.database.entity.Noun
 import com.example.pantanima.ui.enums.Level
 import io.reactivex.Single
-import com.example.pantanima.ui.database.DbConstants as DbConstants1
 
 @Dao
 @TypeConverters(LevelConverter::class)
@@ -16,7 +15,7 @@ interface NounDao {
 
     @Query(
         """
-        SELECT * FROM ${DbConstants1.NOUN_TABLE_NAME}
+        SELECT * FROM nounTable
         WHERE language = :language
         ORDER BY lastUsedTime *1 ASC
         LIMIT :count 
@@ -26,7 +25,7 @@ interface NounDao {
 
     @Query(
         """
-        SELECT * FROM ${DbConstants1.NOUN_TABLE_NAME}
+        SELECT * FROM nounTable
         WHERE language = :language AND level = :level
         ORDER BY lastUsedTime *1 ASC
         LIMIT :count

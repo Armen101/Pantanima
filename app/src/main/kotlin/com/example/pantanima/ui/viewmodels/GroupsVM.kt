@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
 
-class GroupsVM : BaseVM(), AdapterOnItemClickListener<String> {
+class GroupsVM(private val repo : GroupRepo) : BaseVM(), AdapterOnItemClickListener<String> {
 
     private var groupNames: MutableList<String> = arrayListOf()
     private val adapter = GroupsAdapter(this, groupNames)
@@ -36,12 +36,12 @@ class GroupsVM : BaseVM(), AdapterOnItemClickListener<String> {
 
     private fun updateAdapterData() {
         viewModelScope.launch(Dispatchers.IO) {
-            val groups = GroupRepo.getGroups()
+            val groups = repo.getGroups()
                 .shuffled()
                 .subList(0, GamePrefs.INITIAL_GROUPS_COUNT)
 
-            GroupRepo.updateLastUsedTime(groups)
-            groupNames.addAll(GroupRepo.getNamesOfGroups(groups))
+            repo.updateLastUsedTime(groups)
+            groupNames.addAll(repo.getNamesOfGroups(groups))
 
             viewModelScope.launch(Dispatchers.Main) {
                 adapter.notifyDataSetChanged()
@@ -72,8 +72,8 @@ class GroupsVM : BaseVM(), AdapterOnItemClickListener<String> {
 
     private suspend fun getNewGroup(): String {
         return withContext(viewModelScope.coroutineContext + Dispatchers.IO) {
-            val group = GroupRepo.getGroups(groupNames).shuffled().random()
-            GroupRepo.updateLastUsedTime(group)
+            val group = repo.getGroups(groupNames).shuffled().random()
+            repo.updateLastUsedTime(group)
             group.value
         }
     }

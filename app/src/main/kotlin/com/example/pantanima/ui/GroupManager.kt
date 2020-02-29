@@ -2,19 +2,22 @@ package com.example.pantanima.ui
 
 import com.example.pantanima.ui.models.Group
 
-class GroupManager {
+class GroupManager(names: ArrayList<String>?) {
 
     var groups: MutableList<Group> = ArrayList()
 
-    private var currentGroup: Group ?= null
+    private var currentGroup: Group? = null
+
+    init {
+        names?.forEach {
+            groups.add(Group(it))
+        }
+        currentGroup = groups[0]
+    }
 
     fun incAnsweredCount() = currentGroup?.incAnsweredCount()
 
     fun decAnsweredCount() = currentGroup?.decAnsweredCount()
-
-    fun setGroup() {
-        currentGroup = groups[0]
-    }
 
     fun switchGroup() {
         currentGroup?.saveStatistics()

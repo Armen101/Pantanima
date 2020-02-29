@@ -2,9 +2,8 @@ package com.example.pantanima.ui.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.pantanima.ui.database.DbConstants
 
-@Entity(tableName = DbConstants.GROUP_TABLE_NAME)
+@Entity(tableName = "groupTable")
 class Group(@PrimaryKey var value: String){
 
     var lastUsedTime: Long = 0
