@@ -23,19 +23,15 @@ val appModule = module {
 }
 
 val viewModelModule = module {
-    viewModel { GroupsVM(androidApplication(), get()) }
-    viewModel { StartScreenVM(androidApplication()) }
-    viewModel { (gNames: ArrayList<String>?) ->
-        PlayVM(androidApplication(), get { parametersOf(gNames) }, get())
-    }
-    viewModel { (cb: SettingsFragmentCallback) -> SettingsVM(androidApplication(), cb) }
+    viewModel { GroupsVM(get(), get()) }
+    viewModel { StartScreenVM(get()) }
+    viewModel { (gNames: ArrayList<String>?) -> PlayVM(get(), get { parametersOf(gNames) }, get()) }
+    viewModel { (cb: SettingsFragmentCallback) -> SettingsVM(get(), cb) }
     factory { (gNames: ArrayList<String>?) -> GroupManager(gNames) }
 }
 
 val roomModule = module {
-    single {
-        Room.databaseBuilder(androidApplication(), AppDatabase::class.java, "appDb").build()
-    }
+    single { Room.databaseBuilder(get(), AppDatabase::class.java, "appDb").build() }
     single { get<AppDatabase>().groupDao() }
     single { get<AppDatabase>().nounDao() }
 }

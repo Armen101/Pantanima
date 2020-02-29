@@ -29,8 +29,7 @@ object ScrollHelper {
 
     private fun createPlayer() {
         val gen = ToneGenerator(AudioManager.STREAM_MUSIC, 50)
-        gen.startTone(
-            ToneGenerator.TONE_CDMA_CALL_SIGNAL_ISDN_INTERGROUP,
+        gen.startTone(ToneGenerator.TONE_CDMA_CALL_SIGNAL_ISDN_INTERGROUP,
             5
         )
         val handler = Handler(Looper.getMainLooper())

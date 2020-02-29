@@ -7,7 +7,7 @@ import java.util.*
 
 object LocaleHelper {
 
-    fun toLanguageCode(res: Resources?, language: String?): String {
+    private fun toLanguageCode(res: Resources?, language: String?): String {
         return when (language) {
             res?.getString(R.string.armenian) -> Constants.LANGUAGE_AM
             res?.getString(R.string.russian) -> Constants.LANGUAGE_RU

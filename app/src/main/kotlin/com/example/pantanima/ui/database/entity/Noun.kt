@@ -21,7 +21,4 @@ data class Noun(@PrimaryKey var value: String) {
     @Ignore
     var isActive = ObservableBoolean(true)
 
-    override fun toString(): String {
-        return "Noun(value = '$value', language = '$language', level = $level)"
-    }
 }

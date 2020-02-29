@@ -7,7 +7,9 @@ import com.example.pantanima.ui.di.moduls.repoModule
 import com.example.pantanima.ui.di.moduls.roomModule
 import com.example.pantanima.ui.di.moduls.viewModelModule
 import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 import timber.log.Timber
 
 class PantanimaApplication : Application() {
@@ -16,6 +18,7 @@ class PantanimaApplication : Application() {
         super.onCreate()
 
         startKoin {
+            androidLogger(Level.DEBUG)
             androidContext(this@PantanimaApplication)
             modules(appModule, viewModelModule, roomModule, repoModule)
         }
