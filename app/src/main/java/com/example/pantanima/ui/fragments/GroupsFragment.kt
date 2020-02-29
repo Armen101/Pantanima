@@ -4,8 +4,11 @@ import com.example.pantanima.BR
 import com.example.pantanima.R
 import com.example.pantanima.databinding.FragmentGroupsBinding
 import com.example.pantanima.ui.viewmodels.GroupsVM
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class GroupsFragment : BaseFragment<FragmentGroupsBinding, GroupsVM>() {
+
+    private val vm by viewModel<GroupsVM>()
 
     override fun getBindingVariable() = BR.viewModel
 
@@ -13,6 +16,5 @@ class GroupsFragment : BaseFragment<FragmentGroupsBinding, GroupsVM>() {
 
     override fun getNavHostId() = R.id.nav_host_fragment
 
-    override fun getViewModel() = GroupsVM()
-
+    override fun getViewModel() = vm
 }

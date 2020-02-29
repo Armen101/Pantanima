@@ -79,10 +79,8 @@ dependencies {
     //sdp, ssp
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
 
-    //dagger2
-    implementation "com.google.dagger:dagger:$daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    //koin
+    implementation "org.koin:koin-android-viewmodel:$koin_version"
 
     //timber log
     implementation 'com.jakewharton.timber:timber:4.7.1'

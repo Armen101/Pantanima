@@ -12,7 +12,7 @@ import com.example.pantanima.ui.fragments.SettingsFragmentCallback
 import com.example.pantanima.ui.getIfNotNull
 import com.example.pantanima.ui.helpers.GamePrefs
 
-class SettingsVM(var fragmentCallback: SettingsFragmentCallback) : BaseVM() {
+class SettingsVM(private var fragmentCallback: SettingsFragmentCallback) : BaseVM() {
 
     val adapterStartEndPadding = DisplayHelper.displayWidth() / 2 - DisplayHelper.dpToPx(40)
 

@@ -14,22 +14,18 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 import android.media.MediaPlayer
 import androidx.lifecycle.viewModelScope
-import com.example.pantanima.ui.PantanimaApplication
 import com.example.pantanima.ui.helpers.GamePrefs
 import com.example.pantanima.ui.listeners.AdapterOnItemClickListener
 import com.example.pantanima.ui.models.Group
 import java.lang.StringBuilder
 
-class PlayVM(groupNames: ArrayList<String>?) : BaseVM(), AdapterOnItemClickListener<Noun> {
+class PlayVM(private val groupManager: GroupManager, groupNames: ArrayList<String>?)
+    : BaseVM(), AdapterOnItemClickListener<Noun> {
 
     private var clickPlayer: MediaPlayer? = null
     private var tickTockPlayer: MediaPlayer? = null
-
-    @Inject
-    lateinit var groupManager: GroupManager
 
     private var currentWords: List<Noun>? = null
     var countDownTimerText = ObservableField<String>((GamePrefs.ROUND_TIME).toString())
@@ -40,7 +36,6 @@ class PlayVM(groupNames: ArrayList<String>?) : BaseVM(), AdapterOnItemClickListe
     val adapterObservable = ObservableField<RecyclerView.Adapter<*>>(adapter)
 
     init {
-        getApplication<PantanimaApplication>().getComponent().injectHomeViewModel(this)
         if (groupNames != null) {
             initGroups(groupNames)
         }
@@ -82,8 +77,9 @@ class PlayVM(groupNames: ArrayList<String>?) : BaseVM(), AdapterOnItemClickListe
     }
 
     private fun initGroups(names: ArrayList<String>) {
-        for (name in names) {
-            groupManager.groups.add(Group(name))
+        groupManager.groups.clear()
+        names.forEach {
+            groupManager.groups.add(Group(it))
         }
         groupManager.setGroup()
     }

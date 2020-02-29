@@ -8,22 +8,26 @@ import com.example.pantanima.ui.database.DbConstants
 import com.example.pantanima.ui.database.repository.NounRepo
 import com.example.pantanima.ui.database.preference.Preferences
 import com.example.pantanima.ui.database.repository.GroupRepo
-import com.example.pantanima.ui.di.components.AppComponent
-import com.example.pantanima.ui.di.components.DaggerAppComponent
+import com.example.pantanima.ui.di.moduls.appModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 import timber.log.Timber
 
 class PantanimaApplication : Application() {
 
     private lateinit var database: AppDatabase
-    private lateinit var component: AppComponent
 
     override fun onCreate() {
         super.onCreate()
         instance = this
 
+        startKoin {
+            androidContext(this@PantanimaApplication)
+            modules(appModule)
+        }
+
         initTimber()
 
-        component = DaggerAppComponent.create()
         database = Room.databaseBuilder(this, AppDatabase::class.java, DbConstants.DB_NAME)
             .build()
 
@@ -45,8 +49,6 @@ class PantanimaApplication : Application() {
         }
         //todo, in else case init log tree for Fabric
     }
-
-    fun getComponent() = component
 
     companion object {
         lateinit var instance: PantanimaApplication

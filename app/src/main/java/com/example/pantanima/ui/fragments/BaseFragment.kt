@@ -5,22 +5,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.pantanima.ui.viewmodels.BaseVM
 import androidx.navigation.NavController
 import com.example.pantanima.ui.EventObserver
-import com.example.pantanima.ui.helpers.ViewModelUtils
 import com.example.pantanima.ui.activities.NavActivity
 
 
 abstract class BaseFragment<T : ViewDataBinding, V : BaseVM> : Fragment() {
 
     private lateinit var viewDataBinding: T
-    private lateinit var viewModel: V
 
     /**
      * Override for set binding variable
@@ -34,19 +32,13 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseVM> : Fragment() {
      */
     abstract fun getViewModel(): V
 
+    @IdRes
     abstract fun getNavHostId(): Int
 
     @LayoutRes
     abstract fun getLayoutId(): Int
 
-    fun getViewDataBinding(): T {
-        return viewDataBinding
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = createViewModel()
-    }
+    fun getViewDataBinding() = viewDataBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,10 +51,10 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseVM> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewDataBinding.setVariable(getBindingVariable(), viewModel)
+        viewDataBinding.setVariable(getBindingVariable(), getViewModel())
         viewDataBinding.lifecycleOwner = this
         viewDataBinding.executePendingBindings()
-        viewModel.getNewDestination().observe(this, EventObserver {
+        getViewModel().getNewDestination().observe(viewLifecycleOwner, EventObserver {
             getNavController()?.navigate(it.first, it.second)
         })
     }
@@ -71,15 +63,8 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseVM> : Fragment() {
         return (activity as NavActivity).navController
     }
 
-    private fun createViewModel(): V {
-        val vm = getViewModel()
-        val factory = ViewModelUtils.createFor(vm)
-        viewModel = ViewModelProvider(this, factory).get(vm::class.java)
-        return viewModel
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        viewModel.onActivityResult(requestCode, resultCode, data)
+        getViewModel().onActivityResult(requestCode, resultCode, data)
     }
 }
