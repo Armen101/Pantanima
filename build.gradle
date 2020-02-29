@@ -7,7 +7,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.0'
+        classpath 'com.android.tools.build:gradle:3.6.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0"
@@ -43,7 +43,7 @@ ext {
     rxandroidVersion = '2.1.1'
     navigationVersion = '2.2.1'
     coroutinesVersion = '1.1.1'
-    roomVersion = '2.2.3'
+    roomVersion = '2.2.4'
     lottieVersion = '3.0.7'
     daggerVersion = '2.23.2'
 }
