@@ -40,6 +40,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
 }
 
 
@@ -62,6 +66,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+
+    //SwipeRevealLayout
+    implementation "com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1"
 
     // room
     implementation "androidx.room:room-runtime:$roomVersion"

@@ -19,7 +19,7 @@
     </data>
 
 
-    <com.example.pantanima.ui.customviews.SwipeRevealLayout
+    <com.chauthai.swipereveallayout.SwipeRevealLayout
         android:id="@+id/swipeLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/start_screen_button_height"
@@ -75,6 +75,6 @@
 
         </RelativeLayout>
 
-    </com.example.pantanima.ui.customviews.SwipeRevealLayout>
+    </com.chauthai.swipereveallayout.SwipeRevealLayout>
 
 </layout>

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pantanima.BR
 import com.example.pantanima.R
 import com.example.pantanima.databinding.GroupRowBinding
-import com.example.pantanima.ui.customviews.ViewBinderHelper
+import com.chauthai.swipereveallayout.ViewBinderHelper
 import com.example.pantanima.ui.listeners.AdapterOnItemClickListener
 
 class GroupsAdapter(
