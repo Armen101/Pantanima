@@ -2,7 +2,6 @@ package com.example.pantanima.ui
 
 import android.app.Application
 import com.example.pantanima.BuildConfig
-import com.example.pantanima.ui.database.preference.Preferences
 import com.example.pantanima.ui.di.moduls.appModule
 import com.example.pantanima.ui.di.moduls.repoModule
 import com.example.pantanima.ui.di.moduls.roomModule
@@ -15,7 +14,6 @@ class PantanimaApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        instance = this
 
         startKoin {
             androidContext(this@PantanimaApplication)
@@ -23,8 +21,6 @@ class PantanimaApplication : Application() {
         }
 
         initTimber()
-
-        Preferences.init(applicationContext)
     }
 
     private fun initTimber() {
@@ -41,8 +37,4 @@ class PantanimaApplication : Application() {
         //todo, in else case init log tree for Fabric
     }
 
-    companion object {
-        lateinit var instance: PantanimaApplication
-            private set
-    }
 }

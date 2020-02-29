@@ -9,9 +9,8 @@ import io.reactivex.disposables.CompositeDisposable
 import androidx.lifecycle.LiveData
 import com.example.pantanima.ui.Event
 import androidx.lifecycle.MutableLiveData
-import com.example.pantanima.ui.PantanimaApplication
 
-abstract class BaseVM : AndroidViewModel(PantanimaApplication.instance) {
+abstract class BaseVM(app: Application) : AndroidViewModel(app) {
 
     protected var disposable: CompositeDisposable = CompositeDisposable()
 

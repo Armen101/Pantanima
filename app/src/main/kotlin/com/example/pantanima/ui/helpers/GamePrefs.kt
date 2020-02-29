@@ -2,8 +2,11 @@ package com.example.pantanima.ui.helpers
 
 import com.example.pantanima.ui.Constants
 import com.example.pantanima.ui.database.preference.Preferences
+import org.koin.java.KoinJavaComponent.inject
 
 object GamePrefs {
+
+    private val prefs: Preferences by inject(Preferences::class.java)
 
     //Immutable prefs
     const val ASSORTMENT_WORDS_COUNT = 30
@@ -15,19 +18,18 @@ object GamePrefs {
     //Mutable prefs
     var LANGUAGE = Constants.LANGUAGE_AM
         get() {
-            return Preferences.getString(Constants.PREF_LANGUAGE, field) ?: field
+            return prefs.getString(Constants.PREF_LANGUAGE, field) ?: field
         }
     var ROUND_TIME = 40
         get() {
-            return Preferences.getInt(Constants.PREF_ROUND_TIME, field)
+            return prefs.getInt(Constants.PREF_ROUND_TIME, field)
         }
     var GOL_POINTS: Int = 80
         get() {
-            return Preferences.getInt(Constants.PREF_GOL_POINTS, field)
+            return prefs.getInt(Constants.PREF_GOL_POINTS, field)
         }
-
     var MODE = "medium" //todo
         get() {
-            return Preferences.getString(Constants.PREF_MODE, field) ?: field
+            return prefs.getString(Constants.PREF_MODE, field) ?: field
         }
 }

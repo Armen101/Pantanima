@@ -3,6 +3,7 @@ package com.example.pantanima.ui.di.moduls
 import androidx.room.Room
 import com.example.pantanima.ui.GroupManager
 import com.example.pantanima.ui.database.AppDatabase
+import com.example.pantanima.ui.database.preference.Preferences
 import com.example.pantanima.ui.database.repository.GroupRepo
 import com.example.pantanima.ui.database.repository.impl.GroupRepoImpl
 import com.example.pantanima.ui.database.repository.NounRepo
@@ -18,39 +19,28 @@ import org.koin.core.parameter.parametersOf
 import org.koin.dsl.module
 
 val appModule = module {
-    factory { (gNames: ArrayList<String>?) -> GroupManager(gNames) }
+    single { Preferences(androidApplication()) }
 }
 
 val viewModelModule = module {
-
-    viewModel { GroupsVM(get()) }
-
-    viewModel { StartScreenVM() }
-
-    viewModel { (gNames: ArrayList<String>?) -> PlayVM(get { parametersOf(gNames) }, get()) }
-
-    viewModel { (cb: SettingsFragmentCallback) -> SettingsVM(cb) }
-
+    viewModel { GroupsVM(androidApplication(), get()) }
+    viewModel { StartScreenVM(androidApplication()) }
+    viewModel { (gNames: ArrayList<String>?) ->
+        PlayVM(androidApplication(), get { parametersOf(gNames) }, get())
+    }
+    viewModel { (cb: SettingsFragmentCallback) -> SettingsVM(androidApplication(), cb) }
+    factory { (gNames: ArrayList<String>?) -> GroupManager(gNames) }
 }
 
 val roomModule = module {
     single {
-        Room.databaseBuilder(
-            androidApplication(),
-            AppDatabase::class.java,
-            "appDb"
-        ).build()
+        Room.databaseBuilder(androidApplication(), AppDatabase::class.java, "appDb").build()
     }
-
     single { get<AppDatabase>().groupDao() }
-
     single { get<AppDatabase>().nounDao() }
 }
 
 val repoModule = module {
-
     single<GroupRepo> { GroupRepoImpl(get()) }
-
     single<NounRepo> { NounRepoImpl(get()) }
-
 }

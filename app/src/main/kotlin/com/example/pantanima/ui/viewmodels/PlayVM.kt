@@ -21,9 +21,10 @@ import com.example.pantanima.ui.listeners.AdapterOnItemClickListener
 import java.lang.StringBuilder
 
 class PlayVM(
+    app: Application,
     private val groupManager: GroupManager,
     private val nounRepo: NounRepo
-) : BaseVM(), AdapterOnItemClickListener<Noun> {
+) : BaseVM(app), AdapterOnItemClickListener<Noun> {
 
     private var clickPlayer: MediaPlayer? = null
     private var tickTockPlayer: MediaPlayer? = null

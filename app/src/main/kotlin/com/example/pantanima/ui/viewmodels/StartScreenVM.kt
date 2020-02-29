@@ -1,10 +1,11 @@
 package com.example.pantanima.ui.viewmodels
 
+import android.app.Application
 import androidx.databinding.ObservableField
 import com.example.pantanima.R
 import com.example.pantanima.ui.helpers.LocaleHelper
 
-class StartScreenVM : BaseVM() {
+class StartScreenVM(app: Application) : BaseVM(app) {
 
     private var languageList = resources.value.getStringArray(R.array.languages_list)
 

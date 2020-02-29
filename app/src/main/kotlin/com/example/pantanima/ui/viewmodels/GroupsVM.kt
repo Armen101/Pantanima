@@ -1,5 +1,6 @@
 package com.example.pantanima.ui.viewmodels
 
+import android.app.Application
 import android.os.Bundle
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
@@ -18,7 +19,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
 
-class GroupsVM(private val repo : GroupRepo) : BaseVM(), AdapterOnItemClickListener<String> {
+class GroupsVM(app: Application, private val repo : GroupRepo) : BaseVM(app), AdapterOnItemClickListener<String> {
 
     private var groupNames: MutableList<String> = arrayListOf()
     private val adapter = GroupsAdapter(this, groupNames)

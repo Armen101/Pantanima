@@ -3,13 +3,10 @@ package com.example.pantanima.ui.database.preference
 import android.content.Context
 import android.content.SharedPreferences
 
-object Preferences {
+class Preferences (context: Context) {
 
-    private lateinit var sharedPref: SharedPreferences
-
-    fun init(context: Context) {
-        sharedPref = context.getSharedPreferences(PrefConstants.PREFERENCE_NAME, Context.MODE_PRIVATE)
-    }
+    private var sharedPref: SharedPreferences =
+        context.getSharedPreferences(PrefConstants.PREFERENCE_NAME, Context.MODE_PRIVATE)
 
     fun save(KEY_NAME: String, value: String?, async: Boolean = true) {
         val editor = sharedPref.edit()

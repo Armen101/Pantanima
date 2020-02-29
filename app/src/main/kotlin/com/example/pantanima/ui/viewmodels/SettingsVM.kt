@@ -1,5 +1,6 @@
 package com.example.pantanima.ui.viewmodels
 
+import android.app.Application
 import android.view.View
 import androidx.databinding.ObservableField
 import com.example.pantanima.ui.Constants
@@ -11,9 +12,14 @@ import com.example.pantanima.ui.database.preference.Preferences
 import com.example.pantanima.ui.fragments.SettingsFragmentCallback
 import com.example.pantanima.ui.getIfNotNull
 import com.example.pantanima.ui.helpers.GamePrefs
+import org.koin.java.KoinJavaComponent.inject
 
-class SettingsVM(private var fragmentCallback: SettingsFragmentCallback) : BaseVM() {
+class SettingsVM(
+    app: Application,
+    private var fragmentCallback: SettingsFragmentCallback
+) : BaseVM(app) {
 
+    private val prefs: Preferences by inject(Preferences::class.java)
     val adapterStartEndPadding = DisplayHelper.displayWidth() / 2 - DisplayHelper.dpToPx(40)
 
     var timeLayoutManager = ObservableField(SliderLayoutManager(getApplication()))
@@ -113,12 +119,12 @@ class SettingsVM(private var fragmentCallback: SettingsFragmentCallback) : BaseV
     }
 
     private fun saveSettings() {
-        Preferences.save(Constants.PREF_MODE, modeChooseText)
+        prefs.save(Constants.PREF_MODE, modeChooseText)
         scoreChooseText.getIfNotNull {
-            Preferences.save(Constants.PREF_GOL_POINTS, it.toInt())
+            prefs.save(Constants.PREF_GOL_POINTS, it.toInt())
         }
         timeChooseText.getIfNotNull {
-            Preferences.save(Constants.PREF_ROUND_TIME, it.toInt())
+            prefs.save(Constants.PREF_ROUND_TIME, it.toInt())
         }
     }
 }
