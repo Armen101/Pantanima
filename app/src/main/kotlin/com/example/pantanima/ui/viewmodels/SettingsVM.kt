@@ -3,6 +3,8 @@ package com.example.pantanima.ui.viewmodels
 import android.app.Application
 import android.view.View
 import androidx.databinding.ObservableField
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.pantanima.ui.Constants
 import com.example.pantanima.ui.DisplayHelper
 import com.example.pantanima.ui.DisplayHelper.dpToPx
@@ -10,15 +12,11 @@ import com.example.pantanima.ui.adapters.SliderAdapter
 import com.example.pantanima.ui.adapters.SliderLayoutManager
 import com.example.pantanima.ui.customviews.VerticalSliderView
 import com.example.pantanima.ui.database.preference.Preferences
-import com.example.pantanima.ui.fragments.SettingsFragmentCallback
 import com.example.pantanima.ui.getIfNotNull
 import com.example.pantanima.ui.helpers.GamePrefs
 import org.koin.java.KoinJavaComponent.inject
 
-class SettingsVM(
-    app: Application,
-    private var fragmentCallback: SettingsFragmentCallback
-) : BaseVM(app) {
+class SettingsVM(app: Application) : BaseVM(app) {
 
     private val prefs: Preferences by inject(Preferences::class.java)
     val adapterStartEndPadding = DisplayHelper.displayWidth() / 2 - 40.dpToPx()
@@ -43,6 +41,9 @@ class SettingsVM(
             modeChooseText = modePikerData[newPosition]
         }
     }
+    private val _backPressed = MutableLiveData<Any>()
+    val backPressed: LiveData<Any>
+        get() = _backPressed
 
     init {
         timeLayoutManager.get()?.scrollToPosition(timeInitialPosition)
@@ -116,7 +117,7 @@ class SettingsVM(
 
     fun onConfirmClick() {
         saveSettings()
-        fragmentCallback.onBackPressed()
+        _backPressed.postValue(Any())
     }
 
     private fun saveSettings() {

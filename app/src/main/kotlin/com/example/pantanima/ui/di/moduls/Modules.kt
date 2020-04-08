@@ -8,7 +8,6 @@ import com.example.pantanima.ui.database.repository.GroupRepo
 import com.example.pantanima.ui.database.repository.impl.GroupRepoImpl
 import com.example.pantanima.ui.database.repository.NounRepo
 import com.example.pantanima.ui.database.repository.impl.NounRepoImpl
-import com.example.pantanima.ui.fragments.SettingsFragmentCallback
 import com.example.pantanima.ui.viewmodels.GroupsVM
 import com.example.pantanima.ui.viewmodels.PlayVM
 import com.example.pantanima.ui.viewmodels.SettingsVM
@@ -26,7 +25,7 @@ val viewModelModule = module {
     viewModel { GroupsVM(get(), get()) }
     viewModel { StartScreenVM(get()) }
     viewModel { (gNames: ArrayList<String>?) -> PlayVM(get(), get { parametersOf(gNames) }, get()) }
-    viewModel { (cb: SettingsFragmentCallback) -> SettingsVM(get(), cb) }
+    viewModel { SettingsVM(get()) }
     factory { (gNames: ArrayList<String>?) -> GroupManager(gNames) }
 }
 
