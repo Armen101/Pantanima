@@ -5,7 +5,8 @@ import android.os.Bundle
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pantanima.R
@@ -25,13 +26,27 @@ class GroupsVM(app: Application, private val repo : GroupRepo) : BaseVM(app), Ad
     private val adapter = GroupsAdapter(this, groupNames)
     val adapterObservable = ObservableField<RecyclerView.Adapter<*>>(adapter)
     var addGroupIsAvailable = ObservableBoolean(true)
+    val lifecycleLiveData = MutableLiveData<Lifecycle.Event>()
+    private val observer = Observer<Lifecycle.Event> {
+        when (it) {
+            Lifecycle.Event.ON_RESUME -> onResume()
+            else -> {
+            }
+        }
+    }
 
     init {
+        lifecycleLiveData.observeForever(observer)
         updateAdapterData()
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    fun onResume() {
+
+    override fun onCleared() {
+        lifecycleLiveData.removeObserver(observer)
+        super.onCleared()
+    }
+
+    private fun onResume() {
         adapter.notifyDataSetChanged(closeAllSwipedItems = true)
     }
 

@@ -1,5 +1,6 @@
 package com.example.pantanima.ui.fragments
 
+import androidx.lifecycle.Lifecycle
 import com.example.pantanima.BR
 import com.example.pantanima.R
 import com.example.pantanima.databinding.FragmentGroupsBinding
@@ -17,4 +18,9 @@ class GroupsFragment : BaseFragment<FragmentGroupsBinding, GroupsVM>() {
     override fun getNavHostId() = R.id.nav_host_fragment
 
     override fun getViewModel() = vm
+
+    override fun onResume() {
+        super.onResume()
+        vm.lifecycleLiveData.value = Lifecycle.Event.ON_RESUME
+    }
 }

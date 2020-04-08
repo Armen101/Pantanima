@@ -5,6 +5,7 @@ import android.view.View
 import androidx.databinding.ObservableField
 import com.example.pantanima.ui.Constants
 import com.example.pantanima.ui.DisplayHelper
+import com.example.pantanima.ui.DisplayHelper.dpToPx
 import com.example.pantanima.ui.adapters.SliderAdapter
 import com.example.pantanima.ui.adapters.SliderLayoutManager
 import com.example.pantanima.ui.customviews.VerticalSliderView
@@ -20,7 +21,7 @@ class SettingsVM(
 ) : BaseVM(app) {
 
     private val prefs: Preferences by inject(Preferences::class.java)
-    val adapterStartEndPadding = DisplayHelper.displayWidth() / 2 - DisplayHelper.dpToPx(40)
+    val adapterStartEndPadding = DisplayHelper.displayWidth() / 2 - 40.dpToPx()
 
     var timeLayoutManager = ObservableField(SliderLayoutManager(getApplication()))
     private val timePikerData = getTimePickerData()

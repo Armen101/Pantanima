@@ -4,9 +4,9 @@ import android.content.res.Resources
 
 object DisplayHelper {
 
-    fun dpToPx(dp: Int) = (dp * Resources.getSystem().displayMetrics.density).toInt()
+    fun Int.dpToPx() = (this * Resources.getSystem().displayMetrics.density).toInt()
 
-    fun pxToDp(px: Int) = (px / Resources.getSystem().displayMetrics.density).toInt()
+    fun Int.pxToDp() = (this / Resources.getSystem().displayMetrics.density).toInt()
 
     fun displayHeight() = Resources.getSystem().displayMetrics.heightPixels
 
