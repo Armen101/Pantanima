@@ -14,11 +14,9 @@ import com.example.pantanima.ui.customviews.VerticalSliderView
 import com.example.pantanima.ui.database.preference.Preferences
 import com.example.pantanima.ui.getIfNotNull
 import com.example.pantanima.ui.helpers.GamePrefs
-import org.koin.java.KoinJavaComponent.inject
 
 class SettingsVM(app: Application) : BaseVM(app) {
 
-    private val prefs: Preferences by inject(Preferences::class.java)
     val adapterStartEndPadding = DisplayHelper.displayWidth() / 2 - 40.dpToPx()
 
     var timeLayoutManager = ObservableField(SliderLayoutManager(getApplication()))
@@ -121,12 +119,12 @@ class SettingsVM(app: Application) : BaseVM(app) {
     }
 
     private fun saveSettings() {
-        prefs.save(Constants.PREF_MODE, modeChooseText)
+        Preferences.save(Constants.PREF_MODE, modeChooseText)
         scoreChooseText.getIfNotNull {
-            prefs.save(Constants.PREF_GOL_POINTS, it.toInt())
+            Preferences.save(Constants.PREF_GOL_POINTS, it.toInt())
         }
         timeChooseText.getIfNotNull {
-            prefs.save(Constants.PREF_ROUND_TIME, it.toInt())
+            Preferences.save(Constants.PREF_ROUND_TIME, it.toInt())
         }
     }
 }

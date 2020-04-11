@@ -44,6 +44,10 @@
         android:label="@string/title_play"
         tools:layout="@layout/fragment_play">
 
+        <action
+            android:id="@+id/navigateToWin"
+            app:destination="@id/navigation_win" />
+
         <argument
             android:name="mode"
             app:argType="com.example.pantanima.ui.enums.Mode" />
@@ -53,4 +57,11 @@
             android:defaultValue="70"
             app:argType="integer" />
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_win"
+        android:name="com.example.pantanima.ui.fragments.WinFragment"
+        android:label="@string/title_win"
+        tools:layout="@layout/fragment_win"/>
+
 </navigation>

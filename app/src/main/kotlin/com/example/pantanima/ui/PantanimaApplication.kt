@@ -2,7 +2,7 @@ package com.example.pantanima.ui
 
 import android.app.Application
 import com.example.pantanima.BuildConfig
-import com.example.pantanima.ui.di.moduls.appModule
+import com.example.pantanima.ui.database.preference.Preferences
 import com.example.pantanima.ui.di.moduls.repoModule
 import com.example.pantanima.ui.di.moduls.roomModule
 import com.example.pantanima.ui.di.moduls.viewModelModule
@@ -17,10 +17,11 @@ class PantanimaApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        Preferences.init(this)
         startKoin {
             androidLogger(Level.DEBUG)
             androidContext(this@PantanimaApplication)
-            modules(appModule, viewModelModule, roomModule, repoModule)
+            modules(viewModelModule, roomModule, repoModule)
         }
 
         initTimber()

@@ -1,10 +1,14 @@
 package com.example.pantanima.ui.models
 
-class Group(var name: String) {
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
-    var roundAnsweredCount: Int = 0
+@Parcelize
+data class Group(
+    var name: String,
+    var roundAnsweredCount: Int = 0,
     var statistics: MutableList<Int> = ArrayList()
-        private set
+) : Parcelable {
 
     fun saveStatistics() {
         val ss = roundAnsweredCount
@@ -18,6 +22,14 @@ class Group(var name: String) {
 
     fun decAnsweredCount() {
         roundAnsweredCount = roundAnsweredCount.dec()
+    }
+
+    fun getAnsweredCount(): Int {
+        var total = 0
+        statistics.forEach { roundScore ->
+            total += roundScore
+        }
+        return total
     }
 
 }

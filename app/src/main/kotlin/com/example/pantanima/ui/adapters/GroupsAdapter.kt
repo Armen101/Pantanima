@@ -15,8 +15,7 @@ import com.example.pantanima.ui.listeners.AdapterOnItemClickListener
 class GroupsAdapter(
     val listener: AdapterOnItemClickListener<String>,
     val data: MutableList<String>
-) :
-    RecyclerView.Adapter<GroupsAdapter.GroupVH>() {
+) : RecyclerView.Adapter<GroupsAdapter.GroupVH>() {
 
     private val viewBinderHelper: ViewBinderHelper = ViewBinderHelper()
     private var closeAllSwipedItems = false

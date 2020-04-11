@@ -3,9 +3,11 @@
     package="com.example.pantanima">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:name=".ui.PantanimaApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"

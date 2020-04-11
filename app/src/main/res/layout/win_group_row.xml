@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="com.example.pantanima.ui.models.Group" />
+
+        <variable
+            name="holder"
+            type="com.example.pantanima.ui.adapters.WinAdapter.GroupVH" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp">
+
+        <ImageView
+            android:id="@+id/medal"
+            android:layout_width="@dimen/_38sdp"
+            android:layout_height="@dimen/_38sdp"
+            android:background="@{holder.getIcon()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="start|center_vertical"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="0dp"
+            android:text="@{holder.getRowText(item)}"
+            android:textSize="@dimen/_14sdp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/medal"
+            app:layout_constraintStart_toEndOf="@+id/medal"
+            app:layout_constraintTop_toTopOf="@id/medal"
+            tools:text="@string/start" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

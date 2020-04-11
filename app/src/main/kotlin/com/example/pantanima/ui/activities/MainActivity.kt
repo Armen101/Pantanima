@@ -2,10 +2,10 @@ package com.example.pantanima.ui.activities
 
 import android.os.Bundle
 import com.example.pantanima.R
-import com.example.pantanima.ui.database.repository.impl.NounRepoImpl
 import com.example.pantanima.ui.database.preference.PrefConstants
 import com.example.pantanima.ui.database.preference.Preferences
 import com.example.pantanima.ui.database.repository.GroupRepo
+import com.example.pantanima.ui.database.repository.NounRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -13,9 +13,8 @@ import org.koin.android.ext.android.inject
 
 class MainActivity : NavActivity() {
 
-    private val nounRepo: NounRepoImpl by inject()
-    private val groupRepoImpl: GroupRepo by inject()
-    private val prefs: Preferences by inject()
+    private val nounRepo: NounRepo by inject()
+    private val groupRepo: GroupRepo by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,12 +31,12 @@ class MainActivity : NavActivity() {
 
 
     private fun setupData() {
-        val isFirstRunning = prefs.getBoolean(PrefConstants.FIRST_RUNNING, true)
+        val isFirstRunning = Preferences.getBoolean(PrefConstants.FIRST_RUNNING, true)
         if (isFirstRunning) {
             compositeJob.add(GlobalScope.launch(Dispatchers.IO) {
                 nounRepo.insertInitialNouns()
-                groupRepoImpl.insertInitialGroups()
-                prefs.save(PrefConstants.FIRST_RUNNING, false)
+                groupRepo.insertInitialGroups()
+                Preferences.save(PrefConstants.FIRST_RUNNING, false)
             })
         }
     }

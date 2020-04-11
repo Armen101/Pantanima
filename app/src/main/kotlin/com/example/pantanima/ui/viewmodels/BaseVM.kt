@@ -27,7 +27,7 @@ abstract class BaseVM(app: Application) : AndroidViewModel(app) {
         return newDestination
     }
 
-    fun getString(@StringRes resource: Int): String? = resources.value.getString(resource)
+    fun getString(@StringRes resource: Int): String = resources.value.getString(resource)
 
     override fun onCleared() {
         super.onCleared()

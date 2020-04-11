@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.pantanima.ui.viewmodels.WinVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/_30sdp"
+        android:background="@color/background_gray">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/champion"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_250sdp"
+            android:adjustViewBounds="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="champion.json"
+            app:lottie_loop="true"
+            app:lottie_speed="0.8" />
+
+        <TextView
+            android:id="@+id/congrats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_200sdp"
+            android:gravity="center"
+            android:text="@string/congrats"
+            android:textColor="@color/app_style_blue"
+            android:textSize="@dimen/_18sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/win_group_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:lines="1"
+            android:text="@{viewModel.winGroupName}"
+            android:textColor="@color/app_style_red"
+            android:textSize="@dimen/_24sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/congrats"
+            tools:text="group name" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:overScrollMode="never"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:scrollbars="vertical"
+            app:adapter="@{viewModel.adapter}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/win_group_name" />
+
+        <Button
+            android:id="@+id/exit"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_44sdp"
+            android:background="@drawable/start_screen_button"
+            android:backgroundTint="@color/app_style_green"
+            android:fontFamily="@font/caviar_dreams_bold"
+            android:onClick="@{(view) -> viewModel.exit()}"
+            android:text="@string/exit"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+        <Button
+            android:id="@+id/play_again"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_44sdp"
+            android:background="@drawable/start_screen_button"
+            android:backgroundTint="@color/app_style_green"
+            android:onClick="@{(view) -> viewModel.playAgain()}"
+            android:text="@string/play_again"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_14sdp"
+            android:fontFamily="@font/caviar_dreams_bold"
+            app:layout_constraintBottom_toBottomOf="@+id/exit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/exit" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -4,6 +4,7 @@
     <string name="title_start_screen">Start screen</string>
     <string name="title_groups">Groups</string>
     <string name="title_settings">Settings</string>
+    <string name="title_win">Win</string>
 
     <!-- START SCREEN -->
     <string name="new_game">new game</string>
@@ -40,5 +41,10 @@
     <string name="fourth_group_name">fourth group name</string>
     <string name="group_name_max_limit_desc">maximum length of group name is 18</string>
     <string name="group_name_min_limit_desc">required field</string>
+    <string name="winner_reach_to"><![CDATA[you are reached <b><font color=\'#777777\'>%1$d</font></b> scores]]></string>
+    <string name="congrats">congratulations!</string>
+    <string name="other_groups_result">other groups results</string>
+    <string name="play_again">play again</string>
+    <string name="exit">exit</string>
 
 </resources>
