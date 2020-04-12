@@ -35,7 +35,7 @@ class PlayVM(
     private var tickTockPlayer: MediaPlayer? = null
 
     private var currentWords: List<Noun>? = null
-    var countDownTimerText = ObservableField<String>((GamePrefs.ROUND_TIME).toString())
+    var countDownTimerText = ObservableField((GamePrefs.ROUND_TIME).toString())
     var roundStarted = ObservableBoolean(false)
     var history = ObservableField("")
 
@@ -75,6 +75,7 @@ class PlayVM(
                 }
             this.disposable.add(disposable)
         }
+        history.set("")
     }
 
     private fun allItemsIsInactive(): Boolean {
@@ -129,33 +130,56 @@ class PlayVM(
     }
 
     private fun finishRound() {
+        roundStarted.set(false)
         tickTockPlayer?.stop()
         tickTockPlayer?.reset()
 
         groupManager.switchGroup()
-        showHistory()
-        roundStarted.set(false)
+        if (isFinished()) {
+            goToWin()
+            groupManager.resetState()
+        } else {
+            showHistory()
+        }
+    }
+
+    private fun isFinished() = isEqualityRounds() && isReachedGolPoints()
+
+    private fun isEqualityRounds(): Boolean {
+        for (i in 1 until groupManager.groups.size) {
+            val current = groupManager.groups[i].statistics.size
+            val prev = groupManager.groups[i - 1].statistics.size
+            if (current != prev) {
+                return false
+            }
+        }
+        return true
+    }
+
+    private fun isReachedGolPoints(): Boolean {
+        for (group in groupManager.groups) {
+            if (group.getAnsweredCount() >= GamePrefs.GOL_POINTS) {
+                return true
+            }
+        }
+        return false
     }
 
     private fun showHistory() {
         val strBuilder = StringBuilder()
         for (group in groupManager.groups) {
             strBuilder.append(group.name)
-            var total = 0
-            for (round in group.statistics) {
-                total += round
-            }
-            strBuilder.append(":\t").append(total)
+            strBuilder.append(":\t").append(group.getAnsweredCount())
             strBuilder.append("\n")
         }
         history.set(strBuilder.toString())
-        goToWin()
     }
 
     private fun goToWin() {
         val bundle = Bundle()
-        val param = groupManager.groups as ArrayList<out Parcelable>
-        bundle.putParcelableArrayList (Constants.BUNDLE_GROUPS, param)
+        val copyList = groupManager.groups.toList()
+        val param = copyList as ArrayList<out Parcelable>
+        bundle.putParcelableArrayList(Constants.BUNDLE_GROUPS, param)
         setNewDestination(R.id.navigateToWin, bundle)
     }
 

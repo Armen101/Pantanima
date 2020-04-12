@@ -2,13 +2,17 @@ package com.example.pantanima.ui
 
 import com.example.pantanima.ui.models.Group
 
-class GroupManager(names: ArrayList<String>?) {
+class GroupManager(private val names: ArrayList<String>?) {
 
     var groups: MutableList<Group> = ArrayList()
 
     private var currentGroup: Group? = null
 
     init {
+        prepareGroups()
+    }
+
+    private fun prepareGroups() {
         names?.forEach {
             groups.add(Group(it))
         }
@@ -28,5 +32,11 @@ class GroupManager(names: ArrayList<String>?) {
             groups[currentGroupIndex + 1]
         }
     }
+
+    fun resetState() {
+        groups.clear()
+        prepareGroups()
+    }
+
 
 }
