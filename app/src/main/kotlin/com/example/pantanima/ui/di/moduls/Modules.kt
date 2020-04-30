@@ -4,9 +4,9 @@ import androidx.room.Room
 import com.example.pantanima.ui.GroupManager
 import com.example.pantanima.ui.database.AppDatabase
 import com.example.pantanima.ui.database.repository.GroupRepo
+import com.example.pantanima.ui.database.repository.WordRepo
 import com.example.pantanima.ui.database.repository.impl.GroupRepoImpl
-import com.example.pantanima.ui.database.repository.NounRepo
-import com.example.pantanima.ui.database.repository.impl.NounRepoImpl
+import com.example.pantanima.ui.database.repository.impl.WordRepoImpl
 import com.example.pantanima.ui.models.Group
 import com.example.pantanima.ui.viewmodels.*
 import org.koin.android.viewmodel.dsl.viewModel
@@ -23,12 +23,16 @@ val viewModelModule = module {
 }
 
 val roomModule = module {
-    single { Room.databaseBuilder(get(), AppDatabase::class.java, "appDb").build() }
+    single {
+        Room.databaseBuilder(get(), AppDatabase::class.java, "alias.db")
+            .createFromAsset("database/alias.db")
+            .build()
+    }
     single { get<AppDatabase>().groupDao() }
-    single { get<AppDatabase>().nounDao() }
+    single { get<AppDatabase>().wordDao() }
 }
 
 val repoModule = module {
     single<GroupRepo> { GroupRepoImpl(get()) }
-    single<NounRepo> { NounRepoImpl(get()) }
+    single<WordRepo> { WordRepoImpl(get()) }
 }

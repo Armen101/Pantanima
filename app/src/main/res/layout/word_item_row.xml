@@ -12,7 +12,7 @@
 
         <variable
             name="item"
-            type="com.example.pantanima.ui.database.entity.Noun" />
+            type="com.example.pantanima.ui.database.entity.Word" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,7 +32,7 @@
             android:background="@drawable/word_item_bg"
             android:clipToPadding="false"
             android:textStyle="bold"
-            android:text="@{item.value}"
+            android:text="@{item.word}"
             android:textColor="@{item.isActive() ? @color/wordActiveTextColor: @color/wordInactiveTextColor}"
             android:textSize="@dimen/_20sdp"
             android:enabled="@{item.isActive}"

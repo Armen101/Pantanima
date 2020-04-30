@@ -8,16 +8,16 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pantanima.BR
 import com.example.pantanima.R
-import com.example.pantanima.ui.database.entity.Noun
+import com.example.pantanima.ui.database.entity.Word
 import com.example.pantanima.ui.listeners.AdapterOnItemClickListener
 
 
-class WordsAdapter(val listener: AdapterOnItemClickListener<Noun>) :
+class WordsAdapter(val listener: AdapterOnItemClickListener<Word>) :
     RecyclerView.Adapter<WordsAdapter.WordsViewHolder>() {
 
-    private var data: List<Noun>? = null
+    private var data: List<Word>? = null
 
-    fun setData(data: List<Noun>) {
+    fun setData(data: List<Word>) {
         this.data = data
     }
 
@@ -39,7 +39,7 @@ class WordsAdapter(val listener: AdapterOnItemClickListener<Noun>) :
 
         private val binding: ViewDataBinding? = DataBindingUtil.bind(itemView)
 
-        internal fun bind(item: Noun) {
+        internal fun bind(item: Word) {
             binding?.setVariable(BR.listener, listener)
             binding?.setVariable(BR.item, item)
             binding?.executePendingBindings()

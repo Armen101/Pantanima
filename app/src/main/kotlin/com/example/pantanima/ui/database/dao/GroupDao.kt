@@ -11,23 +11,22 @@ interface GroupDao {
 
     @Query(
         """
-        SELECT * FROM groupTable
-        WHERE language = :language
+        SELECT * FROM enGroups
         ORDER BY lastUsedTime *1 ASC
-        LIMIT :count 
+        LIMIT :count
         """
     )
-    fun getAll(language: String, count: Int): MutableList<Group>
+    fun getAll(count: Int): MutableList<Group>
 
     @Query(
         """
-        SELECT * FROM groupTable
-        WHERE language = :language AND value NOT IN (:withoutList)
+        SELECT * FROM enGroups
+        WHERE name NOT IN (:withoutList)
         ORDER BY lastUsedTime *1 ASC
-        LIMIT :count 
+        LIMIT :count
         """
     )
-    fun getAll(language: String, withoutList: List<String>, count: Int): MutableList<Group>
+    fun getAll(withoutList: List<String>, count: Int): MutableList<Group>
 
     @Update
     fun update(groups: List<Group>)

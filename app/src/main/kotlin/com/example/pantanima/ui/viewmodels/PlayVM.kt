@@ -6,7 +6,6 @@ import androidx.databinding.ObservableField
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pantanima.ui.GroupManager
 import com.example.pantanima.ui.adapters.WordsAdapter
-import com.example.pantanima.ui.database.entity.Noun
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -19,7 +18,8 @@ import android.os.Parcelable
 import androidx.lifecycle.viewModelScope
 import com.example.pantanima.R
 import com.example.pantanima.ui.Constants
-import com.example.pantanima.ui.database.repository.NounRepo
+import com.example.pantanima.ui.database.entity.Word
+import com.example.pantanima.ui.database.repository.WordRepo
 import com.example.pantanima.ui.helpers.GamePrefs
 import com.example.pantanima.ui.listeners.AdapterOnItemClickListener
 import java.lang.StringBuilder
@@ -28,13 +28,13 @@ import java.util.ArrayList
 class PlayVM(
     app: Application,
     private val groupManager: GroupManager,
-    private val nounRepo: NounRepo
-) : BaseVM(app), AdapterOnItemClickListener<Noun> {
+    private val wordRepo: WordRepo
+) : BaseVM(app), AdapterOnItemClickListener<Word> {
 
     private var clickPlayer: MediaPlayer? = null
     private var tickTockPlayer: MediaPlayer? = null
 
-    private var currentWords: List<Noun>? = null
+    private var currentWords: List<Word>? = null
     var countDownTimerText = ObservableField((GamePrefs.ROUND_TIME).toString())
     var roundStarted = ObservableBoolean(false)
     var history = ObservableField("")
@@ -42,7 +42,7 @@ class PlayVM(
     private val adapter = WordsAdapter(this)
     val adapterObservable = ObservableField<RecyclerView.Adapter<*>>(adapter)
 
-    override fun onItemClick(item: Noun) {
+    override fun onItemClick(item: Word) {
         val oldIsActiveValue = item.isActive.get()
         item.isActive.set(!oldIsActiveValue)
         if (oldIsActiveValue) {
@@ -89,11 +89,11 @@ class PlayVM(
 
     private fun updateAdapterData(code: () -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
-            val nouns = nounRepo.getNouns().subList(0, GamePrefs.WORDS_COUNT)
-            nounRepo.updateLastUsedTime(nouns)
+            val words = wordRepo.getWords().subList(0, GamePrefs.WORDS_COUNT)
+            wordRepo.updateLastUsedTime(words)
             viewModelScope.launch(Dispatchers.Main) {
-                currentWords = nouns
-                adapter.setData(nouns)
+                currentWords = words
+                adapter.setData(words)
                 adapter.notifyDataSetChanged()
                 code()
             }

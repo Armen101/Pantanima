@@ -4,8 +4,6 @@ import com.example.pantanima.ui.database.entity.Group
 
 interface GroupRepo {
 
-    fun insertInitialGroups()
-
     fun updateLastUsedTime(group: Group)
 
     fun updateLastUsedTime(groups: List<Group>)

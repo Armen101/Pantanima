@@ -62,6 +62,11 @@
         android:id="@+id/navigation_win"
         android:name="com.example.pantanima.ui.fragments.WinFragment"
         android:label="@string/title_win"
-        tools:layout="@layout/fragment_win"/>
+        tools:layout="@layout/fragment_win">
+
+        <action
+            android:id="@+id/navigateToStartScreen"
+            app:destination="@id/navigation_start_screen" />
+    </fragment>
 
 </navigation>

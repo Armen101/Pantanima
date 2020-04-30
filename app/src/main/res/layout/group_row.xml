@@ -58,13 +58,15 @@
 
             <Button
                 android:id="@+id/content"
-                android:layout_width="@dimen/_200sdp"
+                android:layout_width="@dimen/_220sdp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_60sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@drawable/start_screen_button"
                 android:backgroundTint="@android:color/white"
                 android:elevation="@dimen/_4sdp"
+                android:lines="1"
+                android:ellipsize="end"
                 android:fontFamily="@font/caviar_dreams_bold"
                 android:onClick="@{(view)-> listener.onItemClick(item)}"
                 android:text="@{item}"

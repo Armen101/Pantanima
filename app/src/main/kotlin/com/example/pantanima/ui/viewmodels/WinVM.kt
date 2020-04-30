@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.pantanima.R
 import com.example.pantanima.ui.adapters.WinAdapter
 import com.example.pantanima.ui.models.Group
 
@@ -26,7 +27,7 @@ class WinVM(app: Application, groups: List<Group>) : BaseVM(app) {
     }
 
     fun exit() {
-
+        setNewDestination(R.id.navigateToStartScreen)
     }
 
     private fun toSort(groups: List<Group>): List<Group> {

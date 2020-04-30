@@ -24,7 +24,7 @@ class GroupsVM(app: Application, private val repo : GroupRepo) : BaseVM(app), Ad
 
     private var groupNames: MutableList<String> = arrayListOf()
     private val adapter = GroupsAdapter(this, groupNames)
-    val adapterObservable = ObservableField<RecyclerView.Adapter<*>>(adapter)
+    val adapterObservable = ObservableField(adapter)
     var addGroupIsAvailable = ObservableBoolean(true)
     val lifecycleLiveData = MutableLiveData<Lifecycle.Event>()
     private val observer = Observer<Lifecycle.Event> {
@@ -90,7 +90,7 @@ class GroupsVM(app: Application, private val repo : GroupRepo) : BaseVM(app), Ad
         return withContext(viewModelScope.coroutineContext + Dispatchers.IO) {
             val group = repo.getGroups(groupNames).shuffled().random()
             repo.updateLastUsedTime(group)
-            group.value
+            group.name
         }
     }
 
