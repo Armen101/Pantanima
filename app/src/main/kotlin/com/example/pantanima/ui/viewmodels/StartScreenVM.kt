@@ -9,9 +9,9 @@ class StartScreenVM(app: Application) : BaseVM(app) {
 
     private var languageList = resources.value.getStringArray(R.array.languages_list)
 
-    var newGame = ObservableField<String>(getString(R.string.new_game))
-    var tutorial = ObservableField<String>(getString(R.string.tutorial))
-    var language = ObservableField<String>(languageList[0])
+    var newGame = ObservableField(getString(R.string.new_game))
+    var tutorial = ObservableField(getString(R.string.tutorial))
+    var language = ObservableField(languageList[0])
 
     fun goToGroups() {
         setNewDestination(R.id.navigateToGroups)

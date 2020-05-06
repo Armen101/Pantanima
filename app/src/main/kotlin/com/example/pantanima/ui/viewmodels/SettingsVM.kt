@@ -23,13 +23,13 @@ class SettingsVM(app: Application) : BaseVM(app) {
     private val timePikerData = getTimePickerData()
     var timeSliderAdapter = ObservableField(SliderAdapter(timePikerData))
     var timeInitialPosition = timePikerData.indexOf(GamePrefs.ROUND_TIME.toString())
-    var timeChooseText = ObservableField<String>(timePikerData[timeInitialPosition])
+    var timeChooseText = ObservableField(timePikerData[timeInitialPosition])
 
     var scoreLayoutManager = ObservableField(SliderLayoutManager(getApplication()))
     private val scorePikerData = getScorePickerData()
     var scoreSliderAdapter = ObservableField(SliderAdapter(scorePikerData))
     var scoreInitialPosition = scorePikerData.indexOf(GamePrefs.GOL_POINTS.toString())
-    var scoreChooseText = ObservableField<String>(scorePikerData[scoreInitialPosition])
+    var scoreChooseText = ObservableField(scorePikerData[scoreInitialPosition])
 
     var modePikerData = getModePickerData()
     var modeInitialPosition = modePikerData.indexOf(GamePrefs.MODE)
