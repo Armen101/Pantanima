@@ -1,9 +1,4 @@
 <resources>
-    <string name="app_name">Alias</string>
-    <string name="title_play">Play</string>
-    <string name="title_start_screen">Start screen</string>
-    <string name="title_groups">Groups</string>
-    <string name="title_settings">Settings</string>
 
     <!-- START SCREEN -->
     <string name="new_game">новая игра</string>
@@ -30,5 +25,11 @@
     <string name="fourth_group_name">имя четвертой группы</string>
     <string name="group_name_max_limit_desc">максимальная длина имени группы 18</string>
     <string name="group_name_min_limit_desc">обязательное поле</string>
+    <string name="winner_reach_to"><![CDATA[вы набрали <b><font color=\'#777777\'>%1$d</font></b> очков]]></string>
+    <string name="congrats">поздравляем</string>
+    <string name="other_groups_result">результаты других групп</string>
+    <string name="play_again">играть снова</string>
+    <string name="exit">выход</string>
+    <string name="play">играть</string>
 
 </resources>

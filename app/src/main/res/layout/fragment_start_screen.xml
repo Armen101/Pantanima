@@ -41,6 +41,7 @@
             android:background="@drawable/word_item_bg"
             android:backgroundTint="@color/app_style_orange"
             android:clipToPadding="false"
+            android:onClick="@{(view) -> viewModel.openTutorial()}"
             android:fontFamily="@font/caviar_dreams_bold"
             android:gravity="center"
             android:text="@{viewModel.tutorial}"

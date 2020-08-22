@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">Alias</string>
-    <string name="title_play">Play</string>
-    <string name="title_start_screen">Start screen</string>
-    <string name="title_groups">Groups</string>
-    <string name="title_settings">Settings</string>
-    <string name="title_win">Win</string>
+    <string name="app_name" translatable="false">Alias</string>
+    <string name="title_play" translatable="false">Play</string>
+    <string name="title_start_screen" translatable="false">Start screen</string>
+    <string name="title_groups" translatable="false">Groups</string>
+    <string name="title_settings" translatable="false">Settings</string>
+    <string name="title_win" translatable="false">Win</string>
 
     <!-- START SCREEN -->
     <string name="new_game">new game</string>
@@ -46,5 +46,6 @@
     <string name="other_groups_result">other groups results</string>
     <string name="play_again">play again</string>
     <string name="exit">exit</string>
+    <string name="play">play</string>
 
 </resources>

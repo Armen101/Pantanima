@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -22,13 +23,13 @@
             android:layout_height="@dimen/_150sdp"
             android:adjustViewBounds="true"
             android:lottie_play="@{viewModel.roundStarted}"
+            android:visibility="@{viewModel.roundStarted}"
             app:layout_constraintBottom_toTopOf="@+id/recyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_colorFilter="@color/colorPrimaryDark"
-            android:visibility="@{viewModel.roundStarted}"
             app:lottie_fileName="cool.json"
             app:lottie_loop="true"
             app:lottie_speed="0.8" />
@@ -38,15 +39,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
+            android:text="@{viewModel.history}"
+            android:letterSpacing="0.10"
+            android:textColor="@color/slider_tv_color"
+            android:textSize="@dimen/_20sdp"
+            android:visibility="@{viewModel.history.length() != 0}"
             app:layout_constraintBottom_toTopOf="@+id/recyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
-            android:text="@{viewModel.history}"
-            android:textSize="@dimen/_20sdp"
-            android:textColor="@color/app_style_green"
-            android:visibility="@{viewModel.history.length() != 0}" />
+            tools:text="armenoid"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -75,21 +78,38 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline" />
 
-        <Button
-            android:id="@+id/button2"
+        <com.example.pantanima.ui.customviews.RippleBackground
+            android:id="@+id/content"
             android:layout_width="@dimen/_150sdp"
             android:layout_height="@dimen/_150sdp"
-            android:background="@drawable/start_round_button_bg"
-            android:fontFamily="@font/caviar_dreams_bold"
             android:onClick="@{(view)-> viewModel.startRound()}"
-            android:text="@string/start"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/_20sdp"
             android:visibility="@{!viewModel.roundStarted}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/recyclerView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/hourglass" />
+            app:layout_constraintTop_toBottomOf="@+id/hourglass"
+            app:rb_autostart="true"
+            app:rb_color="@color/app_style_green"
+            app:rb_duration="3000"
+            app:rb_radius="@dimen/_26sdp"
+            app:rb_rippleAmount="3"
+            app:rb_scale="3">
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_centerInParent="true"
+                android:clickable="false"
+                android:background="@drawable/start_round_button_bg"
+                android:fontFamily="@font/caviar_dreams_bold"
+                android:gravity="center"
+                android:text="@string/start"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_20sdp" />
+
+        </com.example.pantanima.ui.customviews.RippleBackground>
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"

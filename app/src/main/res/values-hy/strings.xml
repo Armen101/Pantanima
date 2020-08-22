@@ -1,9 +1,4 @@
 <resources>
-    <string name="app_name">Alias</string>
-    <string name="title_play">Play</string>
-    <string name="title_start_screen">Start screen</string>
-    <string name="title_groups">Groups</string>
-    <string name="title_settings">Settings</string>
 
     <!-- START SCREEN -->
     <string name="new_game">նոր խաղ</string>
@@ -30,5 +25,11 @@
     <string name="fourth_group_name">չորրորդ խմբի անուն</string>
     <string name="group_name_max_limit_desc">խմբի անվան առավելագույն երկարությունը 18 է</string>
     <string name="group_name_min_limit_desc">պարտադիր լրացման դաշտ</string>
+    <string name="winner_reach_to"><![CDATA[դուք ունեք <b><font color=\'#777777\'>%1$d</font></b> միավոր]]></string>
+    <string name="congrats">հաղթանակ</string>
+    <string name="other_groups_result">միյուս խմբերի արդյունքները</string>
+    <string name="play_again">կրկին խաղալ</string>
+    <string name="exit">փակել</string>
+    <string name="play">խաղալ</string>
 
 </resources>

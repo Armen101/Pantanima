@@ -1,29 +1,28 @@
 package com.example.pantanima.ui.viewmodels
 
 import android.app.Application
+import android.media.MediaPlayer
+import android.os.Bundle
+import android.os.Parcelable
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pantanima.R
+import com.example.pantanima.ui.Constants
 import com.example.pantanima.ui.GroupManager
 import com.example.pantanima.ui.adapters.WordsAdapter
 import com.example.pantanima.ui.database.entity.Noun
+import com.example.pantanima.ui.database.repository.NounRepo
+import com.example.pantanima.ui.helpers.GamePrefs
+import com.example.pantanima.ui.listeners.AdapterOnItemClickListener
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 import java.util.concurrent.TimeUnit
-import android.media.MediaPlayer
-import android.os.Bundle
-import android.os.Parcelable
-import androidx.lifecycle.viewModelScope
-import com.example.pantanima.R
-import com.example.pantanima.ui.Constants
-import com.example.pantanima.ui.database.repository.NounRepo
-import com.example.pantanima.ui.helpers.GamePrefs
-import com.example.pantanima.ui.listeners.AdapterOnItemClickListener
-import java.lang.StringBuilder
-import java.util.ArrayList
 
 class PlayVM(
     app: Application,
@@ -169,7 +168,7 @@ class PlayVM(
         val strBuilder = StringBuilder()
         for (group in groupManager.groups) {
             strBuilder.append(group.name)
-            strBuilder.append(":\t").append(group.getAnsweredCount())
+            strBuilder.append(":\t\t").append(group.getAnsweredCount())
             strBuilder.append("\n")
         }
         history.set(strBuilder.toString())

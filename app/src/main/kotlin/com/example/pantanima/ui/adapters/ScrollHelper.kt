@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import android.media.ToneGenerator
 import android.os.*
+import timber.log.Timber
+import java.lang.Exception
 
 object ScrollHelper {
 
@@ -28,14 +30,16 @@ object ScrollHelper {
     }
 
     private fun createPlayer() {
-        val gen = ToneGenerator(AudioManager.STREAM_MUSIC, 50)
-        gen.startTone(ToneGenerator.TONE_CDMA_CALL_SIGNAL_ISDN_INTERGROUP,
-            5
-        )
-        val handler = Handler(Looper.getMainLooper())
-        handler.postDelayed({
-            gen.release()
-        }, 100L)
+        try {
+            val gen = ToneGenerator(AudioManager.STREAM_MUSIC, 50)
+            gen.startTone(ToneGenerator.TONE_CDMA_CALL_SIGNAL_ISDN_INTERGROUP, 5)
+            val handler = Handler(Looper.getMainLooper())
+            handler.postDelayed({
+                gen.release()
+            }, 100L)
+        } catch (e: Exception) {
+            Timber.e(e)
+        }
     }
 
     fun playScrollSound(context: Context) {

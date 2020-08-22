@@ -32,5 +32,6 @@
     <dimen name="settings_description_tv_right_left_padding">@dimen/_10sdp</dimen>
     <dimen name="settings_description_bottom_arrow_width">@dimen/_30sdp</dimen>
     <dimen name="settings_description_bottom_arrow_height">@dimen/_8sdp</dimen>
-
+    <dimen name="rippleStrokeWidth">@dimen/_2sdp</dimen>
+    <dimen name="rippleRadius">@dimen/_44sdp</dimen>
 </resources>

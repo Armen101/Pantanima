@@ -2,10 +2,13 @@ package com.example.pantanima.ui.viewmodels
 
 import android.app.Application
 import androidx.databinding.ObservableField
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.pantanima.R
 import com.example.pantanima.ui.helpers.LocaleHelper
 
-class StartScreenVM(app: Application) : BaseVM(app) {
+
+class StartScreenVM(val app: Application) : BaseVM(app) {
 
     private var languageList = resources.value.getStringArray(R.array.languages_list)
 
@@ -13,8 +16,16 @@ class StartScreenVM(app: Application) : BaseVM(app) {
     var tutorial = ObservableField<String>(getString(R.string.tutorial))
     var language = ObservableField<String>(languageList[0])
 
+    private val _openTutorial = MutableLiveData<Boolean>()
+    val openTutorial: LiveData<Boolean>
+        get() = _openTutorial
+
     fun goToGroups() {
         setNewDestination(R.id.navigateToGroups)
+    }
+
+    fun openTutorial() {
+        _openTutorial.value = true
     }
 
     fun onLanguageClick() {
